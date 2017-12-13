@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="_lzVun8mT2ObiZ3rk5827pMMbko8SQthqo8OtoRxhsc" />
+    
+        <title>
+            
+                解決json檔案放在Azure Storage導致發生CORS |
+                    
+                        E.K TechThinking
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+        
+            <meta name="keywords" content="Azure,Storage,Static file,403">
+            
+                        <meta name="description" content="把前端的一些靜態檔案像是css、js…之類的放到Azure Storage，然後，讓網站去參照Storage路徑下載靜態檔案，基本上這樣並無太大問題，不過，做多國語系時候，使用到i18n這個套件，裡面會利用translation.json檔案做多國語系，誰知道這樣使用下卻發生了這個錯誤訊息
+
+ CORS not enabled or no matching rule found for this">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解決json檔案放在Azure Storage導致發生CORS">
+<meta property="og:url" content="http://edwardkuo.imas.tw/paper/2017/09/08/Azure/StorageCORS/index.html">
+<meta property="og:site_name" content="E.K TechThinking">
+<meta property="og:description" content="把前端的一些靜態檔案像是css、js…之類的放到Azure Storage，然後，讓網站去參照Storage路徑下載靜態檔案，基本上這樣並無太大問題，不過，做多國語系時候，使用到i18n這個套件，裡面會利用translation.json檔案做多國語系，誰知道這樣使用下卻發生了這個錯誤訊息
+
+ CORS not enabled or no matching rule found for this">
+<meta property="og:image" content="https://www.visualstudio.com/wp-content/uploads/2017/06/azure_cloud_image.png">
+<meta property="og:updated_time" content="2017-09-08T01:04:04.404Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="解決json檔案放在Azure Storage導致發生CORS">
+<meta name="twitter:description" content="把前端的一些靜態檔案像是css、js…之類的放到Azure Storage，然後，讓網站去參照Storage路徑下載靜態檔案，基本上這樣並無太大問題，不過，做多國語系時候，使用到i18n這個套件，裡面會利用translation.json檔案做多國語系，誰知道這樣使用下卻發生了這個錯誤訊息
+
+ CORS not enabled or no matching rule found for this">
+<meta name="twitter:image" content="https://www.visualstudio.com/wp-content/uploads/2017/06/azure_cloud_image.png">
+                            
+
+                                
+                                    <link rel="alternate" href="http://edwardkuo.github.io/atom.xml" title="E.K TechThinking" type="application/atom+xml" />
+                                    
+
+                                        
+
+                                                <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+                                                    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+                                                        <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+                                                            <link rel="stylesheet" href="/css/style.css">
+
+                                                                <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+                                                                    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-33121513-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+                                                                        <script type="text/javascript">
+                                                                            var appInsights = window.appInsights || function(config) {
+                                                                                function i(config) {
+                                                                                    t[config] = function() {
+                                                                                        var i = arguments;
+                                                                                        t.queue.push(function() {
+                                                                                            t[config].apply(t, i)
+                                                                                        })
+                                                                                    }
+                                                                                }
+                                                                                var t = {
+                                                                                        config: config
+                                                                                    },
+                                                                                    u = document,
+                                                                                    e = window,
+                                                                                    o = "script",
+                                                                                    s = "AuthenticatedUserContext",
+                                                                                    h = "start",
+                                                                                    c = "stop",
+                                                                                    l = "Track",
+                                                                                    a = l + "Event",
+                                                                                    v = l + "Page",
+                                                                                    y = u.createElement(o),
+                                                                                    r, f;
+                                                                                y.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js";
+                                                                                u.getElementsByTagName(o)[0].parentNode.appendChild(y);
+                                                                                try {
+                                                                                    t.cookie = u.cookie
+                                                                                } catch (p) {}
+                                                                                for (t.queue = [], t.version = "1.0", r = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; r.length;) i("track" + r.pop());
+                                                                                return i("set" + s), i("clear" + s), i(h + a), i(c + a), i(h + v), i(c + v), i("flush"), config.disableExceptionTracking || (r = "onerror", i("_" + r), f = e[r], e[r] = function(config, i, u, e, o) {
+                                                                                    var s = f && f(config, i, u, e, o);
+                                                                                    return s !== !0 && t["_" + r](config, i, u, e, o), s
+                                                                                }), t
+                                                                            }({
+                                                                                instrumentationKey: "7891dfec-e884-4bdc-bf34-f581dce47f3a"
+                                                                            });
+
+                                                                            window.appInsights = appInsights;
+
+                                                                            // Add telemetry initializer
+                                                                            appInsights.queue.push(function() {
+                                                                                appInsights.context.addTelemetryInitializer(function(envelope) {
+                                                                                    var telemetryItem = envelope.data.baseData;
+
+
+                                                                                    // To set custom properties:
+                                                                                    telemetryItem.properties = telemetryItem.properties || {};
+                                                                                    telemetryItem.properties["ApplicationName"] = "EK20";
+
+
+                                                                                });
+                                                                            });
+                                                                            // end of insertion
+
+
+
+                                                                            appInsights.trackPageView();
+                                                                        </script>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Tech &amp; Thinking &amp; DevOps &amp; Azure &amp; VSTS</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/about.html">About</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/slideshare/slideshare.html">Slideshare</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/Link/Link.html">Hot Link</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    uncategorized
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-Azure/StorageCORS" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        解決json檔案放在Azure Storage導致發生CORS
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/paper/2017/09/08/Azure/StorageCORS/" class="article-date">
+    <time datetime="2017-09-07T16:00:00.000Z" itemprop="datePublished">2017-09-08</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Azure/">Azure</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <img src="https://www.visualstudio.com/wp-content/uploads/2017/06/azure_cloud_image.png">
+<p>把前端的一些靜態檔案像是<code>css</code>、<code>js</code>…之類的放到Azure Storage，然後，讓網站去參照Storage路徑下載靜態檔案，基本上這樣並無太大問題，不過，做多國語系時候，使用到<code>i18n</code>這個套件，裡面會利用<code>translation.json</code>檔案做多國語系，誰知道這樣使用下卻發生了這個錯誤訊息</p>
+<blockquote>
+<p> CORS not enabled or no matching rule found for this request</p>
+</blockquote>
+<p>通常遇到這問題，我們會去<code>web.config</code>去設定CORS的屬性，來避開這錯誤，不過，針對這個檔案似乎無效，它依然出現這樣錯誤資訊</p>
+<img src="/blogimage/Azure/25.jpg" width="700">
+<p>因此，發現在Storage有一個設定，叫做<code>CORS</code>，看名字就知道顧名思義，因該是針對CORS進行處理，進入這個設定功能後，我們只要設定好CORS規範，基本上就可以解決CORS問題(基本上因該是連Web.config都可以不用設定)<br><img src="/blogimage/Azure/26.jpg" width="400"></p>
+<h2 id="設定CORS-Rule"><a href="#設定CORS-Rule" class="headerlink" title="設定CORS Rule"></a>設定CORS Rule</h2><hr>
+<p>設定這規範其實很簡單的，它是針對每個Host Name去做設定，只要按下Add，就可以看到旁邊設定畫面<br><img src="/blogimage/Azure/27.jpg" width="700"></p>
+<p>看到這畫面要怎樣設定呢，其實最簡單方法就是利用<code>F12</code>取得原本失敗檔案的Header資訊，分別填入就可以，參考資訊如下圖藍色框的欄位<br><img src="/blogimage/Azure/28.jpg" width="500"></p>
+<ul>
+<li>Allowed Origins=Origin</li>
+<li>Allowed Verbs=Access-Control-Request-Method</li>
+<li>Allowed Headers=x-requested-with</li>
+<li>Exposed Headers=x-requested-with</li>
+</ul>
+<p>透過以上對應關係，只要把資訊放入就可以，若是要更進階一點，針對<strong>Allowed Header</strong> &amp; <strong>Exposed Headers</strong>，若是要包括更多的資訊，可以用星號省略後面的資訊，只要符合前面字樣就可以，設定會像是這樣<code>x-requested*</code>，只要是<code>x-requested</code>開頭的，都是符合這規則。</p>
+<p>這樣設定完畢後，就輕鬆解決CORS問題了</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share">Share</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_pinterest"></a>
+    <a class="a2a_button_tumblr"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>
+            follow:</p>
+        <ul class="social-links">
+            
+                
+                    <li>
+                        <a class="social-tooltip" title="twitter" href="https://twitter.com/Chia_Chi_Kuo" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="facebook" href="https://www.facebook.com/jaigi.kuo" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="github" href="https://github.com/edwardkuo/" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="rss" href="http://edwardkuo.github.io/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                    </li>
+                    
+                        
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/paper/2017/09/12/Devops/TeamsGuest/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            讓訪客也加入到你的Microsoft Teams團隊中，但...
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/paper/2017/09/02/Devops/VSTSNPM2/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">解決註冊VSTS的npm平台無法下載npmjs.com套件</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+            
+                <div class="widgets-container">
+                    
+                        
+                            
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://docs.microsoft.com/zh-tw/media/hubs/microsoftteamshome/teams-skype-to-teams.svg)" alt="查詢Microsoft Teams群組中儲存檔案的容量" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a></p>
+                            <p class="item-title"><a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="title">查詢Microsoft Teams群組中儲存檔案的容量</a></p>
+                            <p class="item-date"><time datetime="2017-12-12T16:00:00.000Z" itemprop="datePublished">2017-12-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/04/Devops/VSTSFority/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://bright-side-of-life.com/wp-content/uploads/2017/05/post-fortify-fb.jpg)" alt="VSTS整合資安工具Fortify達成自動化" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/12/04/Devops/VSTSFority/" class="title">VSTS整合資安工具Fortify達成自動化</a></p>
+                            <p class="item-date"><time datetime="2017-12-03T16:00:00.000Z" itemprop="datePublished">2017-12-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/21/Other/StudyLove/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://distudio.blob.core.windows.net/study4tw/1510761314.63796.png)" alt="Study4.TW Study4Love - 與大師對談 活動" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/21/Other/StudyLove/" class="title">Study4.TW Study4Love - 與大師對談 活動</a></p>
+                            <p class="item-date"><time datetime="2017-11-21T14:59:31.000Z" itemprop="datePublished">2017-11-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/10/Devops/VSTSCore/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://core.ac.uk/resources/corelogo_hires.png)" alt="有參照外部元件如何在VSTS建立.Net Core Package" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/10/Devops/VSTSCore/" class="title">有參照外部元件如何在VSTS建立.Net Core Package</a></p>
+                            <p class="item-date"><time datetime="2017-11-09T16:00:00.000Z" itemprop="datePublished">2017-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/10/16/Azure/AIappTeams/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://datadog-prod.imgix.net/img/blog/monitor-azure-logic-app-workflows-datadog/azure-logic-apps-hero.png?ch=Width&fit=max&fm=png&auto=format&lossless=1)" alt="Application Insights + Logic App + Microsoft Teams 整合" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a></p>
+                            <p class="item-title"><a href="/paper/2017/10/16/Azure/AIappTeams/" class="title">Application Insights + Logic App + Microsoft Teams 整合</a></p>
+                            <p class="item-date"><time datetime="2017-10-15T16:00:00.000Z" itemprop="datePublished">2017-10-16</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/資料庫程式版控/">資料庫程式版控</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雲端到地端的持續整合與交付/">雲端到地端的持續整合與交付</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">7</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP-NET/">ASP.NET</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple/">Apple</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Azure/">Azure</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cordova/">Cordova</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevOps/">DevOps</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-End/">Front-End</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LifeStyle/">LifeStyle</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Office-365/">Office 365</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Other/">Other</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerShell/">PowerShell</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T-SQL/">T-SQL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSTS/">VSTS</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Studio/">Visual Studio</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ASP-NET/" style="font-size: 11.82px;">ASP.NET</a> <a href="/tags/Apple/" style="font-size: 13.64px;">Apple</a> <a href="/tags/Azure/" style="font-size: 20px;">Azure</a> <a href="/tags/C/" style="font-size: 18.18px;">C#</a> <a href="/tags/Cordova/" style="font-size: 11.82px;">Cordova</a> <a href="/tags/DevOps/" style="font-size: 19.09px;">DevOps</a> <a href="/tags/Docker/" style="font-size: 14.55px;">Docker</a> <a href="/tags/Front-End/" style="font-size: 10.91px;">Front-End</a> <a href="/tags/LifeStyle/" style="font-size: 16.36px;">LifeStyle</a> <a href="/tags/Office-365/" style="font-size: 10px;">Office 365</a> <a href="/tags/Other/" style="font-size: 11.82px;">Other</a> <a href="/tags/PowerShell/" style="font-size: 12.73px;">PowerShell</a> <a href="/tags/T-SQL/" style="font-size: 15.45px;">T-SQL</a> <a href="/tags/VSTS/" style="font-size: 17.27px;">VSTS</a> <a href="/tags/Visual-Studio/" style="font-size: 11.82px;">Visual Studio</a>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://study4.tw">Study4.TW</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/Study4.Enterprise/">Study4.Enterprise</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/286316594814216/">Azure &amp; .NET Developer FB 社團</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/MISDevOps/">製造業 DevOps日常</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://mva.microsoft.com/?mtag=4040062">MVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://channel9.msdn.com">Channel9</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://dog0416.blogspot.tw/">Matsurigoto</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://skychang.github.io/">天空的垃圾場</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://kyleap.blogspot.tw/">程式宅急便</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://08alan.github.io/">維持熱情不滅</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://dotblogs.com.tw/jamesfu">五餅二魚工作室</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://yi-shiuan.github.io/">饅頭小舖</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://michael80321.blogspot.tw/">Michael&#39;s World</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+                                
+                                    
+                                        <div class="widget-wrap widget-list">
+                                            <h3 class="widget-title">Visitor</h3>
+                                            <div class="widget">
+                                                <a href="http://s11.flagcounter.com/more/4zV"><img src="http://s11.flagcounter.com/count/4zV/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_8/viewers_0/labels_0/pageviews_1/flags_0/percent_1/" alt="Flag Counter" border="0"></a>
+                                            </div>
+
+                                        </div>
+
+
+                </div>
+                </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Edward kuo</p>
+                
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'ek20';
+    
+    
+    var disqus_url = 'http://edwardkuo.imas.tw/paper/2017/09/08/Azure/StorageCORS/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

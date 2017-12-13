@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="_lzVun8mT2ObiZ3rk5827pMMbko8SQthqo8OtoRxhsc" />
+    
+        <title>
+            
+                VSTS佈署Xamarin.iOS到Hockeyapp，自動更新版號和切換BundleIdentifier |
+                    
+                        E.K TechThinking
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+        
+            <meta name="keywords" content="DevOps,HockeyAPP,Xamarin,iOS,Mobile,APP">
+            
+                        <meta name="description" content="在VSTS上面，可以建置Xamarin並將App發佈到HockeyApp上面進行，就可以讓用戶透過HockeyApp下載App，且HockeyApp本身可以讓APP有更新上架後，讓用戶開啟App之後，自動跳出更新App的訊息，這樣好處就可以減少開發人員再去做版本更新的通知功能。HockeyApp其背後的通知更新的機制在於Build版號要更新，才會通知有下載用戶說有新版本上架，換句話說如果只是單純">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VSTS佈署Xamarin.iOS到Hockeyapp，自動更新版號和切換BundleIdentifier">
+<meta property="og:url" content="http://edwardkuo.imas.tw/paper/2017/03/15/Devops/VSTSHockyApp/index.html">
+<meta property="og:site_name" content="E.K TechThinking">
+<meta property="og:description" content="在VSTS上面，可以建置Xamarin並將App發佈到HockeyApp上面進行，就可以讓用戶透過HockeyApp下載App，且HockeyApp本身可以讓APP有更新上架後，讓用戶開啟App之後，自動跳出更新App的訊息，這樣好處就可以減少開發人員再去做版本更新的通知功能。HockeyApp其背後的通知更新的機制在於Build版號要更新，才會通知有下載用戶說有新版本上架，換句話說如果只是單純">
+<meta property="og:image" content="https://static01.nyt.com/images/2016/09/09/well/mind/well_MIRL_stoplight/well_MIRL_stoplight-superJumbo-v2.gif">
+<meta property="og:updated_time" content="2017-05-28T15:46:30.780Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VSTS佈署Xamarin.iOS到Hockeyapp，自動更新版號和切換BundleIdentifier">
+<meta name="twitter:description" content="在VSTS上面，可以建置Xamarin並將App發佈到HockeyApp上面進行，就可以讓用戶透過HockeyApp下載App，且HockeyApp本身可以讓APP有更新上架後，讓用戶開啟App之後，自動跳出更新App的訊息，這樣好處就可以減少開發人員再去做版本更新的通知功能。HockeyApp其背後的通知更新的機制在於Build版號要更新，才會通知有下載用戶說有新版本上架，換句話說如果只是單純">
+<meta name="twitter:image" content="https://static01.nyt.com/images/2016/09/09/well/mind/well_MIRL_stoplight/well_MIRL_stoplight-superJumbo-v2.gif">
+                            
+
+                                
+                                    <link rel="alternate" href="http://edwardkuo.github.io/atom.xml" title="E.K TechThinking" type="application/atom+xml" />
+                                    
+
+                                        
+
+                                                <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+                                                    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+                                                        <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+                                                            <link rel="stylesheet" href="/css/style.css">
+
+                                                                <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+                                                                    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-33121513-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+                                                                        <script type="text/javascript">
+                                                                            var appInsights = window.appInsights || function(config) {
+                                                                                function i(config) {
+                                                                                    t[config] = function() {
+                                                                                        var i = arguments;
+                                                                                        t.queue.push(function() {
+                                                                                            t[config].apply(t, i)
+                                                                                        })
+                                                                                    }
+                                                                                }
+                                                                                var t = {
+                                                                                        config: config
+                                                                                    },
+                                                                                    u = document,
+                                                                                    e = window,
+                                                                                    o = "script",
+                                                                                    s = "AuthenticatedUserContext",
+                                                                                    h = "start",
+                                                                                    c = "stop",
+                                                                                    l = "Track",
+                                                                                    a = l + "Event",
+                                                                                    v = l + "Page",
+                                                                                    y = u.createElement(o),
+                                                                                    r, f;
+                                                                                y.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js";
+                                                                                u.getElementsByTagName(o)[0].parentNode.appendChild(y);
+                                                                                try {
+                                                                                    t.cookie = u.cookie
+                                                                                } catch (p) {}
+                                                                                for (t.queue = [], t.version = "1.0", r = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; r.length;) i("track" + r.pop());
+                                                                                return i("set" + s), i("clear" + s), i(h + a), i(c + a), i(h + v), i(c + v), i("flush"), config.disableExceptionTracking || (r = "onerror", i("_" + r), f = e[r], e[r] = function(config, i, u, e, o) {
+                                                                                    var s = f && f(config, i, u, e, o);
+                                                                                    return s !== !0 && t["_" + r](config, i, u, e, o), s
+                                                                                }), t
+                                                                            }({
+                                                                                instrumentationKey: "7891dfec-e884-4bdc-bf34-f581dce47f3a"
+                                                                            });
+
+                                                                            window.appInsights = appInsights;
+
+                                                                            // Add telemetry initializer
+                                                                            appInsights.queue.push(function() {
+                                                                                appInsights.context.addTelemetryInitializer(function(envelope) {
+                                                                                    var telemetryItem = envelope.data.baseData;
+
+
+                                                                                    // To set custom properties:
+                                                                                    telemetryItem.properties = telemetryItem.properties || {};
+                                                                                    telemetryItem.properties["ApplicationName"] = "EK20";
+
+
+                                                                                });
+                                                                            });
+                                                                            // end of insertion
+
+
+
+                                                                            appInsights.trackPageView();
+                                                                        </script>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Tech &amp; Thinking &amp; DevOps &amp; Azure &amp; VSTS</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/about.html">About</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/slideshare/slideshare.html">Slideshare</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/Link/Link.html">Hot Link</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    uncategorized
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-Devops/VSTSHockyApp" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        VSTS佈署Xamarin.iOS到Hockeyapp，自動更新版號和切換BundleIdentifier
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/paper/2017/03/15/Devops/VSTSHockyApp/" class="article-date">
+    <time datetime="2017-03-14T16:00:00.000Z" itemprop="datePublished">2017-03-15</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DevOps/">DevOps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VSTS/">VSTS</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <img src="https://static01.nyt.com/images/2016/09/09/well/mind/well_MIRL_stoplight/well_MIRL_stoplight-superJumbo-v2.gif">
+<p>在VSTS上面，可以建置Xamarin並將App發佈到HockeyApp上面進行，就可以讓用戶透過HockeyApp下載App，且HockeyApp本身可以讓APP有更新上架後，讓用戶開啟App之後，自動跳出更新App的訊息，這樣好處就可以減少開發人員再去做版本更新的通知功能。HockeyApp其背後的通知更新的機制在於<code>Build</code>版號要更新，才會通知有下載用戶說有新版本上架，換句話說如果只是單純上架新版的<code>ipa</code>是沒有用的<br><img src="/blogimage/HockeyApp/1.jpg" width="600"></p>
+<p>要做到版本更新，手動方式就是在<code>Hockapp</code>介面去調整<code>build number</code>，不過，這樣似乎有一點麻煩，期望可以這部分自動化，讓<code>ipa</code>檔上傳後就自動更新版號。因此，必須在VSTS做一些設定即可</p>
+<h3 id="自動更新版號"><a href="#自動更新版號" class="headerlink" title="自動更新版號"></a>自動更新版號</h3><hr>
+<p>要做到自動更新版號，主要需了解HockeyApp版號的控制，由下圖可以知道，版號的取得是來自於<code>plist</code>檔案中的<code>CFBundleVersion</code>數值<br><img src="/blogimage/HockeyApp/2.jpg" width="600"></p>
+<p>只要知道它取得資訊地方，基本上在VSTS內要做到修改版號這件事情就簡單多。只要我們在<code>Build</code>的時候，去修改<code>CFBundleVersion</code>數值，不就可以了嗎?基於此想法，所以，後續動作就是修改<code>plist</code>檔案。</p>
+<p>預設在VSTS裡面並沒有像MAC有方便更新<code>plist</code>的工具，所以，需安裝一個套件來幫我們簡化這個步驟，套件名稱為<code>Colin&#39;s ALM Corner Build &amp; Release Tools</code></p>
+<img src="/blogimage/HockeyApp/3.jpg" width="600">
+<p>這工具可以修改東西有這些:</p>
+<ul>
+<li>Version Assemblies</li>
+<li>Replace Tokens</li>
+<li>DacPac Change Report Task</li>
+<li>Tokenizer</li>
+<li>Coverage Gate</li>
+</ul>
+<p>主要是透過<code>Version Assemblies</code>方式去修改<code>plist</code>檔案，原本Build Xamarin流程</p>
+<img src="/blogimage/HockeyApp/4.jpg" width="400">
+<p>我們加上一個<code>Version Assemblies</code> Task，輔助我們修改<code>plist</code>檔案</p>
+<img src="/blogimage/HockeyApp/5.jpg" width="500">
+<p>在這Task幾個項目要設定</p>
+<ul>
+<li>Source Path : 要取得<code>plist</code>檔案目錄</li>
+<li>File Pattern : 這邊當然是指定plist檔案囉，<code>/Info.plist</code></li>
+<li>Version Source : 設定版本號的來源，可以使用Build Number或自訂變數，如果你要有自己的版本號設定，就選用自訂變數，不過，這邊的自訂變數，必須切記要符合Apple版本的編碼格式:<code>1.0.0</code></li>
+<li>Variable to use : 要使用的自訂變數，這邊一般可以使用<code>Build.BuildNumber</code>，原本因該是<code>$Build.BuildNumber</code>，但是這邊不可以加上<code>$</code></li>
+<li>Version Extract Pattern : 原本版本的型態格式，這邊使用<code>Custom Regex</code>，由我們來定義，符合<code>plist</code>內的CFBundleVersion格式</li>
+<li>Custom Regex Find Pattern : Regex的表達式:<code>(?:\d+\.\d+\.)(\d+)</code>，就直接抄這個，不需要變更</li>
+</ul>
+<p>這運作機制，其實就是幫忙找到<code>plist</code>檔案，有設定<code>CFBundleVersion</code>版本的地方，用<code>$Build.BuildNumber</code>去Replace原本設定值，另外，在Advanced的<code>Replace Pattern</code>設定為<code>1.0.0</code>，且一個重點就是<code>Build Regex Group Index</code>必須視為0</p>
+<img src="/blogimage/HockeyApp/6.jpg" width="500">
+<p>因此，當每次build完後，就可以增量增加版號，這時候再把build好的ipa檔，傳到HockeyApp就可以</p>
+<h3 id="切換bundle-identifier"><a href="#切換bundle-identifier" class="headerlink" title="切換bundle identifier"></a>切換bundle identifier</h3><hr>
+<p>我們都知道在iOS中BundleIdentifier名稱是唯一的，且每個名稱都會帶入一個憑證。一般我們在開發階段可以使用apple <code>develop</code>的憑證，做開發與發佈。不過，如果要正式發布給用戶安裝，就不能使用開發的憑證，必須到正式發布的憑證，憑證的改變還算簡單，這要在<code>Build Xamarin.iOS</code>的Task中，去更換<code>P12 Certificate File</code>,<code>P12 Password</code> &amp; <code>Provisioning Profile File</code>對應的資訊就可以</p>
+<img src="/blogimage/HockeyApp/7.jpg" width="500">
+<p>但是，困難的是修改bundle identifier，畢竟在開發階段是不會設定bundle identifier為正式發布的名稱，而是當我們要Release時候，才會進行變更。要做這方面原本以為很困難，不過，發現這資訊也是被綁在<code>plist</code>檔案內，這時候發現一道曙光。就是如上面更新版號一樣作法去修改<code>plist</code>檔案</p>
+<p>不過，這邊操作起來就簡單許多，因為我們只要Replace開發用的<code>BundleIdentifier</code>名稱，換成正式發布的名稱就可以，這樣上面會動到的地方有:</p>
+<ul>
+<li>Variable to use : 用變數指定正式發布名稱</li>
+<li>Version Extract Pattern : 一樣用Custom Regex</li>
+<li>Custom Regex Find Pattern : 設定測試的<code>BundleIdentifier</code>的名字，後面可以直接Replace這個名字<br>另外，在Advanced設定</li>
+<li>Custom Regex Replace Pattern : 設定測試的<code>BundleIdentifier</code>的名字</li>
+<li>Replace Pattern : 設定Custom Regex</li>
+<li>Build Regex Group Index : 設定為0</li>
+</ul>
+<p>這樣就可以變更名稱了，以上這些步驟都要在build之前，這樣才會把資訊跟ipa檔一起打包</p>
+<p>所以，後續只要透過Branch去拆分開發與正式版本就可以，也就可以達到自動化佈署與切換的功能</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share">Share</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_pinterest"></a>
+    <a class="a2a_button_tumblr"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>
+            follow:</p>
+        <ul class="social-links">
+            
+                
+                    <li>
+                        <a class="social-tooltip" title="twitter" href="https://twitter.com/Chia_Chi_Kuo" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="facebook" href="https://www.facebook.com/jaigi.kuo" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="github" href="https://github.com/edwardkuo/" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="rss" href="http://edwardkuo.github.io/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                    </li>
+                    
+                        
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/paper/2017/03/23/SQL/Memorytableindex/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            透過參考數值設定In Memory Table的Index
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/paper/2017/03/10/Docker/Deletewindowsfilter/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">無法刪除Docker資料夾中的windowsfilter目錄</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+            
+                <div class="widgets-container">
+                    
+                        
+                            
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://docs.microsoft.com/zh-tw/media/hubs/microsoftteamshome/teams-skype-to-teams.svg)" alt="查詢Microsoft Teams群組中儲存檔案的容量" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a></p>
+                            <p class="item-title"><a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="title">查詢Microsoft Teams群組中儲存檔案的容量</a></p>
+                            <p class="item-date"><time datetime="2017-12-12T16:00:00.000Z" itemprop="datePublished">2017-12-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/04/Devops/VSTSFority/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://bright-side-of-life.com/wp-content/uploads/2017/05/post-fortify-fb.jpg)" alt="VSTS整合資安工具Fortify達成自動化" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/12/04/Devops/VSTSFority/" class="title">VSTS整合資安工具Fortify達成自動化</a></p>
+                            <p class="item-date"><time datetime="2017-12-03T16:00:00.000Z" itemprop="datePublished">2017-12-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/21/Other/StudyLove/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://distudio.blob.core.windows.net/study4tw/1510761314.63796.png)" alt="Study4.TW Study4Love - 與大師對談 活動" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/21/Other/StudyLove/" class="title">Study4.TW Study4Love - 與大師對談 活動</a></p>
+                            <p class="item-date"><time datetime="2017-11-21T14:59:31.000Z" itemprop="datePublished">2017-11-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/10/Devops/VSTSCore/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://core.ac.uk/resources/corelogo_hires.png)" alt="有參照外部元件如何在VSTS建立.Net Core Package" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/10/Devops/VSTSCore/" class="title">有參照外部元件如何在VSTS建立.Net Core Package</a></p>
+                            <p class="item-date"><time datetime="2017-11-09T16:00:00.000Z" itemprop="datePublished">2017-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/10/16/Azure/AIappTeams/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://datadog-prod.imgix.net/img/blog/monitor-azure-logic-app-workflows-datadog/azure-logic-apps-hero.png?ch=Width&fit=max&fm=png&auto=format&lossless=1)" alt="Application Insights + Logic App + Microsoft Teams 整合" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a></p>
+                            <p class="item-title"><a href="/paper/2017/10/16/Azure/AIappTeams/" class="title">Application Insights + Logic App + Microsoft Teams 整合</a></p>
+                            <p class="item-date"><time datetime="2017-10-15T16:00:00.000Z" itemprop="datePublished">2017-10-16</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/資料庫程式版控/">資料庫程式版控</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雲端到地端的持續整合與交付/">雲端到地端的持續整合與交付</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">7</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP-NET/">ASP.NET</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple/">Apple</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Azure/">Azure</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cordova/">Cordova</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevOps/">DevOps</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-End/">Front-End</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LifeStyle/">LifeStyle</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Office-365/">Office 365</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Other/">Other</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerShell/">PowerShell</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T-SQL/">T-SQL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSTS/">VSTS</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Studio/">Visual Studio</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ASP-NET/" style="font-size: 11.82px;">ASP.NET</a> <a href="/tags/Apple/" style="font-size: 13.64px;">Apple</a> <a href="/tags/Azure/" style="font-size: 20px;">Azure</a> <a href="/tags/C/" style="font-size: 18.18px;">C#</a> <a href="/tags/Cordova/" style="font-size: 11.82px;">Cordova</a> <a href="/tags/DevOps/" style="font-size: 19.09px;">DevOps</a> <a href="/tags/Docker/" style="font-size: 14.55px;">Docker</a> <a href="/tags/Front-End/" style="font-size: 10.91px;">Front-End</a> <a href="/tags/LifeStyle/" style="font-size: 16.36px;">LifeStyle</a> <a href="/tags/Office-365/" style="font-size: 10px;">Office 365</a> <a href="/tags/Other/" style="font-size: 11.82px;">Other</a> <a href="/tags/PowerShell/" style="font-size: 12.73px;">PowerShell</a> <a href="/tags/T-SQL/" style="font-size: 15.45px;">T-SQL</a> <a href="/tags/VSTS/" style="font-size: 17.27px;">VSTS</a> <a href="/tags/Visual-Studio/" style="font-size: 11.82px;">Visual Studio</a>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://study4.tw">Study4.TW</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/Study4.Enterprise/">Study4.Enterprise</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/286316594814216/">Azure &amp; .NET Developer FB 社團</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/MISDevOps/">製造業 DevOps日常</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://mva.microsoft.com/?mtag=4040062">MVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://channel9.msdn.com">Channel9</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://dog0416.blogspot.tw/">Matsurigoto</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://skychang.github.io/">天空的垃圾場</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://kyleap.blogspot.tw/">程式宅急便</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://08alan.github.io/">維持熱情不滅</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://dotblogs.com.tw/jamesfu">五餅二魚工作室</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://yi-shiuan.github.io/">饅頭小舖</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://michael80321.blogspot.tw/">Michael&#39;s World</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+                                
+                                    
+                                        <div class="widget-wrap widget-list">
+                                            <h3 class="widget-title">Visitor</h3>
+                                            <div class="widget">
+                                                <a href="http://s11.flagcounter.com/more/4zV"><img src="http://s11.flagcounter.com/count/4zV/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_8/viewers_0/labels_0/pageviews_1/flags_0/percent_1/" alt="Flag Counter" border="0"></a>
+                                            </div>
+
+                                        </div>
+
+
+                </div>
+                </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Edward kuo</p>
+                
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'ek20';
+    
+    
+    var disqus_url = 'http://edwardkuo.imas.tw/paper/2017/03/15/Devops/VSTSHockyApp/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

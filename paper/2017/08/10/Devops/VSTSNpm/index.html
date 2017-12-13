@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="_lzVun8mT2ObiZ3rk5827pMMbko8SQthqo8OtoRxhsc" />
+    
+        <title>
+            
+                在VSTS中建立npm套件管理平台 |
+                    
+                        E.K TechThinking
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+        
+            <meta name="keywords" content="VSTS,Package,npm,visual studio">
+            
+                        <meta name="description" content="在之前有介紹透過VSTS的Packages可以自建團隊的Nuget套件管理平台，在Packages中不只是可以建立Nuget套件的管理平台，如果，今日是前端人員或是非.NET人員，想要用npm指令來裝前端套件，VSTS是否可以做npm套件的管理平台呢?答案是可以，VSTS的Packages同時支援Nuget和npm套件管理，就讓我們來建立一個npm packages管理平台吧。
+自動化建立npm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在VSTS中建立npm套件管理平台">
+<meta property="og:url" content="http://edwardkuo.imas.tw/paper/2017/08/10/Devops/VSTSNpm/index.html">
+<meta property="og:site_name" content="E.K TechThinking">
+<meta property="og:description" content="在之前有介紹透過VSTS的Packages可以自建團隊的Nuget套件管理平台，在Packages中不只是可以建立Nuget套件的管理平台，如果，今日是前端人員或是非.NET人員，想要用npm指令來裝前端套件，VSTS是否可以做npm套件的管理平台呢?答案是可以，VSTS的Packages同時支援Nuget和npm套件管理，就讓我們來建立一個npm packages管理平台吧。
+自動化建立npm">
+<meta property="og:image" content="https://cs.fit.edu/code/projects/nothing_works/repository/revisions/b488be127a8cf1e59eb257db3f8eaf6efdb0f275/entry/deps/npm/html/npm-large.png">
+<meta property="og:updated_time" content="2017-09-02T12:14:23.279Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在VSTS中建立npm套件管理平台">
+<meta name="twitter:description" content="在之前有介紹透過VSTS的Packages可以自建團隊的Nuget套件管理平台，在Packages中不只是可以建立Nuget套件的管理平台，如果，今日是前端人員或是非.NET人員，想要用npm指令來裝前端套件，VSTS是否可以做npm套件的管理平台呢?答案是可以，VSTS的Packages同時支援Nuget和npm套件管理，就讓我們來建立一個npm packages管理平台吧。
+自動化建立npm">
+<meta name="twitter:image" content="https://cs.fit.edu/code/projects/nothing_works/repository/revisions/b488be127a8cf1e59eb257db3f8eaf6efdb0f275/entry/deps/npm/html/npm-large.png">
+                            
+
+                                
+                                    <link rel="alternate" href="http://edwardkuo.github.io/atom.xml" title="E.K TechThinking" type="application/atom+xml" />
+                                    
+
+                                        
+
+                                                <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+                                                    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+                                                        <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+                                                            <link rel="stylesheet" href="/css/style.css">
+
+                                                                <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+                                                                    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-33121513-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+                                                                        <script type="text/javascript">
+                                                                            var appInsights = window.appInsights || function(config) {
+                                                                                function i(config) {
+                                                                                    t[config] = function() {
+                                                                                        var i = arguments;
+                                                                                        t.queue.push(function() {
+                                                                                            t[config].apply(t, i)
+                                                                                        })
+                                                                                    }
+                                                                                }
+                                                                                var t = {
+                                                                                        config: config
+                                                                                    },
+                                                                                    u = document,
+                                                                                    e = window,
+                                                                                    o = "script",
+                                                                                    s = "AuthenticatedUserContext",
+                                                                                    h = "start",
+                                                                                    c = "stop",
+                                                                                    l = "Track",
+                                                                                    a = l + "Event",
+                                                                                    v = l + "Page",
+                                                                                    y = u.createElement(o),
+                                                                                    r, f;
+                                                                                y.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js";
+                                                                                u.getElementsByTagName(o)[0].parentNode.appendChild(y);
+                                                                                try {
+                                                                                    t.cookie = u.cookie
+                                                                                } catch (p) {}
+                                                                                for (t.queue = [], t.version = "1.0", r = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; r.length;) i("track" + r.pop());
+                                                                                return i("set" + s), i("clear" + s), i(h + a), i(c + a), i(h + v), i(c + v), i("flush"), config.disableExceptionTracking || (r = "onerror", i("_" + r), f = e[r], e[r] = function(config, i, u, e, o) {
+                                                                                    var s = f && f(config, i, u, e, o);
+                                                                                    return s !== !0 && t["_" + r](config, i, u, e, o), s
+                                                                                }), t
+                                                                            }({
+                                                                                instrumentationKey: "7891dfec-e884-4bdc-bf34-f581dce47f3a"
+                                                                            });
+
+                                                                            window.appInsights = appInsights;
+
+                                                                            // Add telemetry initializer
+                                                                            appInsights.queue.push(function() {
+                                                                                appInsights.context.addTelemetryInitializer(function(envelope) {
+                                                                                    var telemetryItem = envelope.data.baseData;
+
+
+                                                                                    // To set custom properties:
+                                                                                    telemetryItem.properties = telemetryItem.properties || {};
+                                                                                    telemetryItem.properties["ApplicationName"] = "EK20";
+
+
+                                                                                });
+                                                                            });
+                                                                            // end of insertion
+
+
+
+                                                                            appInsights.trackPageView();
+                                                                        </script>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Tech &amp; Thinking &amp; DevOps &amp; Azure &amp; VSTS</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/about.html">About</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/slideshare/slideshare.html">Slideshare</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/Link/Link.html">Hot Link</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    uncategorized
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-Devops/VSTSNpm" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        在VSTS中建立npm套件管理平台
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/paper/2017/08/10/Devops/VSTSNpm/" class="article-date">
+    <time datetime="2017-08-09T16:00:00.000Z" itemprop="datePublished">2017-08-10</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DevOps/">DevOps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VSTS/">VSTS</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <img src="https://cs.fit.edu/code/projects/nothing_works/repository/revisions/b488be127a8cf1e59eb257db3f8eaf6efdb0f275/entry/deps/npm/html/npm-large.png">
+<p>在之前有介紹透過VSTS的<code>Packages</code>可以自建團隊的Nuget套件管理平台，在<code>Packages</code>中不只是可以建立Nuget套件的管理平台，如果，今日是前端人員或是非.NET人員，想要用<code>npm</code>指令來裝前端套件，VSTS是否可以做<code>npm</code>套件的管理平台呢?答案是可以，VSTS的Packages同時支援<strong>Nuget</strong>和<strong>npm</strong>套件管理，就讓我們來建立一個npm packages管理平台吧。</p>
+<h2 id="自動化建立npm-package"><a href="#自動化建立npm-package" class="headerlink" title="自動化建立npm package"></a>自動化建立npm package</h2><hr>
+<p>在VSTS的Feed本身就同時支援Nuget和npm，換句話說可以在同一個Feed URL同時存在兩種套件管理，不過，並不建議這樣混合使用，畢竟這樣使用會造成套件本身管理的混亂。還是建議把兩種不同屬性的Package分別建立不同的Feed。要建立Feed只需要選擇建立就可以，很簡單的<br><img src="/blogimage/VSTSnpm/1.jpg" width="500"></p>
+<p>只需要填入Feed名稱就可以建立成功，建立成功後去點選<em>Connect to Feed</em>，可以看到裡面有<strong>Nuget</strong>和<strong>npm</strong>兩種設定方式<br><img src="/blogimage/VSTSnpm/2.jpg" width="600"></p>
+<p>透過VSTS自動化建置npm package的流程比建置Nuget package簡單許多了，今日若是要透過VSTS自動化建置，上圖中的設定可以暫時不需要管它，後續如果是在Clinet進行，則必須要做一些相關設定才有辦法，先來說講最簡單的，使用VSTS建置npm package。</p>
+<p>因為npm主要是封裝前端的元件，基本上都不太需要做到編譯的動作，當然如果今天是用<code>SCSS</code>需要編譯成<code>CSS</code>才給人家用，這樣就需要增加編譯動作，不然，只要將整個專案進行封裝就可以。在封裝的前提必須在專案檔加入<code>package.json</code>檔案，這檔案主要是針對Package做說明，與<code>Package.config</code>有異曲同工之妙</p>
+<p>關於<code>package.json</code>說明</p>
+<blockquote>
+<p>The most important things in your package.json are the name and version fields. Those are actually required, and your package won’t install without them. The name and version together form an identifier that is assumed to be completely unique. Changes to the package should come along with changes to the version.</p>
+</blockquote>
+<p>關於<code>package.json</code>格式，可以透過<code>npm init</code>建立<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"my_package"</span>,</div><div class="line">  <span class="attr">"description"</span>: <span class="string">""</span>,</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</div><div class="line">  <span class="attr">"description"</span>: <span class="string">""</span>,</div><div class="line">  <span class="attr">"main"</span>: <span class="string">"index.js"</span>,</div><div class="line">  <span class="attr">"scripts"</span>: &#123;</div><div class="line">    <span class="attr">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"repository"</span>: &#123;</div><div class="line">    <span class="attr">"type"</span>: <span class="string">"git"</span>,</div><div class="line">    <span class="attr">"url"</span>: <span class="string">"https://github.com/ashleygwilliams/my_package.git"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"keywords"</span>: [],</div><div class="line">  <span class="attr">"author"</span>: <span class="string">""</span>,</div><div class="line">  <span class="attr">"license"</span>: <span class="string">"ISC"</span>,</div><div class="line">  <span class="attr">"bugs"</span>: &#123;</div><div class="line">    <span class="attr">"url"</span>: <span class="string">"https://github.com/ashleygwilliams/my_package/issues"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"homepage"</span>: <span class="string">"https://github.com/ashleygwilliams/my_package"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>有了這檔案，只需要去VSTS進行設定就可以，因為，沒有Build的動作，基本上在VSTS Build就等於Release了。所以，這邊只需要添加一個<code>npm</code> Task即可<br><img src="/blogimage/VSTSnpm/3.jpg" width="600"></p>
+<h2 id="設定npm-Task"><a href="#設定npm-Task" class="headerlink" title="設定npm Task"></a>設定npm Task</h2><hr>
+<p>建立好Task後，就是把相關設定設定完畢就可以<br><img src="/blogimage/VSTSnpm/4.jpg" width="600"></p>
+<ul>
+<li>Command : 可以選擇<code>install</code>,<code>publish</code>和<code>Custom</code>，這邊選擇<code>publish</code></li>
+<li>Working folder with package.json : 如果<code>package.json</code>在Root就不用填寫，不然就選擇該檔案所在的資料夾</li>
+<li>Registry location : 註冊你的npm package在哪個地方，如果是在VSTS內，則選用<code>Registry I Select here</code>，一但選用這個，下面的<code>target</code>就可以選擇在你VSTS上面的Feed URL了</li>
+</ul>
+<p>以上屬性設定完成後，就可以讓她自動化去封裝了，同時也會自動化佈署到我們自己的Feed內，建置完成後就可以看到Feed那邊多出了npm package了<br><img src="/blogimage/VSTSnpm/5.jpg" width="600"><br>另外，如果每次要佈署時候，沒有去更改<code>package.json</code>中的version號碼，會發生佈署失敗，主要原因是它不會去覆蓋原本舊版本，必須要進版才可以，不然會發生錯誤，如果不想這樣麻煩，也可以使用<code>Version Assemblies</code>套件做自動化進版<br><img src="/blogimage/VSTSnpm/6.jpg" width="7" height="00"></p>
+<h2 id="安裝VSTS中的npm-package"><a href="#安裝VSTS中的npm-package" class="headerlink" title="安裝VSTS中的npm package"></a>安裝VSTS中的npm package</h2><hr>
+<p>既然我們已經可以用npm封裝好了，再來就是要能去使用它，因為，VSTS上的是屬於私人或是團隊的，並不像<code>npm</code>網站一樣是被公開可以用。所以，這邊我們需要增加一些設定才可以抓取VSTS上的npm，不然直接下<code>npm install xxxx</code>是沒有用的，主要是要把VSTS Auth驗證資訊會透過<code>.npmrc</code>內資訊被設定在專案中</p>
+<blockquote>
+<p>.npmrc : npm gets its config settings from the command line, environment variables, and npmrc files.</p>
+</blockquote>
+<p>預設你可能沒有<code>vsts-npm-auth</code>套件，所以，需透過npm安裝這個套件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g vsts-npm-auth --registry https://registry.npmjs.com --always-auth false</div></pre></td></tr></table></figure></p>
+<p>然後，在專案手動加入空白的<code>.npmrc</code>檔案，目前還不知道怎樣自動加入此檔案，有了這個檔案後，根據本文上面第二張圖，有一段<strong>Add this feed to your project .npmrc</strong>，把裡面的資訊<code>registry=XXX</code>放入.npmrc檔案中。到了這一步完成後，就可以執行下面語法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vsts-npm-auth -config .npmrc</div></pre></td></tr></table></figure></p>
+<p>成功後會得到下面訊息</p>
+<blockquote>
+<p>Getting new credentials for source:<a href="https://XXXXXXregistry/" target="_blank" rel="external">https://XXXXXXregistry/</a>, scope:vso.packaging_write vso.drop_write</p>
+</blockquote>
+<p>如果在Visual Studio中想要安裝VSTS上面的npm的套件，可以用<em>package manager console</em>工具或是安裝*Flatten Packages`工具，協助我們安裝npm套件，如果使用Visual Studio Code就更簡單了</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share">Share</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_pinterest"></a>
+    <a class="a2a_button_tumblr"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>
+            follow:</p>
+        <ul class="social-links">
+            
+                
+                    <li>
+                        <a class="social-tooltip" title="twitter" href="https://twitter.com/Chia_Chi_Kuo" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="facebook" href="https://www.facebook.com/jaigi.kuo" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="github" href="https://github.com/edwardkuo/" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="rss" href="http://edwardkuo.github.io/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                    </li>
+                    
+                        
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/paper/2017/08/11/Docker/DockerCLI/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            用Chocolatey安裝Docker CLI
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/paper/2017/08/07/Azure/ApplicationInsightsFilter/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Application Insights自訂過濾收集的訊息內容</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+            
+                <div class="widgets-container">
+                    
+                        
+                            
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://docs.microsoft.com/zh-tw/media/hubs/microsoftteamshome/teams-skype-to-teams.svg)" alt="查詢Microsoft Teams群組中儲存檔案的容量" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a></p>
+                            <p class="item-title"><a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="title">查詢Microsoft Teams群組中儲存檔案的容量</a></p>
+                            <p class="item-date"><time datetime="2017-12-12T16:00:00.000Z" itemprop="datePublished">2017-12-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/04/Devops/VSTSFority/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://bright-side-of-life.com/wp-content/uploads/2017/05/post-fortify-fb.jpg)" alt="VSTS整合資安工具Fortify達成自動化" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/12/04/Devops/VSTSFority/" class="title">VSTS整合資安工具Fortify達成自動化</a></p>
+                            <p class="item-date"><time datetime="2017-12-03T16:00:00.000Z" itemprop="datePublished">2017-12-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/21/Other/StudyLove/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://distudio.blob.core.windows.net/study4tw/1510761314.63796.png)" alt="Study4.TW Study4Love - 與大師對談 活動" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/21/Other/StudyLove/" class="title">Study4.TW Study4Love - 與大師對談 活動</a></p>
+                            <p class="item-date"><time datetime="2017-11-21T14:59:31.000Z" itemprop="datePublished">2017-11-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/10/Devops/VSTSCore/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://core.ac.uk/resources/corelogo_hires.png)" alt="有參照外部元件如何在VSTS建立.Net Core Package" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/10/Devops/VSTSCore/" class="title">有參照外部元件如何在VSTS建立.Net Core Package</a></p>
+                            <p class="item-date"><time datetime="2017-11-09T16:00:00.000Z" itemprop="datePublished">2017-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/10/16/Azure/AIappTeams/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://datadog-prod.imgix.net/img/blog/monitor-azure-logic-app-workflows-datadog/azure-logic-apps-hero.png?ch=Width&fit=max&fm=png&auto=format&lossless=1)" alt="Application Insights + Logic App + Microsoft Teams 整合" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a></p>
+                            <p class="item-title"><a href="/paper/2017/10/16/Azure/AIappTeams/" class="title">Application Insights + Logic App + Microsoft Teams 整合</a></p>
+                            <p class="item-date"><time datetime="2017-10-15T16:00:00.000Z" itemprop="datePublished">2017-10-16</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/資料庫程式版控/">資料庫程式版控</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雲端到地端的持續整合與交付/">雲端到地端的持續整合與交付</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">7</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP-NET/">ASP.NET</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple/">Apple</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Azure/">Azure</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cordova/">Cordova</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevOps/">DevOps</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-End/">Front-End</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LifeStyle/">LifeStyle</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Office-365/">Office 365</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Other/">Other</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerShell/">PowerShell</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T-SQL/">T-SQL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSTS/">VSTS</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Studio/">Visual Studio</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ASP-NET/" style="font-size: 11.82px;">ASP.NET</a> <a href="/tags/Apple/" style="font-size: 13.64px;">Apple</a> <a href="/tags/Azure/" style="font-size: 20px;">Azure</a> <a href="/tags/C/" style="font-size: 18.18px;">C#</a> <a href="/tags/Cordova/" style="font-size: 11.82px;">Cordova</a> <a href="/tags/DevOps/" style="font-size: 19.09px;">DevOps</a> <a href="/tags/Docker/" style="font-size: 14.55px;">Docker</a> <a href="/tags/Front-End/" style="font-size: 10.91px;">Front-End</a> <a href="/tags/LifeStyle/" style="font-size: 16.36px;">LifeStyle</a> <a href="/tags/Office-365/" style="font-size: 10px;">Office 365</a> <a href="/tags/Other/" style="font-size: 11.82px;">Other</a> <a href="/tags/PowerShell/" style="font-size: 12.73px;">PowerShell</a> <a href="/tags/T-SQL/" style="font-size: 15.45px;">T-SQL</a> <a href="/tags/VSTS/" style="font-size: 17.27px;">VSTS</a> <a href="/tags/Visual-Studio/" style="font-size: 11.82px;">Visual Studio</a>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://study4.tw">Study4.TW</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/Study4.Enterprise/">Study4.Enterprise</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/286316594814216/">Azure &amp; .NET Developer FB 社團</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/MISDevOps/">製造業 DevOps日常</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://mva.microsoft.com/?mtag=4040062">MVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://channel9.msdn.com">Channel9</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://dog0416.blogspot.tw/">Matsurigoto</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://skychang.github.io/">天空的垃圾場</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://kyleap.blogspot.tw/">程式宅急便</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://08alan.github.io/">維持熱情不滅</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://dotblogs.com.tw/jamesfu">五餅二魚工作室</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://yi-shiuan.github.io/">饅頭小舖</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://michael80321.blogspot.tw/">Michael&#39;s World</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+                                
+                                    
+                                        <div class="widget-wrap widget-list">
+                                            <h3 class="widget-title">Visitor</h3>
+                                            <div class="widget">
+                                                <a href="http://s11.flagcounter.com/more/4zV"><img src="http://s11.flagcounter.com/count/4zV/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_8/viewers_0/labels_0/pageviews_1/flags_0/percent_1/" alt="Flag Counter" border="0"></a>
+                                            </div>
+
+                                        </div>
+
+
+                </div>
+                </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Edward kuo</p>
+                
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'ek20';
+    
+    
+    var disqus_url = 'http://edwardkuo.imas.tw/paper/2017/08/10/Devops/VSTSNpm/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

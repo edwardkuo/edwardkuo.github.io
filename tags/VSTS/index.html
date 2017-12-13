@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="_lzVun8mT2ObiZ3rk5827pMMbko8SQthqo8OtoRxhsc" />
+    
+        <title>
+            
+                Tag: VSTS |
+                    
+                        E.K TechThinking
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+        
+                        <meta name="description" content="Azure,Teams,雲端架構,製造業,DevOps,程式開發,MVP,架構設計,C#,SQL,javascript,html,css,微軟,MVC,Server,寫">
+<meta property="og:type" content="website">
+<meta property="og:title" content="E.K TechThinking">
+<meta property="og:url" content="http://edwardkuo.imas.tw/tags/VSTS/index.html">
+<meta property="og:site_name" content="E.K TechThinking">
+<meta property="og:description" content="Azure,Teams,雲端架構,製造業,DevOps,程式開發,MVP,架構設計,C#,SQL,javascript,html,css,微軟,MVC,Server,寫">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="E.K TechThinking">
+<meta name="twitter:description" content="Azure,Teams,雲端架構,製造業,DevOps,程式開發,MVP,架構設計,C#,SQL,javascript,html,css,微軟,MVC,Server,寫">
+                            
+
+                                
+                                    <link rel="alternate" href="http://edwardkuo.github.io/atom.xml" title="E.K TechThinking" type="application/atom+xml" />
+                                    
+
+                                        
+
+                                                <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+                                                    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+                                                        <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+                                                            <link rel="stylesheet" href="/css/style.css">
+
+                                                                <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+                                                                    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-33121513-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+                                                                        <script type="text/javascript">
+                                                                            var appInsights = window.appInsights || function(config) {
+                                                                                function i(config) {
+                                                                                    t[config] = function() {
+                                                                                        var i = arguments;
+                                                                                        t.queue.push(function() {
+                                                                                            t[config].apply(t, i)
+                                                                                        })
+                                                                                    }
+                                                                                }
+                                                                                var t = {
+                                                                                        config: config
+                                                                                    },
+                                                                                    u = document,
+                                                                                    e = window,
+                                                                                    o = "script",
+                                                                                    s = "AuthenticatedUserContext",
+                                                                                    h = "start",
+                                                                                    c = "stop",
+                                                                                    l = "Track",
+                                                                                    a = l + "Event",
+                                                                                    v = l + "Page",
+                                                                                    y = u.createElement(o),
+                                                                                    r, f;
+                                                                                y.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js";
+                                                                                u.getElementsByTagName(o)[0].parentNode.appendChild(y);
+                                                                                try {
+                                                                                    t.cookie = u.cookie
+                                                                                } catch (p) {}
+                                                                                for (t.queue = [], t.version = "1.0", r = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; r.length;) i("track" + r.pop());
+                                                                                return i("set" + s), i("clear" + s), i(h + a), i(c + a), i(h + v), i(c + v), i("flush"), config.disableExceptionTracking || (r = "onerror", i("_" + r), f = e[r], e[r] = function(config, i, u, e, o) {
+                                                                                    var s = f && f(config, i, u, e, o);
+                                                                                    return s !== !0 && t["_" + r](config, i, u, e, o), s
+                                                                                }), t
+                                                                            }({
+                                                                                instrumentationKey: "7891dfec-e884-4bdc-bf34-f581dce47f3a"
+                                                                            });
+
+                                                                            window.appInsights = appInsights;
+
+                                                                            // Add telemetry initializer
+                                                                            appInsights.queue.push(function() {
+                                                                                appInsights.context.addTelemetryInitializer(function(envelope) {
+                                                                                    var telemetryItem = envelope.data.baseData;
+
+
+                                                                                    // To set custom properties:
+                                                                                    telemetryItem.properties = telemetryItem.properties || {};
+                                                                                    telemetryItem.properties["ApplicationName"] = "EK20";
+
+
+                                                                                });
+                                                                            });
+                                                                            // end of insertion
+
+
+
+                                                                            appInsights.trackPageView();
+                                                                        </script>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Tech &amp; Thinking &amp; DevOps &amp; Azure &amp; VSTS</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/about.html">About</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/slideshare/slideshare.html">Slideshare</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/Link/Link.html">Hot Link</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <i class="icon fa fa-tag"></i>Tag: <em>VSTS</em>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    
+    
+        
+        
+        <section class="archives-wrap">
+            <div class="archive-year-wrap">
+                <a href="/archives/2017" class="archive-year"><i class="icon fa fa-calendar-o"></i>2017</a>
+            </div>
+            <div class="archives">
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/12/04/Devops/VSTSFority/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://bright-side-of-life.com/wp-content/uploads/2017/05/post-fortify-fb.jpg)" alt="VSTS整合資安工具Fortify達成自動化" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/12/04/Devops/VSTSFority/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-12-03T16:00:00.000Z" itemprop="datePublished">2017-12-04</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/12/04/Devops/VSTSFority/">VSTS整合資安工具Fortify達成自動化</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在資安逐步被重視的年代，企業會導入更多資安相關工具，除了本身伺服器或網路層的工具外，近年也針對程式碼進行安全性的掃瞄，目前其中市面上比較熱門的工具之一就是HPE Fortify，他本身可掃描的程式碼種類很多。在開發者端，可以透過Visual Studio的Plug in方式，安裝在Visual Studio，如果你又有Fortify Center的登入權限，便可以從Center將資安團隊設定好的
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/11/10/Devops/VSTSCore/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://core.ac.uk/resources/corelogo_hires.png)" alt="有參照外部元件如何在VSTS建立.Net Core Package" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/11/10/Devops/VSTSCore/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-11-09T16:00:00.000Z" itemprop="datePublished">2017-11-10</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/11/10/Devops/VSTSCore/">有參照外部元件如何在VSTS建立.Net Core Package</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在先前一篇的[用VSTS建立.Net Core的Package]，建立屬於.Net Core的Nuget Package，其中在Path to csproj or nuspec file(s) to pack是沒有辦法放.nuspec檔案的，但是，原本在.nuspec有一個標籤可以把外部dll包進Package123&lt;files&gt;    &lt;file src="lib\XXX.d
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/10/13/Devops/donetVSTS/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://stackify.com/wp-content/uploads/2017/03/dotnetwidowsserv-793x397.jpg)" alt="用VSTS建立.Net Core的Package" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/10/13/Devops/donetVSTS/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-10-12T16:00:00.000Z" itemprop="datePublished">2017-10-13</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/10/13/Devops/donetVSTS/">用VSTS建立.Net Core的Package</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+我們知道使用VSTS中的Packages Manager可以建立企業或是私有的Nuget Server，在一般.Net Framework下，可以用下面幾個步驟建立Nuget的Package，其中使用到的是MSBuild做編譯，再用Nuget指令打包成Package
+
+不過，今天若是也這樣對.Net Core專案進行封裝，雖然會成功，但是，當在.Net Core專案下載來用時候，就會出現你使用了
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/10/03/Devops/VSTSAgent2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://4.bp.blogspot.com/-um9fpZrF5hA/U4SCkUT1EuI/AAAAAAAAA08/cy9elvop6XY/s1600/Proxy_Logo3.gif)" alt="VSTS新版Agent要多.proxy設定檔" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/10/03/Devops/VSTSAgent2/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-10-02T16:00:00.000Z" itemprop="datePublished">2017-10-03</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/10/03/Devops/VSTSAgent2/">VSTS新版Agent要多.proxy設定檔</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在使用VSTS Agent 2.115版本時候，在企業內部使用是沒甚麼問題，不過，最近升級到2.123版後，地端與雲端就失聯，就無法進行連線，到_diag資料查看Log，發現會卡在最後連線驗證地端權限時候，一直發生Timeout然後Agent就發生Exception，導致怎樣都無法與雲端溝通，如果再倒回2.115版又可以連線，真是太神奇
+仔細研究一下，因為企業內部必須透過Proxy才能連線，在舊
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/09/02/Devops/VSTSNPM2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://partners.npmjs.com/weekly/weekly32/weekly-header-grace-hopper.png)" alt="解決註冊VSTS的npm平台無法下載npmjs.com套件" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/09/02/Devops/VSTSNPM2/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-09-01T16:00:00.000Z" itemprop="datePublished">2017-09-02</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/09/02/Devops/VSTSNPM2/">解決註冊VSTS的npm平台無法下載npmjs.com套件</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在前一篇的[在VSTS中建立npm套件管理平台]介紹說可以在VSTS內建立NPM套件平台，因為，VSTS建立的NPM套件管理平台是屬於私人的，所以，會有註冊憑證的動作，不過，這樣做下去之後，卻發生一個問題，如果今日我們是要從原本NPM官網下載套件，就會發生這樣錯誤
+其實這錯誤就是因為在.npmrc設定檔中註冊是VSTS NPM套件路徑，而原本NPM平台上套件又不在VSTS，導致會發生失敗，如果不
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/08/10/Devops/VSTSNpm/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://cs.fit.edu/code/projects/nothing_works/repository/revisions/b488be127a8cf1e59eb257db3f8eaf6efdb0f275/entry/deps/npm/html/npm-large.png)" alt="在VSTS中建立npm套件管理平台" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/08/10/Devops/VSTSNpm/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-08-09T16:00:00.000Z" itemprop="datePublished">2017-08-10</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/08/10/Devops/VSTSNpm/">在VSTS中建立npm套件管理平台</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在之前有介紹透過VSTS的Packages可以自建團隊的Nuget套件管理平台，在Packages中不只是可以建立Nuget套件的管理平台，如果，今日是前端人員或是非.NET人員，想要用npm指令來裝前端套件，VSTS是否可以做npm套件的管理平台呢?答案是可以，VSTS的Packages同時支援Nuget和npm套件管理，就讓我們來建立一個npm packages管理平台吧。
+自動化建立npm
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/07/14/Devops/VSTSSE/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://sierraws.com/wp-content/uploads/2013/11/Sierra-Workforce-Solutions-Workplance-Security-AccessControl-e1389048310112.jpg)" alt="用Azure Conditional Access限制公司以外地區不可以連入VSTS" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/07/14/Devops/VSTSSE/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-07-13T16:00:00.000Z" itemprop="datePublished">2017-07-14</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/07/14/Devops/VSTSSE/">用Azure Conditional Access限制公司以外地區不可以連入VSTS</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+就目前微軟以雲端服務為優先情況，VSTS的功能是越來越強大，再加上本身VSTS也可以與地端整合，所以，使用VSTS來做為版控工具是一個不錯選擇，不過，很多人知道好處，但畢竟是雲端服務又會很擔心，如果在公司外部讓公司有心人進入後，把所有程式碼都拿走就慘了，安全性的管理一直想用VSTS的一個。
+其實只要透過Azure Conditional Access就可以解決這問題。畢竟，在整個微軟雲端服務中，
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/07/07/Devops/VSTSPackage/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://www.geekhive.com/wp-content/uploads/2017/05/ship-1920x1080.jpg)" alt="自動化建置取得不同VSTS平台內的Packages Manager套件" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/07/07/Devops/VSTSPackage/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-07-06T16:00:00.000Z" itemprop="datePublished">2017-07-07</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/07/07/Devops/VSTSPackage/">自動化建置取得不同VSTS平台內的Packages Manager套件</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+自從VSTS有了Packages的功能，可以讓我們自建團隊私有的Nuget後，就習慣把大量可以Re-Use套件放上去，可以讓整個團隊共同使用這些套件。不過，如果給自己團隊是沒有甚麼問題，今天要跨團隊使用呢?就是給在不同專案成員也用你開發的Package，在同一個VSTS URL下，只要去設定Feed權限也就可以，如下圖，在BestFeed下設定給予要讀取此Package的人員那些權限
+但是，如果
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/05/24/Devops/MobileCenter/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://www.visualstudio.com/wp-content/uploads/2016/11/roadmap@2x.png)" alt="VSTS 整合Visual Studio Mobile Center" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/05/24/Devops/MobileCenter/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-05-23T16:00:00.000Z" itemprop="datePublished">2017-05-24</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/05/24/Devops/MobileCenter/">VSTS 整合Visual Studio Mobile Center</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+要在VSTS建置一個Xamarin開發出來的App，只要在Build Process將相關要建置的Task設定好基本上就可以產生出一個APP，若是要建置出iOS用的APP，就必須要在建置的Agent下一番功夫，例如使用Local agent或是第三方的Agent像是MacinCloud幫忙建置Xamarin專案，用Local agent則還是必須準備一台MAC在上面安裝Build Agent，似
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/03/15/Devops/VSTSHockyApp/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://static01.nyt.com/images/2016/09/09/well/mind/well_MIRL_stoplight/well_MIRL_stoplight-superJumbo-v2.gif)" alt="VSTS佈署Xamarin.iOS到Hockeyapp，自動更新版號和切換BundleIdentifier" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/03/15/Devops/VSTSHockyApp/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-03-14T16:00:00.000Z" itemprop="datePublished">2017-03-15</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/03/15/Devops/VSTSHockyApp/">VSTS佈署Xamarin.iOS到Hockeyapp，自動更新版號和切換BundleIdentifier</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在VSTS上面，可以建置Xamarin並將App發佈到HockeyApp上面進行，就可以讓用戶透過HockeyApp下載App，且HockeyApp本身可以讓APP有更新上架後，讓用戶開啟App之後，自動跳出更新App的訊息，這樣好處就可以減少開發人員再去做版本更新的通知功能。HockeyApp其背後的通知更新的機制在於Build版號要更新，才會通知有下載用戶說有新版本上架，換句話說如果只是單純
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/02/14/Devops/VSTSLibrary/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.slate.com/content/dam/slate/articles/technology/seven_wonders/2014/11/141209_7Wonders_WaterHero.gif.CROP.original-original.gif)" alt="善用VSTS的Library功能管理參數" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/02/14/Devops/VSTSLibrary/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-02-13T16:00:00.000Z" itemprop="datePublished">2017-02-14</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/02/14/Devops/VSTSLibrary/">善用VSTS的Library功能管理參數</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+大部專案都透過VSTS來進行佈署，雖然專案多，但是其實很多時候要設定的參數往往都相同，或是要佈署的路徑可能有80%是一樣，就必須每次都設定一次，或是說要用到一些Command的指令，在不同專案可能要寫一樣，若是，當中有需要變換指令寫法，就必須記住那些專案有用到，然後去改他，這樣非常不方便。再者，有些設定參數可能是具有安全性，不適合寫在Task中。
+基於上面一些理由，就可以透過VSTS的Libra
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/02/09/Devops/DeletePackageVSTS/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://mohamedradwan.com/wp-content/uploads/2016/07/0-Release-Management-Overview-for-TFS-and-VSTS.jpg)" alt="快速刪除VSTS Package某一個元件所有的版本" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/02/09/Devops/DeletePackageVSTS/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-02-08T16:00:00.000Z" itemprop="datePublished">2017-02-09</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/02/09/Devops/DeletePackageVSTS/">快速刪除VSTS Package某一個元件所有的版本</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+VSTS Packages可以讓我們自訂團隊的Nuget Service，我們可以把自訂元件放到VSTS內，並分享給團隊人使用，一般來說這樣應用問題不太大，不過，用一段時間發現一個問題，就是當要把這個元件從Package Feed移掉時候，並沒有想像中簡單。雖然，介面上有提供Unlist &amp; Delete Package，前者是讓這個版本不顯示在Feed上面，後者則是把這版本元件給刪除，
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/01/20/Devops/VSTSSendMail/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://valuebound.com/sites/default/files/2016-03/send-emai-programatically-in-drupal-8.jpg)" alt="VSTS 能夾帶附檔的Send Mail套件" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/01/20/Devops/VSTSSendMail/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-01-19T16:00:00.000Z" itemprop="datePublished">2017-01-20</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/01/20/Devops/VSTSSendMail/">VSTS 能夾帶附檔的Send Mail套件</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在前面的[自動化建立Database版本差異化Script]提到，我們可以透過SQL Compare方式去產生這次要佈署的SQL檔案，不過，在實務上來說，會習慣把產出檔案直接寄送給相關人員去佈署。又或是如果今天是撰寫元件的團隊，要把改版或是修正版的dll傳送給人員做更新。現在可以當你自動Buil &amp; Release後直接寄送檔案給指定人員
+安裝Send Mail套件
+首先到VSTS的Ma
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+        
+            </div></section>
+        
+        
+        <section class="archives-wrap">
+            <div class="archive-year-wrap">
+                <a href="/archives/2016" class="archive-year"><i class="icon fa fa-calendar-o"></i>2016</a>
+            </div>
+            <div class="archives">
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/12/25/Devops/VSTSCustomer/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.microsoftinsider.es/wp-content/uploads/2015/07/Visual-Studio-2015.jpg)" alt="VSTS也可以在Process Template Layout加入客製化欄位" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/12/25/Devops/VSTSCustomer/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-12-24T16:00:00.000Z" itemprop="datePublished">2016-12-25</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/12/25/Devops/VSTSCustomer/">VSTS也可以在Process Template Layout加入客製化欄位</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在VSTS提供三種預設樣板，分別為Agile、CMMI和Scrum，這三種比較屬於標準型的流程，但是，在許多實務上並非這三種內所包含的欄位或是要觀看的指標是符合現狀，如果，覺得這預設值表可以符合現狀，其實也滿怪的，以Scrum為例，雖然，Scrum有提到一些所謂的”標準”流程或是方式，但是，如果只是一昧認為開發流程要去符合上面Scrum所定義的才算是Scrum，感覺就是倒果為因，反倒是因該讓兩者
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/09/27/Devops/2016-09-27/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://image.slidesharecdn.com/dev-b211-140608184419-phpapp01/95/getting-started-with-visual-studio-online-teched-na-2014-5-638.jpg?cb=1402253110)" alt="打通自動化雲端部署到地端-VSTS用MSBuild產生部署Web Site所需要的Files" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/09/27/Devops/2016-09-27/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/雲端到地端的持續整合與交付/">雲端到地端的持續整合與交付</a>
+            </p>
+            <p class="date"><time datetime="2016-09-26T16:00:00.000Z" itemprop="datePublished">2016-09-27</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/09/27/Devops/2016-09-27/">打通自動化雲端部署到地端-VSTS用MSBuild產生部署Web Site所需要的Files</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+用VSTS去部署Web Site有什麼難的？尤其部署到Azure Web Site更是沒有難度，基本上只要用Azure web app deployment這個Task就可以。但是，部署到地端的IIS裡面，就沒有這樣簡單，尤其是要從雲到地的部署，沒有這樣簡單的原因，不外乎幾點：
+
+IIS沒有辦法裝Web deploy套件
+地端Agent可能沒有用Web deploy的權限
+VSTS並沒有類似Az
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/09/01/Devops/2016-09-01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://image.slidesharecdn.com/dev-b211-140608184419-phpapp01/95/getting-started-with-visual-studio-online-teched-na-2014-5-638.jpg?cb=1402253110)" alt="解決VSTS內Azure File Copy的Content Type問題" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/09/01/Devops/2016-09-01/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-08-31T16:00:00.000Z" itemprop="datePublished">2016-09-01</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/09/01/Devops/2016-09-01/">解決VSTS內Azure File Copy的Content Type問題</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+透過Azure File Copy的Task，可以把檔案部署到VM或是Blob中，在後者部署上如果只是一般的檔案，基本上並無太大問題，不過今日要是你部署的是js,image,css或是fonts檔案可能就會出現問題
+最容易發生的問題就是Web的連結這些Link檔案，雖然不會出現404問題，但是檔案內容也不會有做作用。主要是因為使用這Task部署後，檔案在Blob的Content Type會被設定
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/08/22/Devops/2016-08-22/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://image.slidesharecdn.com/dev-b211-140608184419-phpapp01/95/getting-started-with-visual-studio-online-teched-na-2014-5-638.jpg?cb=1402253110)" alt="如何替VSTS增加User Account , Agents和Build時數" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/08/22/Devops/2016-08-22/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-08-21T16:00:00.000Z" itemprop="datePublished">2016-08-22</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/08/22/Devops/2016-08-22/">如何替VSTS增加User Account , Agents和Build時數</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+一般來說使用VSTS好處是在五人以下的團隊可以免費使用VSTS的功能，且VSTS額外提供幾項免費項目
+
+每個月免費build 240分鐘
+每個月免費20000名的虛擬使用者分鐘數 (VUM)
+一個免費的build agent
+一個免費私人的部署agent相關計價方式可以參考下面詳細價格資訊https://www.visualstudio.com/pricing/visual-studio-tea
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/08/17/Devops/2016-08-17/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://image.slidesharecdn.com/dev-b211-140608184419-phpapp01/95/getting-started-with-visual-studio-online-teched-na-2014-5-638.jpg?cb=1402253110)" alt="打通自動化雲端部署到地端-自動化建立Database版本差異化Script" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/08/17/Devops/2016-08-17/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/雲端到地端的持續整合與交付/">雲端到地端的持續整合與交付</a>
+            </p>
+            <p class="date"><time datetime="2016-08-16T16:00:00.000Z" itemprop="datePublished">2016-08-17</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/08/17/Devops/2016-08-17/">打通自動化雲端部署到地端-自動化建立Database版本差異化Script</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+基於雲到地部署，除了我們在Application能做到CI&amp;DI的流程，現在連Database也是可以做到這個流程，不過，在實務上不太可能讓開發人員自動化去更新資料庫，尤其在正式環境下更是不可能，畢竟異動資料庫的風險是很大的，所以，一般保險作法可以產生要部署的SQL Script提供給DBA確認後，再做部署的動作
+要產生部署的SQL Script不是很容易嗎？是的，不過當你從開發到真正要
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/08/11/Devops/2016-08-11/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://image.slidesharecdn.com/dev-b211-140608184419-phpapp01/95/getting-started-with-visual-studio-online-teched-na-2014-5-638.jpg?cb=1402253110)" alt="打通自動化雲端部署到地端-安裝VSTS Agent" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/08/11/Devops/2016-08-11/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/雲端到地端的持續整合與交付/">雲端到地端的持續整合與交付</a>
+            </p>
+            <p class="date"><time datetime="2016-08-10T16:00:00.000Z" itemprop="datePublished">2016-08-11</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/08/11/Devops/2016-08-11/">打通自動化雲端部署到地端-安裝VSTS Agent</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+當開始使用Visual Studio Online做版控後，雖然很多新功能都可以優先使用以及運用一些雲端的優勢，但是，頭痛地方在於用VSTS做版控的系統，並非都會部署到雲端環境，尤其企業內部的系統往往必須部署在自己的Server內。所以，如何運用VSTS的優勢再結合實務上的需求，這就很重要。
+要讓雲端Source可以與地端接觸，必須要安裝Agent，讓Agent與VSTS做溝通，Agent可以在
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/06/18/Devops/2016-06-18/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://anadea.info/uploads/image_attachment/image/321/server-deployment.jpg)" alt="Hexo+VSTS+Azure Web app 的持續整合與交付" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/06/18/Devops/2016-06-18/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-06-17T16:00:00.000Z" itemprop="datePublished">2016-06-18</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/06/18/Devops/2016-06-18/">Hexo+VSTS+Azure Web app 的持續整合與交付</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+Markdown撰寫文件的方式，大多被常用在blog撰寫，不過，其實在很多地方應用上，也可以透過這種簡易方式去架設企業KM或是一般產品或是商店的簡易型網站。撇開個人blog的應用外，其他應用上難免都會有需要多人一起協同開發或是撰寫的場境，因此，基於協同合作的模式，還是必須要對這些文件做版本控管。
+Markdown只是撰寫內容的模式，還是要給它套上有質感的殼，才能出去見人，所以，選用Hexo框架來
+        </p>
+    </div>
+</article>
+    
+
+
+    </div></section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>
+            follow:</p>
+        <ul class="social-links">
+            
+                
+                    <li>
+                        <a class="social-tooltip" title="twitter" href="https://twitter.com/Chia_Chi_Kuo" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="facebook" href="https://www.facebook.com/jaigi.kuo" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="github" href="https://github.com/edwardkuo/" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="rss" href="http://edwardkuo.github.io/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                    </li>
+                    
+                        
+        </ul>
+    </div>
+    
+                <div class="widgets-container">
+                    
+                        
+                            
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://docs.microsoft.com/zh-tw/media/hubs/microsoftteamshome/teams-skype-to-teams.svg)" alt="查詢Microsoft Teams群組中儲存檔案的容量" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a></p>
+                            <p class="item-title"><a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="title">查詢Microsoft Teams群組中儲存檔案的容量</a></p>
+                            <p class="item-date"><time datetime="2017-12-12T16:00:00.000Z" itemprop="datePublished">2017-12-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/04/Devops/VSTSFority/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://bright-side-of-life.com/wp-content/uploads/2017/05/post-fortify-fb.jpg)" alt="VSTS整合資安工具Fortify達成自動化" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/12/04/Devops/VSTSFority/" class="title">VSTS整合資安工具Fortify達成自動化</a></p>
+                            <p class="item-date"><time datetime="2017-12-03T16:00:00.000Z" itemprop="datePublished">2017-12-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/21/Other/StudyLove/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://distudio.blob.core.windows.net/study4tw/1510761314.63796.png)" alt="Study4.TW Study4Love - 與大師對談 活動" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/21/Other/StudyLove/" class="title">Study4.TW Study4Love - 與大師對談 活動</a></p>
+                            <p class="item-date"><time datetime="2017-11-21T14:59:31.000Z" itemprop="datePublished">2017-11-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/10/Devops/VSTSCore/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://core.ac.uk/resources/corelogo_hires.png)" alt="有參照外部元件如何在VSTS建立.Net Core Package" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/10/Devops/VSTSCore/" class="title">有參照外部元件如何在VSTS建立.Net Core Package</a></p>
+                            <p class="item-date"><time datetime="2017-11-09T16:00:00.000Z" itemprop="datePublished">2017-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/10/16/Azure/AIappTeams/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://datadog-prod.imgix.net/img/blog/monitor-azure-logic-app-workflows-datadog/azure-logic-apps-hero.png?ch=Width&fit=max&fm=png&auto=format&lossless=1)" alt="Application Insights + Logic App + Microsoft Teams 整合" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a></p>
+                            <p class="item-title"><a href="/paper/2017/10/16/Azure/AIappTeams/" class="title">Application Insights + Logic App + Microsoft Teams 整合</a></p>
+                            <p class="item-date"><time datetime="2017-10-15T16:00:00.000Z" itemprop="datePublished">2017-10-16</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/資料庫程式版控/">資料庫程式版控</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雲端到地端的持續整合與交付/">雲端到地端的持續整合與交付</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">7</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP-NET/">ASP.NET</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple/">Apple</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Azure/">Azure</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cordova/">Cordova</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevOps/">DevOps</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-End/">Front-End</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LifeStyle/">LifeStyle</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Office-365/">Office 365</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Other/">Other</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerShell/">PowerShell</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T-SQL/">T-SQL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSTS/">VSTS</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Studio/">Visual Studio</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ASP-NET/" style="font-size: 11.82px;">ASP.NET</a> <a href="/tags/Apple/" style="font-size: 13.64px;">Apple</a> <a href="/tags/Azure/" style="font-size: 20px;">Azure</a> <a href="/tags/C/" style="font-size: 18.18px;">C#</a> <a href="/tags/Cordova/" style="font-size: 11.82px;">Cordova</a> <a href="/tags/DevOps/" style="font-size: 19.09px;">DevOps</a> <a href="/tags/Docker/" style="font-size: 14.55px;">Docker</a> <a href="/tags/Front-End/" style="font-size: 10.91px;">Front-End</a> <a href="/tags/LifeStyle/" style="font-size: 16.36px;">LifeStyle</a> <a href="/tags/Office-365/" style="font-size: 10px;">Office 365</a> <a href="/tags/Other/" style="font-size: 11.82px;">Other</a> <a href="/tags/PowerShell/" style="font-size: 12.73px;">PowerShell</a> <a href="/tags/T-SQL/" style="font-size: 15.45px;">T-SQL</a> <a href="/tags/VSTS/" style="font-size: 17.27px;">VSTS</a> <a href="/tags/Visual-Studio/" style="font-size: 11.82px;">Visual Studio</a>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://study4.tw">Study4.TW</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/Study4.Enterprise/">Study4.Enterprise</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/286316594814216/">Azure &amp; .NET Developer FB 社團</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/MISDevOps/">製造業 DevOps日常</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://mva.microsoft.com/?mtag=4040062">MVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://channel9.msdn.com">Channel9</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://dog0416.blogspot.tw/">Matsurigoto</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://skychang.github.io/">天空的垃圾場</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://kyleap.blogspot.tw/">程式宅急便</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://08alan.github.io/">維持熱情不滅</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://dotblogs.com.tw/jamesfu">五餅二魚工作室</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://yi-shiuan.github.io/">饅頭小舖</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://michael80321.blogspot.tw/">Michael&#39;s World</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+                                
+                                    
+                                        <div class="widget-wrap widget-list">
+                                            <h3 class="widget-title">Visitor</h3>
+                                            <div class="widget">
+                                                <a href="http://s11.flagcounter.com/more/4zV"><img src="http://s11.flagcounter.com/count/4zV/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_8/viewers_0/labels_0/pageviews_1/flags_0/percent_1/" alt="Flag Counter" border="0"></a>
+                                            </div>
+
+                                        </div>
+
+
+                </div>
+                </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Edward kuo</p>
+                
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'ek20';
+    
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

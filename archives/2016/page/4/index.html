@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="_lzVun8mT2ObiZ3rk5827pMMbko8SQthqo8OtoRxhsc" />
+    
+        <title>
+            
+                Archive: 2016 |
+                    
+                        E.K TechThinking
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+        
+                        <meta name="description" content="Azure,Teams,雲端架構,製造業,DevOps,程式開發,MVP,架構設計,C#,SQL,javascript,html,css,微軟,MVC,Server,寫">
+<meta property="og:type" content="website">
+<meta property="og:title" content="E.K TechThinking">
+<meta property="og:url" content="http://edwardkuo.imas.tw/archives/2016/page/4/index.html">
+<meta property="og:site_name" content="E.K TechThinking">
+<meta property="og:description" content="Azure,Teams,雲端架構,製造業,DevOps,程式開發,MVP,架構設計,C#,SQL,javascript,html,css,微軟,MVC,Server,寫">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="E.K TechThinking">
+<meta name="twitter:description" content="Azure,Teams,雲端架構,製造業,DevOps,程式開發,MVP,架構設計,C#,SQL,javascript,html,css,微軟,MVC,Server,寫">
+                            
+
+                                
+                                    <link rel="alternate" href="http://edwardkuo.github.io/atom.xml" title="E.K TechThinking" type="application/atom+xml" />
+                                    
+
+                                        
+
+                                                <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+                                                    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+                                                        <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+                                                            <link rel="stylesheet" href="/css/style.css">
+
+                                                                <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+                                                                    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-33121513-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+                                                                        <script type="text/javascript">
+                                                                            var appInsights = window.appInsights || function(config) {
+                                                                                function i(config) {
+                                                                                    t[config] = function() {
+                                                                                        var i = arguments;
+                                                                                        t.queue.push(function() {
+                                                                                            t[config].apply(t, i)
+                                                                                        })
+                                                                                    }
+                                                                                }
+                                                                                var t = {
+                                                                                        config: config
+                                                                                    },
+                                                                                    u = document,
+                                                                                    e = window,
+                                                                                    o = "script",
+                                                                                    s = "AuthenticatedUserContext",
+                                                                                    h = "start",
+                                                                                    c = "stop",
+                                                                                    l = "Track",
+                                                                                    a = l + "Event",
+                                                                                    v = l + "Page",
+                                                                                    y = u.createElement(o),
+                                                                                    r, f;
+                                                                                y.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js";
+                                                                                u.getElementsByTagName(o)[0].parentNode.appendChild(y);
+                                                                                try {
+                                                                                    t.cookie = u.cookie
+                                                                                } catch (p) {}
+                                                                                for (t.queue = [], t.version = "1.0", r = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; r.length;) i("track" + r.pop());
+                                                                                return i("set" + s), i("clear" + s), i(h + a), i(c + a), i(h + v), i(c + v), i("flush"), config.disableExceptionTracking || (r = "onerror", i("_" + r), f = e[r], e[r] = function(config, i, u, e, o) {
+                                                                                    var s = f && f(config, i, u, e, o);
+                                                                                    return s !== !0 && t["_" + r](config, i, u, e, o), s
+                                                                                }), t
+                                                                            }({
+                                                                                instrumentationKey: "7891dfec-e884-4bdc-bf34-f581dce47f3a"
+                                                                            });
+
+                                                                            window.appInsights = appInsights;
+
+                                                                            // Add telemetry initializer
+                                                                            appInsights.queue.push(function() {
+                                                                                appInsights.context.addTelemetryInitializer(function(envelope) {
+                                                                                    var telemetryItem = envelope.data.baseData;
+
+
+                                                                                    // To set custom properties:
+                                                                                    telemetryItem.properties = telemetryItem.properties || {};
+                                                                                    telemetryItem.properties["ApplicationName"] = "EK20";
+
+
+                                                                                });
+                                                                            });
+                                                                            // end of insertion
+
+
+
+                                                                            appInsights.trackPageView();
+                                                                        </script>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Tech &amp; Thinking &amp; DevOps &amp; Azure &amp; VSTS</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/about.html">About</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/slideshare/slideshare.html">Slideshare</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/Link/Link.html">Hot Link</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <i class="icon fa fa-archive"></i>Archive: 2016
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    
+    
+        
+        
+        <section class="archives-wrap">
+            <div class="archive-year-wrap">
+                <a href="/archives/2016" class="archive-year"><i class="icon fa fa-calendar-o"></i>2016</a>
+            </div>
+            <div class="archives">
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/05/14/App/2016-05-14/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://innovation-village.com/wp-content/uploads/2015/04/mobile-app.jpg)" alt="使用Visual Studio Code寫TypeScript" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/05/14/App/2016-05-14/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-05-13T16:00:00.000Z" itemprop="datePublished">2016-05-14</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/05/14/App/2016-05-14/">使用Visual Studio Code寫TypeScript</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+Visual Studio Code的功能越來越多元，果然是一套跨平台好用的編輯器，雖然，現階段功能還沒有Sublime多，但是，它不僅能編輯前端還可以撰寫後端程式碼，這部分就可以讓人期待它的後續發展，因此，嘗試用它在Macbook pro上來開發微軟多方宣傳的Typescript試試看
+要在Mac上使用，首先必須先安裝好Typescript套件
+安裝Typescript Package
+1np
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/05/10/Azure/2016-05-10/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://edumuch.com/wp-content/uploads/2016/01/fe0cb49c-fc42-487f-8e68-e247b4278174_orig.png)" alt="Azure Web App Inbound IP和Outbound IP的不同" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/05/10/Azure/2016-05-10/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-05-10T12:09:34.000Z" itemprop="datePublished">2016-05-10</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/05/10/Azure/2016-05-10/">Azure Web App Inbound IP和Outbound IP的不同</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+Azure Web App有分為兩種類型的IP位址，一種是Inbound IP，一種是Outbound IP
+
+Inbound IP是所謂內部虛擬IP，一般你沒有綁定SSL憑證時，這個IP是與大家分享的
+Outbound IP是對外的實體IP，這個IP取決於資料中心的配置，通常是四個IP輪詢
+
+Inbound ＆ Outbound最簡單識別方式就是 A Web Site Call B Web S
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/05/01/Net/2016-05-01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://trtpost-wpengine.netdna-ssl.com/files/2014/06/shutterstock_173668979-680x400.jpg)" alt="CommittableTransaction &amp; TransactionScope 用法" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/05/01/Net/2016-05-01/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-05-01T14:59:31.000Z" itemprop="datePublished">2016-05-01</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/05/01/Net/2016-05-01/">CommittableTransaction &amp; TransactionScope 用法</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在程式撰寫中常常會遇到需要做資料Transaction的機制，當有異常時需要透過Rollback還原。在.NET中有兩種Transaction模式分別是明確交易與隱含交易。通常使用的方式分別為CommittableTransaction &amp; TransactionScope
+
+TransactionScope:類別提供一個簡單的方式，讓您不用與交易互動，即可將一段程式碼標記為參與交易，此
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/05/01/Web/2016-05-01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://moztw.org/events/code-rush/images/ani-code-rush.gif)" alt="動態產生Web.sitemap檔案" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/05/01/Web/2016-05-01/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-05-01T14:59:31.000Z" itemprop="datePublished">2016-05-01</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/05/01/Web/2016-05-01/">動態產生Web.sitemap檔案</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+一般要在網站上使用Web導覽列，使用SiteMapPath控制項並且搭配Web.sitemap便可以製作出網站導覽列。只要在Web.sitemap建立相對應好的XML檔就可以，但是，若是這些導覽列屬於變動型，每次有變動就要在對Web.sitemap檔案，進行更新也是很麻煩的。因此，把相對的功能與功能頁面連結放入資料庫中，然後動態產生此Web.sitemap檔案，便可以隨時變動Web.sitema
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/04/23/SQL/2016-04-23/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.srcinc.com/images/eha-headers-databases.jpg)" alt="T-SQL 時間欄位的格式化(用Convert / Cast作法)" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/04/23/SQL/2016-04-23/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-04-23T14:59:31.000Z" itemprop="datePublished">2016-04-23</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/04/23/SQL/2016-04-23/">T-SQL 時間欄位的格式化(用Convert / Cast作法)</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+用T-SQL要把資料的時間輸出想要的格式是很常見的需求，例如:年月日時分秒或是年月日，在C#可以用tostring(&quot;yyyy-MM-dd&quot;)方式。在T-SQL中可以用Convert或是Cast，但是，每次用Convert時候，都還要去記住格式化的代碼有點難，這邊整理一些相關資訊，供大家參考也給自己記憶。
+
+用Cast方式，可以轉換成下列幾種格式
+
+  分別執行結果如下:
+
+
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/04/21/Net/2016-04-21/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://trtpost-wpengine.netdna-ssl.com/files/2014/06/shutterstock_173668979-680x400.jpg)" alt="將物件轉換成XML檔案" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/04/21/Net/2016-04-21/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-04-21T14:59:31.000Z" itemprop="datePublished">2016-04-21</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/04/21/Net/2016-04-21/">將物件轉換成XML檔案</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+一般講到檔案儲存，大都是可被識別之內容的檔案居多，主要是這些檔案還是可以被某些程式開啟，不過，這次遇到卻是需要把物件作為檔案格式儲存下來，後續有需要用到時候，再把這些物件取出。不過為啥要這樣做呢?
+舉例:一個List&lt;Dataset&gt;物件來說，其內容在有限時間區間內是會被重複利用，若是，每次用到都要再重新取得資訊，是相當浪費資源，所以，會先將此物件以檔案型態存放，有用到就直接取得檔案
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/04/15/Azure/2016-04-15/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://edumuch.com/wp-content/uploads/2016/01/fe0cb49c-fc42-487f-8e68-e247b4278174_orig.png)" alt="看懂Azure Storage的Blob監控指標" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/04/15/Azure/2016-04-15/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-04-14T16:00:00.000Z" itemprop="datePublished">2016-04-15</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/04/15/Azure/2016-04-15/">看懂Azure Storage的Blob監控指標</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+Azure Storage是Azure服務中，最被應用的一個服務，其中又以Blob是被大家常用，雖然，大家常常用卻不知道其實blob本身也是會有效能問題，並非只是把檔案放進去，讓它輸入和輸出這樣簡單，所以，我們透過Blob的監控，看你自己的Blob目前的效能狀況，進而改善檔案配置
+
+分享幾個Blob指標給大家，也可以透過幾個簡單指標去判斷，你目前Blob效能狀況，這些指標都是會有相互影響，怎樣設
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/04/12/Devops/2016-04-12/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.srcinc.com/images/eha-headers-databases.jpg)" alt="開始進行資料庫程式的版控和佈署" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/04/12/Devops/2016-04-12/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/資料庫程式版控/">資料庫程式版控</a>
+            </p>
+            <p class="date"><time datetime="2016-04-12T14:59:31.000Z" itemprop="datePublished">2016-04-12</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/04/12/Devops/2016-04-12/">開始進行資料庫程式的版控和佈署</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在程式開發上，大家都知道要對程式碼進行版控的動作，但是，對於DB的Table Schema或是資料庫物件就不會去做版控。針對這一部份，大都採用傳統方式，用複製的動作進行版控，久而久之就會開始遺失或是缺東缺西。早期要做資料庫物件版控其實也不容易，畢竟，DB是透過Script運作。自從VisualStudio有資料庫專案後，再加上資料庫更新與建制，可以透過.dacpac封裝方式進行部署與差異化更新，
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/04/09/Azure/2016-04-09/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://edumuch.com/wp-content/uploads/2016/01/fe0cb49c-fc42-487f-8e68-e247b4278174_orig.png)" alt="建立Azure SQL Database 全文搜索功能" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/04/09/Azure/2016-04-09/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-04-08T16:00:00.000Z" itemprop="datePublished">2016-04-09</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/04/09/Azure/2016-04-09/">建立Azure SQL Database 全文搜索功能</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+自從Azure SQL Database Release 全文檢索功能一直沒有機會去使用，今天剛好遇到需要進行多欄位資料模糊查詢的需求，為了避免使用Like 加 OR 有可能會導致查詢性能下，因此，來使用一下Azure SQL Database功能，以前在地端的SQL Server要做全文檢索，還需要自行去安裝這部分功能，雖然，沒有太難安裝，但似乎也沒有那樣便利，如果在Azure就可以省去這些麻
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/04/02/Net/2016-04-02/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://trtpost-wpengine.netdna-ssl.com/files/2014/06/shutterstock_173668979-680x400.jpg)" alt="將Datatable轉換成Vba可接受的RecordSet類別" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/04/02/Net/2016-04-02/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-04-01T16:00:00.000Z" itemprop="datePublished">2016-04-02</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/04/02/Net/2016-04-02/">將Datatable轉換成Vba可接受的RecordSet類別</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+由於目前工作地方大部分程式還是建構在EXCEL中，使用VBA撈取資料庫資料並做資料運算。但是，將資料撈回到EXCEL再用VBA做運算效能比較差且又擔心USER在運算邏輯的程式亂做修改，造成資料有誤。想說改用Excel呼叫Web Service，把邏輯運算都靠Web service做好，再把整包資料丟回到EXCEL這樣就可以避免上述一些問題。
+不過，由於在.NET環境中主要都是ADO.NET架構，
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/04/01/SQL/2016-04-01/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.srcinc.com/images/eha-headers-databases.jpg)" alt="Cannot truncate table,because it is being referenced by a FOREIGN KEY constraint?" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/04/01/SQL/2016-04-01/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-04-01T14:59:31.000Z" itemprop="datePublished">2016-04-01</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/04/01/SQL/2016-04-01/">Cannot truncate table,because it is being referenced by a FOREIGN KEY constraint?</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+今天測試資料完畢，想要把所有測試表全部truncate table，竟然出現下面字樣
+
+Cannot truncate table ‘XXXXX’ because it is being referenced by a FOREIGN KEY constraint.”
+
+現在才知道若是這個資料表的主索引，是別的資料表的FK，則不能直接使用 truncate table，將所有相關性資料一次清掉，
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/03/27/Net/2016-03-04/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://trtpost-wpengine.netdna-ssl.com/files/2014/06/shutterstock_173668979-680x400.jpg)" alt="取得當前程式執行階段的Method Name" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/03/27/Net/2016-03-04/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-03-26T16:00:00.000Z" itemprop="datePublished">2016-03-27</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/03/27/Net/2016-03-04/">取得當前程式執行階段的Method Name</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+當你在開發或維護大型程式系統時，其系統中的各項Method錯綜複雜(就是程式很亂)，又有馬上需要 Trouble shooting壓力，這時候就很需要知道，程式是執行到哪一個Method，方便進行Trace。通常我會把這功用下列兩個地方:
+
+系統發生Exception地方，需記錄知道哪一個Method發生問題
+系統Kernel的地方，以方便了解資料進出是發生在哪一個Method
+
+
+首先參照下面
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/03/26/LifeStyle/2016-03-26/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://thumbs.dreamstime.com/z/supply-chain-management-scm-distribution-product-step-53488356.jpg)" alt="全球供應鏈的思維" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/03/26/LifeStyle/2016-03-26/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-03-25T16:00:00.000Z" itemprop="datePublished">2016-03-26</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/03/26/LifeStyle/2016-03-26/">全球供應鏈的思維</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+雖然，SCM (Supply Chain Management)對於我來說並不陌生，再加上自己也曾經做過SCM系統一段時日，但是，日子久了畢竟人還是會健忘的，加上自己現在工作還是跟這方面有著間接關系，所以，還是趕緊把自己曾經講過SCM課程，做一下摘要性整理
+何謂全球供應鏈管理
+
+全球市場為範圍，將集團或是公司在涉及不同國家的運籌管理功能，進行協調與合理化。
+滿足客戶需求的前提下，把物流與庫存成本
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/03/24/Web/2016-03-24/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://moztw.org/events/code-rush/images/ani-code-rush.gif)" alt="使用Ajax.BeginForm在Controller做頁面跳轉" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/03/24/Web/2016-03-24/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-03-24T04:59:31.000Z" itemprop="datePublished">2016-03-24</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/03/24/Web/2016-03-24/">使用Ajax.BeginForm在Controller做頁面跳轉</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+MVC使用Ajax.BeginForm並且在Controller控制頁面轉跳是很常使用的，若是在Controller用return RedirectToAction(XXXX)跳轉，就會發生頁面卡著不動。
+View
+1234567@using (Ajax.BeginForm("Login", "XXX", new AjaxOptions &#123; UpdateTargetId = "Erro
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/03/22/Net/2016-03-22/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://trtpost-wpengine.netdna-ssl.com/files/2014/06/shutterstock_173668979-680x400.jpg)" alt="如何序列化Datatable / Dataset物件" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/03/22/Net/2016-03-22/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-03-22T14:59:31.000Z" itemprop="datePublished">2016-03-22</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/03/22/Net/2016-03-22/">如何序列化Datatable / Dataset物件</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在做SOA機制上，有需要接受Datatable或DataSet傳送給SOA平台，但是，物件無法這樣直接傳遞，必須先做過序列化才有辦法將物件傳遞出去。
+DataTable 序列化
+123456789internal string DatatableSerialize(System.Data.DataTable _dt)&#123;      System.Xml.Serialization.Xml
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/03/17/Net/2016-03-17/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://trtpost-wpengine.netdna-ssl.com/files/2014/06/shutterstock_173668979-680x400.jpg)" alt="將VBA的RecordSet轉換Datatable類別" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/03/17/Net/2016-03-17/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-03-16T16:00:00.000Z" itemprop="datePublished">2016-03-17</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/03/17/Net/2016-03-17/">將VBA的RecordSet轉換Datatable類別</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+寫一篇關於將Datatable轉換成Vba可接受的RecordSet類別，如果把結果顛倒過來呢？這也是可以的。其主要目的是讓Excel內的資料上傳後，可以透RecordSet 轉換成 Datatable解析其中資料內容或是讓.Net可以快速針對內容作處理。
+
+主要需要靠ADODB.Stream&amp;ADODB.Recordset物件幫助。
+12Type adoStreamType = Typ
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/03/03/Net/2016-03-03/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://trtpost-wpengine.netdna-ssl.com/files/2014/06/shutterstock_173668979-680x400.jpg)" alt="取得該日期之對應週別" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/03/03/Net/2016-03-03/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-03-02T16:00:00.000Z" itemprop="datePublished">2016-03-03</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/03/03/Net/2016-03-03/">取得該日期之對應週別</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+取得日期對應週別，這個功能滿有用，主要是可以識別目前日期是整年的第幾週。當然，在某些公司內的週期定義，可能不是所謂的週日到週六為一週，有可能是上周五到下周四為完整一週，這樣去計算週期就會跟一般有所不同
+這邊先講一般正常週別的作法，必須用到System.Globalization.Calendar類別。要宣告這個物件跟一般物件不太一樣，它必須透過CultureInfo.Calendar屬性來做宣告
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/03/03/Azure/2016-03-03/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://edumuch.com/wp-content/uploads/2016/01/fe0cb49c-fc42-487f-8e68-e247b4278174_orig.png)" alt="Azure Web App設定虛擬網路固定IP" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/03/03/Azure/2016-03-03/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-03-02T16:00:00.000Z" itemprop="datePublished">2016-03-03</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/03/03/Azure/2016-03-03/">Azure Web App設定虛擬網路固定IP</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+我們知道在Azure Web App的虛擬IP是採用Share，所以，無論建立幾個Web Site的虛擬IP都會是同一組，若是有需要自己一組固定的虛擬IP呢？這時候就必須在Web App上面做一些設置，才有辦法讓你的Web App會有擁有一組的固定IP，未設置前如下圖
+要讓自己的Web App有固定Inbound IP，需要下列幾個步驟
+
+建立一個規模至少必須是『基本』的Web App，這邊採用
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/02/24/PowerShell/2016-02-24/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.askme4tech.com/sites/default/files/powershell-cim.jpg)" alt="使用Powershell指令呼叫 Web API" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/02/24/PowerShell/2016-02-24/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-02-24T04:59:31.000Z" itemprop="datePublished">2016-02-24</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/02/24/PowerShell/2016-02-24/">使用Powershell指令呼叫 Web API</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+Azure Web Site有了Web Job之後，這功能還真的非常好用，以前每次做排程，大都喜歡去用SSIS，主要透過SSIS執行Job會有一些紀錄可以看，現在Web Job也有這樣功能，雖然，目前上面不能掛載SSIS，但是，能做得東西也夠多，除了使用Console程式外，也能用PowerShell來開發唷，做一個簡單的使用PowerShell去驅動Web Api範例12$url ="http
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2016/02/23/Net/2016-02-23/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://trtpost-wpengine.netdna-ssl.com/files/2014/06/shutterstock_173668979-680x400.jpg)" alt="使用Linq的Join / right Join / Left Join" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2016/02/23/Net/2016-02-23/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2016-02-23T14:59:31.000Z" itemprop="datePublished">2016-02-23</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2016/02/23/Net/2016-02-23/">使用Linq的Join / right Join / Left Join</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+用Join來做資料聯集，在T-SQL指令是常會用到的一種語法，不過，對於常寫SQL語法的人要轉換到Linq語法時，往往對於Join這語句的操作就常會感到比較陌生也不習慣要怎樣使用。因此，這邊簡單說明一下，要如何操作Linq的join語法
+資料表Ａ
+資料表B
+Join
+先來做兩個資料的Join，把資料表B去顯示對應的資料表A的WeekName，Join是算是Linq比較簡單易懂的，其條件為透過資料
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+
+    </div></section>
+
+
+    <nav id="page-nav">
+        <span class="pages">Page 4 of 5</span>
+        <a class="extend prev" rel="prev" href="/archives/2016/page/3/">&laquo;</a><a class="page-number" href="/archives/2016/">1</a><a class="page-number" href="/archives/2016/page/2/">2</a><a class="page-number" href="/archives/2016/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/archives/2016/page/5/">5</a><a class="extend next" rel="next" href="/archives/2016/page/5/">&raquo;</a>
+    </nav>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>
+            follow:</p>
+        <ul class="social-links">
+            
+                
+                    <li>
+                        <a class="social-tooltip" title="twitter" href="https://twitter.com/Chia_Chi_Kuo" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="facebook" href="https://www.facebook.com/jaigi.kuo" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="github" href="https://github.com/edwardkuo/" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="rss" href="http://edwardkuo.github.io/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                    </li>
+                    
+                        
+        </ul>
+    </div>
+    
+                <div class="widgets-container">
+                    
+                        
+                            
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://docs.microsoft.com/zh-tw/media/hubs/microsoftteamshome/teams-skype-to-teams.svg)" alt="查詢Microsoft Teams群組中儲存檔案的容量" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a></p>
+                            <p class="item-title"><a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="title">查詢Microsoft Teams群組中儲存檔案的容量</a></p>
+                            <p class="item-date"><time datetime="2017-12-12T16:00:00.000Z" itemprop="datePublished">2017-12-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/04/Devops/VSTSFority/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://bright-side-of-life.com/wp-content/uploads/2017/05/post-fortify-fb.jpg)" alt="VSTS整合資安工具Fortify達成自動化" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/12/04/Devops/VSTSFority/" class="title">VSTS整合資安工具Fortify達成自動化</a></p>
+                            <p class="item-date"><time datetime="2017-12-03T16:00:00.000Z" itemprop="datePublished">2017-12-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/21/Other/StudyLove/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://distudio.blob.core.windows.net/study4tw/1510761314.63796.png)" alt="Study4.TW Study4Love - 與大師對談 活動" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/21/Other/StudyLove/" class="title">Study4.TW Study4Love - 與大師對談 活動</a></p>
+                            <p class="item-date"><time datetime="2017-11-21T14:59:31.000Z" itemprop="datePublished">2017-11-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/10/Devops/VSTSCore/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://core.ac.uk/resources/corelogo_hires.png)" alt="有參照外部元件如何在VSTS建立.Net Core Package" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/10/Devops/VSTSCore/" class="title">有參照外部元件如何在VSTS建立.Net Core Package</a></p>
+                            <p class="item-date"><time datetime="2017-11-09T16:00:00.000Z" itemprop="datePublished">2017-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/10/16/Azure/AIappTeams/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://datadog-prod.imgix.net/img/blog/monitor-azure-logic-app-workflows-datadog/azure-logic-apps-hero.png?ch=Width&fit=max&fm=png&auto=format&lossless=1)" alt="Application Insights + Logic App + Microsoft Teams 整合" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a></p>
+                            <p class="item-title"><a href="/paper/2017/10/16/Azure/AIappTeams/" class="title">Application Insights + Logic App + Microsoft Teams 整合</a></p>
+                            <p class="item-date"><time datetime="2017-10-15T16:00:00.000Z" itemprop="datePublished">2017-10-16</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/資料庫程式版控/">資料庫程式版控</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雲端到地端的持續整合與交付/">雲端到地端的持續整合與交付</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">7</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP-NET/">ASP.NET</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple/">Apple</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Azure/">Azure</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cordova/">Cordova</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevOps/">DevOps</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-End/">Front-End</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LifeStyle/">LifeStyle</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Office-365/">Office 365</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Other/">Other</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerShell/">PowerShell</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T-SQL/">T-SQL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSTS/">VSTS</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Studio/">Visual Studio</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ASP-NET/" style="font-size: 11.82px;">ASP.NET</a> <a href="/tags/Apple/" style="font-size: 13.64px;">Apple</a> <a href="/tags/Azure/" style="font-size: 20px;">Azure</a> <a href="/tags/C/" style="font-size: 18.18px;">C#</a> <a href="/tags/Cordova/" style="font-size: 11.82px;">Cordova</a> <a href="/tags/DevOps/" style="font-size: 19.09px;">DevOps</a> <a href="/tags/Docker/" style="font-size: 14.55px;">Docker</a> <a href="/tags/Front-End/" style="font-size: 10.91px;">Front-End</a> <a href="/tags/LifeStyle/" style="font-size: 16.36px;">LifeStyle</a> <a href="/tags/Office-365/" style="font-size: 10px;">Office 365</a> <a href="/tags/Other/" style="font-size: 11.82px;">Other</a> <a href="/tags/PowerShell/" style="font-size: 12.73px;">PowerShell</a> <a href="/tags/T-SQL/" style="font-size: 15.45px;">T-SQL</a> <a href="/tags/VSTS/" style="font-size: 17.27px;">VSTS</a> <a href="/tags/Visual-Studio/" style="font-size: 11.82px;">Visual Studio</a>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://study4.tw">Study4.TW</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/Study4.Enterprise/">Study4.Enterprise</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/286316594814216/">Azure &amp; .NET Developer FB 社團</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/MISDevOps/">製造業 DevOps日常</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://mva.microsoft.com/?mtag=4040062">MVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://channel9.msdn.com">Channel9</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://dog0416.blogspot.tw/">Matsurigoto</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://skychang.github.io/">天空的垃圾場</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://kyleap.blogspot.tw/">程式宅急便</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://08alan.github.io/">維持熱情不滅</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://dotblogs.com.tw/jamesfu">五餅二魚工作室</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://yi-shiuan.github.io/">饅頭小舖</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://michael80321.blogspot.tw/">Michael&#39;s World</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+                                
+                                    
+                                        <div class="widget-wrap widget-list">
+                                            <h3 class="widget-title">Visitor</h3>
+                                            <div class="widget">
+                                                <a href="http://s11.flagcounter.com/more/4zV"><img src="http://s11.flagcounter.com/count/4zV/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_8/viewers_0/labels_0/pageviews_1/flags_0/percent_1/" alt="Flag Counter" border="0"></a>
+                                            </div>
+
+                                        </div>
+
+
+                </div>
+                </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Edward kuo</p>
+                
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'ek20';
+    
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

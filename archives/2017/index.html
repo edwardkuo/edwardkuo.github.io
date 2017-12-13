@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="_lzVun8mT2ObiZ3rk5827pMMbko8SQthqo8OtoRxhsc" />
+    
+        <title>
+            
+                Archive: 2017 |
+                    
+                        E.K TechThinking
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+        
+                        <meta name="description" content="Azure,Teams,雲端架構,製造業,DevOps,程式開發,MVP,架構設計,C#,SQL,javascript,html,css,微軟,MVC,Server,寫">
+<meta property="og:type" content="website">
+<meta property="og:title" content="E.K TechThinking">
+<meta property="og:url" content="http://edwardkuo.imas.tw/archives/2017/index.html">
+<meta property="og:site_name" content="E.K TechThinking">
+<meta property="og:description" content="Azure,Teams,雲端架構,製造業,DevOps,程式開發,MVP,架構設計,C#,SQL,javascript,html,css,微軟,MVC,Server,寫">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="E.K TechThinking">
+<meta name="twitter:description" content="Azure,Teams,雲端架構,製造業,DevOps,程式開發,MVP,架構設計,C#,SQL,javascript,html,css,微軟,MVC,Server,寫">
+                            
+
+                                
+                                    <link rel="alternate" href="http://edwardkuo.github.io/atom.xml" title="E.K TechThinking" type="application/atom+xml" />
+                                    
+
+                                        
+
+                                                <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+                                                    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+                                                        <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+                                                            <link rel="stylesheet" href="/css/style.css">
+
+                                                                <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+                                                                    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-33121513-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+                                                                        <script type="text/javascript">
+                                                                            var appInsights = window.appInsights || function(config) {
+                                                                                function i(config) {
+                                                                                    t[config] = function() {
+                                                                                        var i = arguments;
+                                                                                        t.queue.push(function() {
+                                                                                            t[config].apply(t, i)
+                                                                                        })
+                                                                                    }
+                                                                                }
+                                                                                var t = {
+                                                                                        config: config
+                                                                                    },
+                                                                                    u = document,
+                                                                                    e = window,
+                                                                                    o = "script",
+                                                                                    s = "AuthenticatedUserContext",
+                                                                                    h = "start",
+                                                                                    c = "stop",
+                                                                                    l = "Track",
+                                                                                    a = l + "Event",
+                                                                                    v = l + "Page",
+                                                                                    y = u.createElement(o),
+                                                                                    r, f;
+                                                                                y.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js";
+                                                                                u.getElementsByTagName(o)[0].parentNode.appendChild(y);
+                                                                                try {
+                                                                                    t.cookie = u.cookie
+                                                                                } catch (p) {}
+                                                                                for (t.queue = [], t.version = "1.0", r = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; r.length;) i("track" + r.pop());
+                                                                                return i("set" + s), i("clear" + s), i(h + a), i(c + a), i(h + v), i(c + v), i("flush"), config.disableExceptionTracking || (r = "onerror", i("_" + r), f = e[r], e[r] = function(config, i, u, e, o) {
+                                                                                    var s = f && f(config, i, u, e, o);
+                                                                                    return s !== !0 && t["_" + r](config, i, u, e, o), s
+                                                                                }), t
+                                                                            }({
+                                                                                instrumentationKey: "7891dfec-e884-4bdc-bf34-f581dce47f3a"
+                                                                            });
+
+                                                                            window.appInsights = appInsights;
+
+                                                                            // Add telemetry initializer
+                                                                            appInsights.queue.push(function() {
+                                                                                appInsights.context.addTelemetryInitializer(function(envelope) {
+                                                                                    var telemetryItem = envelope.data.baseData;
+
+
+                                                                                    // To set custom properties:
+                                                                                    telemetryItem.properties = telemetryItem.properties || {};
+                                                                                    telemetryItem.properties["ApplicationName"] = "EK20";
+
+
+                                                                                });
+                                                                            });
+                                                                            // end of insertion
+
+
+
+                                                                            appInsights.trackPageView();
+                                                                        </script>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Tech &amp; Thinking &amp; DevOps &amp; Azure &amp; VSTS</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/about.html">About</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/slideshare/slideshare.html">Slideshare</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/Link/Link.html">Hot Link</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <i class="icon fa fa-archive"></i>Archive: 2017
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    
+    
+        
+        
+        <section class="archives-wrap">
+            <div class="archive-year-wrap">
+                <a href="/archives/2017" class="archive-year"><i class="icon fa fa-calendar-o"></i>2017</a>
+            </div>
+            <div class="archives">
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://docs.microsoft.com/zh-tw/media/hubs/microsoftteamshome/teams-skype-to-teams.svg)" alt="查詢Microsoft Teams群組中儲存檔案的容量" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/12/13/Devops/TeamsFileSize/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a>
+            </p>
+            <p class="date"><time datetime="2017-12-12T16:00:00.000Z" itemprop="datePublished">2017-12-13</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/12/13/Devops/TeamsFileSize/">查詢Microsoft Teams群組中儲存檔案的容量</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+
+
+首先感謝微軟技術團隊提供支援，協同解決
+
+
+當大家開始習慣使用Microsoft Teams時候，就會開始把習慣透過群組方式分享檔案給團隊成員，　Office 365雖然有提供每個帳號1TB的Onedrive空間，但是，對於公用的空間卻是有限制的，其計算方式1TB+Account個數x0.5G，換句話說如果公司人數1000人，共用的空間大小則是1.5G。而這1.5G會被SharePoint和
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/12/04/Devops/VSTSFority/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://bright-side-of-life.com/wp-content/uploads/2017/05/post-fortify-fb.jpg)" alt="VSTS整合資安工具Fortify達成自動化" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/12/04/Devops/VSTSFority/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-12-03T16:00:00.000Z" itemprop="datePublished">2017-12-04</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/12/04/Devops/VSTSFority/">VSTS整合資安工具Fortify達成自動化</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在資安逐步被重視的年代，企業會導入更多資安相關工具，除了本身伺服器或網路層的工具外，近年也針對程式碼進行安全性的掃瞄，目前其中市面上比較熱門的工具之一就是HPE Fortify，他本身可掃描的程式碼種類很多。在開發者端，可以透過Visual Studio的Plug in方式，安裝在Visual Studio，如果你又有Fortify Center的登入權限，便可以從Center將資安團隊設定好的
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/11/21/Other/StudyLove/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://distudio.blob.core.windows.net/study4tw/1510761314.63796.png)" alt="Study4.TW Study4Love - 與大師對談 活動" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/11/21/Other/StudyLove/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-11-21T14:59:31.000Z" itemprop="datePublished">2017-11-21</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/11/21/Other/StudyLove/">Study4.TW Study4Love - 與大師對談 活動</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+活動時間： 1/06/2018 9:00:00 AM活動地點： 台大管理學院1號館/台北市大安區基隆路四段144巷 No. 52 
+邀請了高達 15 位講師，分享他們的專業知識和經驗，在一整天的議程中，您將可以盡情地享受 IT Infrastructure、Dev、Agile、DevOps、Azure、Database、AI…等相關的議題，無論您是初學者、轉換跑道者還是資深的技術人員，這裡皆有適
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/11/10/Devops/VSTSCore/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://core.ac.uk/resources/corelogo_hires.png)" alt="有參照外部元件如何在VSTS建立.Net Core Package" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/11/10/Devops/VSTSCore/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-11-09T16:00:00.000Z" itemprop="datePublished">2017-11-10</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/11/10/Devops/VSTSCore/">有參照外部元件如何在VSTS建立.Net Core Package</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在先前一篇的[用VSTS建立.Net Core的Package]，建立屬於.Net Core的Nuget Package，其中在Path to csproj or nuspec file(s) to pack是沒有辦法放.nuspec檔案的，但是，原本在.nuspec有一個標籤可以把外部dll包進Package123&lt;files&gt;    &lt;file src="lib\XXX.d
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/10/16/Azure/AIappTeams/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://datadog-prod.imgix.net/img/blog/monitor-azure-logic-app-workflows-datadog/azure-logic-apps-hero.png?ch=Width&fit=max&fm=png&auto=format&lossless=1)" alt="Application Insights + Logic App + Microsoft Teams 整合" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/10/16/Azure/AIappTeams/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a>
+            </p>
+            <p class="date"><time datetime="2017-10-15T16:00:00.000Z" itemprop="datePublished">2017-10-16</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/10/16/Azure/AIappTeams/">Application Insights + Logic App + Microsoft Teams 整合</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+Application Insights可以讓我們去設定監控某些指標，當這些指標有發生異常時候，就會發送Alert通知，讓我們隨時知道發生的狀況或是是否有異常發生
+我們通常會設定是屬於Exception類的訊息，且這對於開發或是維運人員來說才可以立即進行處理，同時也是屬於DevOps環節的一塊，不過，透過Mail方式收到資訊內容就會像下圖這樣呈現方式，就這樣內容來說只知道有發生問題，但是無法知道
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/10/13/Devops/donetVSTS/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://stackify.com/wp-content/uploads/2017/03/dotnetwidowsserv-793x397.jpg)" alt="用VSTS建立.Net Core的Package" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/10/13/Devops/donetVSTS/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-10-12T16:00:00.000Z" itemprop="datePublished">2017-10-13</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/10/13/Devops/donetVSTS/">用VSTS建立.Net Core的Package</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+我們知道使用VSTS中的Packages Manager可以建立企業或是私有的Nuget Server，在一般.Net Framework下，可以用下面幾個步驟建立Nuget的Package，其中使用到的是MSBuild做編譯，再用Nuget指令打包成Package
+
+不過，今天若是也這樣對.Net Core專案進行封裝，雖然會成功，但是，當在.Net Core專案下載來用時候，就會出現你使用了
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/10/03/Devops/VSTSAgent2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://4.bp.blogspot.com/-um9fpZrF5hA/U4SCkUT1EuI/AAAAAAAAA08/cy9elvop6XY/s1600/Proxy_Logo3.gif)" alt="VSTS新版Agent要多.proxy設定檔" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/10/03/Devops/VSTSAgent2/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-10-02T16:00:00.000Z" itemprop="datePublished">2017-10-03</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/10/03/Devops/VSTSAgent2/">VSTS新版Agent要多.proxy設定檔</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在使用VSTS Agent 2.115版本時候，在企業內部使用是沒甚麼問題，不過，最近升級到2.123版後，地端與雲端就失聯，就無法進行連線，到_diag資料查看Log，發現會卡在最後連線驗證地端權限時候，一直發生Timeout然後Agent就發生Exception，導致怎樣都無法與雲端溝通，如果再倒回2.115版又可以連線，真是太神奇
+仔細研究一下，因為企業內部必須透過Proxy才能連線，在舊
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/09/12/Devops/TeamsGuest/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://www.devicedaily.com/wp-content/uploads/2016/05/3058781-poster-p-1-five-ways-to-keep-small-teams-efficient.jpg)" alt="讓訪客也加入到你的Microsoft Teams團隊中，但..." class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/09/12/Devops/TeamsGuest/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a>
+            </p>
+            <p class="date"><time datetime="2017-09-11T16:00:00.000Z" itemprop="datePublished">2017-09-12</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/09/12/Devops/TeamsGuest/">讓訪客也加入到你的Microsoft Teams團隊中，但...</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+Microsoft Teams一個值得高興的更新，就是Microsoft Teams可以支援外部訪客加入Teams團隊中了，原先，要使用Teams的成員，必須具備O365帳號且還必須同一個組織或是公司下的O365帳號才可以一起使用Teams，現在這些非原本在同個組織下的O365帳號或，都會被當作訪客登入到Teams，首先，先來看用訪客身分登入後，訪客會具備那些權限
+不過，雖然可以邀請訪客登入，但
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/09/08/Azure/StorageCORS/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://www.visualstudio.com/wp-content/uploads/2017/06/azure_cloud_image.png)" alt="解決json檔案放在Azure Storage導致發生CORS" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/09/08/Azure/StorageCORS/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-09-07T16:00:00.000Z" itemprop="datePublished">2017-09-08</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/09/08/Azure/StorageCORS/">解決json檔案放在Azure Storage導致發生CORS</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+把前端的一些靜態檔案像是css、js…之類的放到Azure Storage，然後，讓網站去參照Storage路徑下載靜態檔案，基本上這樣並無太大問題，不過，做多國語系時候，使用到i18n這個套件，裡面會利用translation.json檔案做多國語系，誰知道這樣使用下卻發生了這個錯誤訊息
+
+ CORS not enabled or no matching rule found for this
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/09/02/Devops/VSTSNPM2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://partners.npmjs.com/weekly/weekly32/weekly-header-grace-hopper.png)" alt="解決註冊VSTS的npm平台無法下載npmjs.com套件" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/09/02/Devops/VSTSNPM2/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-09-01T16:00:00.000Z" itemprop="datePublished">2017-09-02</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/09/02/Devops/VSTSNPM2/">解決註冊VSTS的npm平台無法下載npmjs.com套件</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在前一篇的[在VSTS中建立npm套件管理平台]介紹說可以在VSTS內建立NPM套件平台，因為，VSTS建立的NPM套件管理平台是屬於私人的，所以，會有註冊憑證的動作，不過，這樣做下去之後，卻發生一個問題，如果今日我們是要從原本NPM官網下載套件，就會發生這樣錯誤
+其實這錯誤就是因為在.npmrc設定檔中註冊是VSTS NPM套件路徑，而原本NPM平台上套件又不在VSTS，導致會發生失敗，如果不
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/08/11/Docker/DockerCLI/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://store.docker.com/dist/fde255842a0008cf599d244e3a63a1f7.png)" alt="用Chocolatey安裝Docker CLI" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/08/11/Docker/DockerCLI/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-08-11T14:59:31.000Z" itemprop="datePublished">2017-08-11</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/08/11/Docker/DockerCLI/">用Chocolatey安裝Docker CLI</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+一般想要在個人電腦或是Windows Server 2016玩Docker，前者可以安裝Docker for Windows，後者啟用Window Server的Container，這樣就可以開始使用Docker指令，不過，今日只是想在某台電腦透過Docker -H去執行Remote具有Container的機器，是否還需要完整安裝上述所提的功能才能使用Docker Command呢?
+答案是可以
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/08/10/Devops/VSTSNpm/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://cs.fit.edu/code/projects/nothing_works/repository/revisions/b488be127a8cf1e59eb257db3f8eaf6efdb0f275/entry/deps/npm/html/npm-large.png)" alt="在VSTS中建立npm套件管理平台" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/08/10/Devops/VSTSNpm/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-08-09T16:00:00.000Z" itemprop="datePublished">2017-08-10</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/08/10/Devops/VSTSNpm/">在VSTS中建立npm套件管理平台</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在之前有介紹透過VSTS的Packages可以自建團隊的Nuget套件管理平台，在Packages中不只是可以建立Nuget套件的管理平台，如果，今日是前端人員或是非.NET人員，想要用npm指令來裝前端套件，VSTS是否可以做npm套件的管理平台呢?答案是可以，VSTS的Packages同時支援Nuget和npm套件管理，就讓我們來建立一個npm packages管理平台吧。
+自動化建立npm
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/08/07/Azure/ApplicationInsightsFilter/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blogmedia.avanade.com/avanade-insights/2017/04/Mapping-Digital-Workplace-Insights-to-Business-Value-Context.jpg)" alt="Application Insights自訂過濾收集的訊息內容" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/08/07/Azure/ApplicationInsightsFilter/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a>
+            </p>
+            <p class="date"><time datetime="2017-08-06T16:00:00.000Z" itemprop="datePublished">2017-08-07</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/08/07/Azure/ApplicationInsightsFilter/">Application Insights自訂過濾收集的訊息內容</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+Application Insights越做越強大，基本上程式內部怎樣運作，Application Insights都可以蒐集到相關資訊，不過，有時候這樣會帶來一種困惱就是在某些情境下的資訊，並不想被蒐集到Application Insights內進行分析，因為有可能造成分析錯誤或是統計資訊的誤差，舉例來說，目前發現如果在IIS中針對Web Site設定Preload功能，在Applicatio
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/08/06/LifeStyle/Chinadesign/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/blogimage/WeChat.jpg)" alt="2017 第12屆 五金杯 中國五金產品工業設計大賽徵集" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/08/06/LifeStyle/Chinadesign/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-08-05T16:00:00.000Z" itemprop="datePublished">2017-08-06</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/08/06/LifeStyle/Chinadesign/">2017 第12屆 五金杯 中國五金產品工業設計大賽徵集</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+2015年有幸到中國參加此大會評審，發現雖然名為五金產品比賽，當時不乏有些不錯的IoT產品出線，不過那時候只限於中國內作品參賽，這次也可以有台灣作品參賽，工業設計高手可以去挑戰看看
+何謂五金杯大賽
+“五金杯”中國五金產品工業設計大賽自2006年創辦以來已成功舉辦11屆，大賽在各主辦單位和協作單位的支持下，歷屆參賽作品的數量和質量都在不斷的進步。大賽以創新和務實的特點和國內外知名的專家評委陣容，吸
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/07/25/Devops/MCin-apps/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://adtmag.com/articles/2017/04/14/~/media/ECG/adtmag/Images/2017/03/mobile_center.png)" alt="Mobile Center讓App有自動更新功能" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/07/25/Devops/MCin-apps/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-07-24T16:00:00.000Z" itemprop="datePublished">2017-07-25</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/07/25/Devops/MCin-apps/">Mobile Center讓App有自動更新功能</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+微軟在Mobile的解決方案，原先是建構Hockey App上面，不過，從今年五月開始就慢慢轉移到Mobile Center上面，無論是Build還是Test，甚至到發布，都可以透過Mobile Center幫忙完成，先前的一篇文章[VSTS 整合Visual Studio Mobile Center ]中有介紹把VSTS的Repositories與Mobile Center結合，現在Mobil
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/07/21/Docker/DockerCon/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://www.docker.com/sites/default/files/group_5622_0.png)" alt="Windows Server 2016 Containers初體驗" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/07/21/Docker/DockerCon/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-07-21T14:59:31.000Z" itemprop="datePublished">2017-07-21</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/07/21/Docker/DockerCon/">Windows Server 2016 Containers初體驗</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+當Windows Server 2016開始有支援Containers後，認為只要把Windows Server 2016內的Container服務啟動後，就可以立馬來使用Docker這項技術，殊不知這是錯誤的，因為，這樣做法只是讓Windows Server 2016有了Container功能，但是，要讓它可以用Docker，還必須額外安裝Docker模組才可以有辦法開始使用Docker的技術
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/07/14/Devops/VSTSSE/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://sierraws.com/wp-content/uploads/2013/11/Sierra-Workforce-Solutions-Workplance-Security-AccessControl-e1389048310112.jpg)" alt="用Azure Conditional Access限制公司以外地區不可以連入VSTS" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/07/14/Devops/VSTSSE/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-07-13T16:00:00.000Z" itemprop="datePublished">2017-07-14</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/07/14/Devops/VSTSSE/">用Azure Conditional Access限制公司以外地區不可以連入VSTS</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+就目前微軟以雲端服務為優先情況，VSTS的功能是越來越強大，再加上本身VSTS也可以與地端整合，所以，使用VSTS來做為版控工具是一個不錯選擇，不過，很多人知道好處，但畢竟是雲端服務又會很擔心，如果在公司外部讓公司有心人進入後，把所有程式碼都拿走就慘了，安全性的管理一直想用VSTS的一個。
+其實只要透過Azure Conditional Access就可以解決這問題。畢竟，在整個微軟雲端服務中，
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/07/07/Devops/VSTSPackage/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://www.geekhive.com/wp-content/uploads/2017/05/ship-1920x1080.jpg)" alt="自動化建置取得不同VSTS平台內的Packages Manager套件" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/07/07/Devops/VSTSPackage/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-07-06T16:00:00.000Z" itemprop="datePublished">2017-07-07</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/07/07/Devops/VSTSPackage/">自動化建置取得不同VSTS平台內的Packages Manager套件</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+自從VSTS有了Packages的功能，可以讓我們自建團隊私有的Nuget後，就習慣把大量可以Re-Use套件放上去，可以讓整個團隊共同使用這些套件。不過，如果給自己團隊是沒有甚麼問題，今天要跨團隊使用呢?就是給在不同專案成員也用你開發的Package，在同一個VSTS URL下，只要去設定Feed權限也就可以，如下圖，在BestFeed下設定給予要讀取此Package的人員那些權限
+但是，如果
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/06/23/Devops/TEAMSVSTS/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://www.mindmeister.com/blog/wp-content/uploads/Brainstorming-1024x536.png)" alt="Microsoft Teams整合VSTS Story Board" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/06/23/Devops/TEAMSVSTS/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a>
+            </p>
+            <p class="date"><time datetime="2017-06-22T16:00:00.000Z" itemprop="datePublished">2017-06-23</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/06/23/Devops/TEAMSVSTS/">Microsoft Teams整合VSTS Story Board</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+先前在VSTS使用Story Board時候，又用Teams，想說是否可以不要兩邊切換看和討論Story，早期作法就只是把VSTS Story的Link address抓下來，利用Teams的Tab內的Web Site功能建立，不過，這個月更新，整合度就更好了，只需要透過幾個步驟，就可以把兩邊給串起來，且比我之前用link來做好多了
+選VSTS Tab
+到Teams的Tab功能列表中，找到VST
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/06/03/SQL/SQLAA/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.conceptinfoway.net/wp-content/uploads/2010/03/SQL-1.png)" alt="還原DB發生Cannot execute as the database principal because the principal &quot;dbo&quot; does not exist..." class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/06/03/SQL/SQLAA/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-06-02T16:00:00.000Z" itemprop="datePublished">2017-06-03</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/06/03/SQL/SQLAA/">還原DB發生Cannot execute as the database principal because the principal &quot;dbo&quot; does not exist...</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+今天把某台的DB Server中的資料庫還原到另一台DB Server時候，發生這樣的訊息
+
+Cannot execute as the database principal because the principal “dbo” does not exist, this type of principal cannot be impersonated, or you do not have p
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+
+    </div></section>
+
+
+    <nav id="page-nav">
+        <span class="pages">Page 1 of 3</span>
+        <span class="page-number current">1</span><a class="page-number" href="/archives/2017/page/2/">2</a><a class="page-number" href="/archives/2017/page/3/">3</a><a class="extend next" rel="next" href="/archives/2017/page/2/">&raquo;</a>
+    </nav>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>
+            follow:</p>
+        <ul class="social-links">
+            
+                
+                    <li>
+                        <a class="social-tooltip" title="twitter" href="https://twitter.com/Chia_Chi_Kuo" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="facebook" href="https://www.facebook.com/jaigi.kuo" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="github" href="https://github.com/edwardkuo/" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="rss" href="http://edwardkuo.github.io/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                    </li>
+                    
+                        
+        </ul>
+    </div>
+    
+                <div class="widgets-container">
+                    
+                        
+                            
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://docs.microsoft.com/zh-tw/media/hubs/microsoftteamshome/teams-skype-to-teams.svg)" alt="查詢Microsoft Teams群組中儲存檔案的容量" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a></p>
+                            <p class="item-title"><a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="title">查詢Microsoft Teams群組中儲存檔案的容量</a></p>
+                            <p class="item-date"><time datetime="2017-12-12T16:00:00.000Z" itemprop="datePublished">2017-12-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/04/Devops/VSTSFority/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://bright-side-of-life.com/wp-content/uploads/2017/05/post-fortify-fb.jpg)" alt="VSTS整合資安工具Fortify達成自動化" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/12/04/Devops/VSTSFority/" class="title">VSTS整合資安工具Fortify達成自動化</a></p>
+                            <p class="item-date"><time datetime="2017-12-03T16:00:00.000Z" itemprop="datePublished">2017-12-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/21/Other/StudyLove/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://distudio.blob.core.windows.net/study4tw/1510761314.63796.png)" alt="Study4.TW Study4Love - 與大師對談 活動" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/21/Other/StudyLove/" class="title">Study4.TW Study4Love - 與大師對談 活動</a></p>
+                            <p class="item-date"><time datetime="2017-11-21T14:59:31.000Z" itemprop="datePublished">2017-11-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/10/Devops/VSTSCore/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://core.ac.uk/resources/corelogo_hires.png)" alt="有參照外部元件如何在VSTS建立.Net Core Package" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/10/Devops/VSTSCore/" class="title">有參照外部元件如何在VSTS建立.Net Core Package</a></p>
+                            <p class="item-date"><time datetime="2017-11-09T16:00:00.000Z" itemprop="datePublished">2017-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/10/16/Azure/AIappTeams/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://datadog-prod.imgix.net/img/blog/monitor-azure-logic-app-workflows-datadog/azure-logic-apps-hero.png?ch=Width&fit=max&fm=png&auto=format&lossless=1)" alt="Application Insights + Logic App + Microsoft Teams 整合" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a></p>
+                            <p class="item-title"><a href="/paper/2017/10/16/Azure/AIappTeams/" class="title">Application Insights + Logic App + Microsoft Teams 整合</a></p>
+                            <p class="item-date"><time datetime="2017-10-15T16:00:00.000Z" itemprop="datePublished">2017-10-16</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/資料庫程式版控/">資料庫程式版控</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雲端到地端的持續整合與交付/">雲端到地端的持續整合與交付</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">7</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP-NET/">ASP.NET</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple/">Apple</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Azure/">Azure</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cordova/">Cordova</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevOps/">DevOps</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-End/">Front-End</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LifeStyle/">LifeStyle</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Office-365/">Office 365</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Other/">Other</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerShell/">PowerShell</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T-SQL/">T-SQL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSTS/">VSTS</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Studio/">Visual Studio</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ASP-NET/" style="font-size: 11.82px;">ASP.NET</a> <a href="/tags/Apple/" style="font-size: 13.64px;">Apple</a> <a href="/tags/Azure/" style="font-size: 20px;">Azure</a> <a href="/tags/C/" style="font-size: 18.18px;">C#</a> <a href="/tags/Cordova/" style="font-size: 11.82px;">Cordova</a> <a href="/tags/DevOps/" style="font-size: 19.09px;">DevOps</a> <a href="/tags/Docker/" style="font-size: 14.55px;">Docker</a> <a href="/tags/Front-End/" style="font-size: 10.91px;">Front-End</a> <a href="/tags/LifeStyle/" style="font-size: 16.36px;">LifeStyle</a> <a href="/tags/Office-365/" style="font-size: 10px;">Office 365</a> <a href="/tags/Other/" style="font-size: 11.82px;">Other</a> <a href="/tags/PowerShell/" style="font-size: 12.73px;">PowerShell</a> <a href="/tags/T-SQL/" style="font-size: 15.45px;">T-SQL</a> <a href="/tags/VSTS/" style="font-size: 17.27px;">VSTS</a> <a href="/tags/Visual-Studio/" style="font-size: 11.82px;">Visual Studio</a>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://study4.tw">Study4.TW</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/Study4.Enterprise/">Study4.Enterprise</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/286316594814216/">Azure &amp; .NET Developer FB 社團</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/MISDevOps/">製造業 DevOps日常</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://mva.microsoft.com/?mtag=4040062">MVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://channel9.msdn.com">Channel9</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://dog0416.blogspot.tw/">Matsurigoto</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://skychang.github.io/">天空的垃圾場</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://kyleap.blogspot.tw/">程式宅急便</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://08alan.github.io/">維持熱情不滅</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://dotblogs.com.tw/jamesfu">五餅二魚工作室</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://yi-shiuan.github.io/">饅頭小舖</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://michael80321.blogspot.tw/">Michael&#39;s World</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+                                
+                                    
+                                        <div class="widget-wrap widget-list">
+                                            <h3 class="widget-title">Visitor</h3>
+                                            <div class="widget">
+                                                <a href="http://s11.flagcounter.com/more/4zV"><img src="http://s11.flagcounter.com/count/4zV/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_8/viewers_0/labels_0/pageviews_1/flags_0/percent_1/" alt="Flag Counter" border="0"></a>
+                                            </div>
+
+                                        </div>
+
+
+                </div>
+                </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Edward kuo</p>
+                
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'ek20';
+    
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

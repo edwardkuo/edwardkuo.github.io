@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="_lzVun8mT2ObiZ3rk5827pMMbko8SQthqo8OtoRxhsc" />
+    
+        <title>
+            
+                開始使用Azure Application Insights REST API |
+                    
+                        E.K TechThinking
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+        
+                
+                    <meta name="keywords" content="Azure">
+                    
+                        <meta name="description" content="Application Insights是Azure監控我們開發的系統一個很好的服務之一，主要可以讓我們省去很多工，就可以抓取到系統運作資訊和問題點。通常，我們能到Azure Portal查看Application Insights紀錄的資訊，不過，Azure上面資訊統計或是分析方式，畢竟還是微軟官方提供的，如果想要客製化來分析資料，就必須把資料抓回來，自己針對資料做相關性分析，現在可以透過Az">
+<meta property="og:type" content="article">
+<meta property="og:title" content="開始使用Azure Application Insights REST API">
+<meta property="og:url" content="http://edwardkuo.imas.tw/paper/2016/10/12/Azure/2016-10-12/index.html">
+<meta property="og:site_name" content="E.K TechThinking">
+<meta property="og:description" content="Application Insights是Azure監控我們開發的系統一個很好的服務之一，主要可以讓我們省去很多工，就可以抓取到系統運作資訊和問題點。通常，我們能到Azure Portal查看Application Insights紀錄的資訊，不過，Azure上面資訊統計或是分析方式，畢竟還是微軟官方提供的，如果想要客製化來分析資料，就必須把資料抓回來，自己針對資料做相關性分析，現在可以透過Az">
+<meta property="og:image" content="https://sec.ch9.ms/ch9/650b/482bbe5f-80ca-455f-a62f-b921d82b650b/APIManagementOverview_960.jpg">
+<meta property="og:updated_time" content="2017-04-03T15:13:39.807Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="開始使用Azure Application Insights REST API">
+<meta name="twitter:description" content="Application Insights是Azure監控我們開發的系統一個很好的服務之一，主要可以讓我們省去很多工，就可以抓取到系統運作資訊和問題點。通常，我們能到Azure Portal查看Application Insights紀錄的資訊，不過，Azure上面資訊統計或是分析方式，畢竟還是微軟官方提供的，如果想要客製化來分析資料，就必須把資料抓回來，自己針對資料做相關性分析，現在可以透過Az">
+<meta name="twitter:image" content="https://sec.ch9.ms/ch9/650b/482bbe5f-80ca-455f-a62f-b921d82b650b/APIManagementOverview_960.jpg">
+                            
+
+                                
+                                    <link rel="alternate" href="http://edwardkuo.github.io/atom.xml" title="E.K TechThinking" type="application/atom+xml" />
+                                    
+
+                                        
+
+                                                <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+                                                    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+                                                        <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+                                                            <link rel="stylesheet" href="/css/style.css">
+
+                                                                <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+                                                                    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-33121513-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+                                                                        <script type="text/javascript">
+                                                                            var appInsights = window.appInsights || function(config) {
+                                                                                function i(config) {
+                                                                                    t[config] = function() {
+                                                                                        var i = arguments;
+                                                                                        t.queue.push(function() {
+                                                                                            t[config].apply(t, i)
+                                                                                        })
+                                                                                    }
+                                                                                }
+                                                                                var t = {
+                                                                                        config: config
+                                                                                    },
+                                                                                    u = document,
+                                                                                    e = window,
+                                                                                    o = "script",
+                                                                                    s = "AuthenticatedUserContext",
+                                                                                    h = "start",
+                                                                                    c = "stop",
+                                                                                    l = "Track",
+                                                                                    a = l + "Event",
+                                                                                    v = l + "Page",
+                                                                                    y = u.createElement(o),
+                                                                                    r, f;
+                                                                                y.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js";
+                                                                                u.getElementsByTagName(o)[0].parentNode.appendChild(y);
+                                                                                try {
+                                                                                    t.cookie = u.cookie
+                                                                                } catch (p) {}
+                                                                                for (t.queue = [], t.version = "1.0", r = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; r.length;) i("track" + r.pop());
+                                                                                return i("set" + s), i("clear" + s), i(h + a), i(c + a), i(h + v), i(c + v), i("flush"), config.disableExceptionTracking || (r = "onerror", i("_" + r), f = e[r], e[r] = function(config, i, u, e, o) {
+                                                                                    var s = f && f(config, i, u, e, o);
+                                                                                    return s !== !0 && t["_" + r](config, i, u, e, o), s
+                                                                                }), t
+                                                                            }({
+                                                                                instrumentationKey: "7891dfec-e884-4bdc-bf34-f581dce47f3a"
+                                                                            });
+
+                                                                            window.appInsights = appInsights;
+
+                                                                            // Add telemetry initializer
+                                                                            appInsights.queue.push(function() {
+                                                                                appInsights.context.addTelemetryInitializer(function(envelope) {
+                                                                                    var telemetryItem = envelope.data.baseData;
+
+
+                                                                                    // To set custom properties:
+                                                                                    telemetryItem.properties = telemetryItem.properties || {};
+                                                                                    telemetryItem.properties["ApplicationName"] = "EK20";
+
+
+                                                                                });
+                                                                            });
+                                                                            // end of insertion
+
+
+
+                                                                            appInsights.trackPageView();
+                                                                        </script>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Tech &amp; Thinking &amp; DevOps &amp; Azure &amp; VSTS</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/about.html">About</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/slideshare/slideshare.html">Slideshare</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/Link/Link.html">Hot Link</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-Azure/2016-10-12" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        開始使用Azure Application Insights REST API
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/paper/2016/10/12/Azure/2016-10-12/" class="article-date">
+    <time datetime="2016-10-11T16:00:00.000Z" itemprop="datePublished">2016-10-12</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Azure/">Azure</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <img src="https://sec.ch9.ms/ch9/650b/482bbe5f-80ca-455f-a62f-b921d82b650b/APIManagementOverview_960.jpg">
+<p>Application Insights是Azure監控我們開發的系統一個很好的服務之一，主要可以讓我們省去很多工，就可以抓取到系統運作資訊和問題點。通常，我們能到Azure Portal查看Application Insights紀錄的資訊，不過，Azure上面資訊統計或是分析方式，畢竟還是微軟官方提供的，如果想要客製化來分析資料，就必須把資料抓回來，自己針對資料做相關性分析，現在可以透過Azure Application Insights REST API讓我們把資料給傳遞回來<br><img src="/blogimage/EK%202016-10-12%20%E4%B8%8B%E5%8D%888.04.58.png" width="800"></p>
+<p>Azure Application Insights REST API現在是屬於Beta版，所以，使用上難免有一些不方便，且功能性還不是那麼完全，但是，一些常用性的資訊已經給被傳遞出來，在開始使用Azure Application Insights REST API前，必須先到Azure Portal進行一些準備事項</p>
+<h3 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h3><hr>
+<ul>
+<li>Application Insights付費機制最少必須是<code>Standard</code></li>
+</ul>
+<img src="/blogimage/EK%202016-10-12%20%E4%B8%8B%E5%8D%888.08.29.png" width="400">
+<p>為什麼有這限制，我猜因該是在於是否有Data Export功能所致吧<br><img src="/blogimage/EK%202016-10-14%20%E4%B8%8B%E5%8D%888.52.25.png" width="500"></p>
+<ul>
+<li>建立Application Insights API金鑰</li>
+</ul>
+<img src="/blogimage/EK%202016-10-12%20%E4%B8%8B%E5%8D%888.09.42.png" width="400">
+<pre><code>記得建立完成後，要把金鑰記錄下來，不然事後回來是查不到的
+</code></pre><img src="/blogimage/EK%202016-10-12%20%E4%B8%8B%E5%8D%888.12.02.png" width="400">
+<h3 id="開始使用API吧"><a href="#開始使用API吧" class="headerlink" title="開始使用API吧"></a>開始使用API吧</h3><hr>
+<p>目前在API的資料可以提供的資料種類<code>Metric</code>,<code>Events</code>和<code>Query</code>三種方式，個人最常用到的是查詢<code>Events</code>類型的資料，而Application Insights API查詢資料方式是使用OData的語法做資料搜尋</p>
+<p>Application Insights API的Address如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://api.applicationinsights.io/beta/apps/&#123;APPID&#125;/&#123;queryType&#125;/&#123;queryPath&#125;?&#123;parameterString&#125;</div></pre></td></tr></table></figure></p>
+<p>網址中的參數分別為：</p>
+<ol>
+<li>APPID : 就是Application Insights中的金鑰</li>
+<li>queryType : 就是要查詢資料種類類型</li>
+<li>queryPath : 就是要查詢的資料位置，若是用<code>Event</code> Type來說，目前提供<code>requests</code>和<code>$all</code>可以使用，不同類型使用的位置也不同</li>
+<li>parameterString : 這就是使用OData的指令進行查詢了，例如使用$top,$filter…等，這邊針對有哪些欄位部分，可能還是必須進入Portal查看會比較清楚</li>
+</ol>
+<p>在每個類型可用的queryPath，也可以查看下面這個表<br><img src="/blogimage/EK%202016-10-12%20%E4%B8%8B%E5%8D%888.34.13.png" width="700"></p>
+<p>在Event類型下的資訊，共有這六種分類<br><img src="/blogimage/EK%202016-10-12%20%E4%B8%8B%E5%8D%888.36.51.png" width="400"></p>
+<p>所以，當呼叫API回傳的Json格式也是包含這六種分類的資料內容，這邊先把回傳的<code>Json</code>資料結構轉換成強型別使用<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ApplicationInsightsMessage</span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> odatacontext &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> AiMessages[] aimessages &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> Value[] <span class="keyword">value</span> &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AiMessages</span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> code &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> message &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Value</span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">public</span> DateTime timestamp &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> id &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> type &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">int</span> count &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> Exception exception &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> Customdimensions customDimensions &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> customMeasurements &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> Operation operation &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> Session session &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> User user &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> Application application &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> Client client &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> Cloud cloud &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> Ai ai &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> Pageview pageView &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> Customevent customEvent &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Exception</span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> problemId &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> handledAt &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> type &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> message &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> assembly &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> method &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> outerType &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> outerMessage &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> outerAssembly &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> outerMethod &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> innermostType &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> innermostMessage &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> innermostAssembly &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> innermostMethod &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> severityLevel &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> Detail[] details &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Detail</span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> outerId &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> message &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> type &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> id &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Customdimensions</span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> CPUCore &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> ApplicationVersion &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> Time &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> PhysicalMemory &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Operation</span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> id &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> parentId &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> syntheticSource &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Session</span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> id &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">User</span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> id &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> authenticatedId &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> accountId &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Application</span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> version &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Client</span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> type &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> model &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> os &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> ip &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> city &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> stateOrProvince &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> countryOrRegion &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> browser &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Cloud</span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> roleName &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> roleInstance &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Ai</span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> appId &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> appName &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> iKey &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> sdkVersion &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Pageview</span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> url &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> duration &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">object</span> performanceBucket &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Customevent</span></div><div class="line">   &#123;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">string</span> name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>然後，就可以透過API把資料取回來，其中在<code>x-api-key</code>填入你剛剛在Portal建立Application Insights API時所產生的金鑰<br>    <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">string</span> APPID = <span class="string">"XXX"</span>;</div><div class="line"><span class="keyword">string</span> queryType = <span class="string">"events"</span>;</div><div class="line"><span class="keyword">string</span> queryPath = <span class="string">"$all"</span>;</div><div class="line"><span class="keyword">string</span> parameterString = <span class="string">"$top=1"</span>;</div><div class="line"><span class="keyword">string</span> Result = <span class="keyword">string</span>.Empty;</div><div class="line"></div><div class="line">HttpClient client = <span class="keyword">new</span> HttpClient();</div><div class="line">client.DefaultRequestHeaders.Accept.Add(</div><div class="line">    <span class="keyword">new</span> MediaTypeWithQualityHeaderValue(<span class="string">"application/json"</span>));</div><div class="line">client.DefaultRequestHeaders.Add(<span class="string">"x-api-key"</span>, <span class="string">"XXXX"</span>);</div><div class="line"><span class="keyword">var</span> req = <span class="keyword">string</span>.Format(<span class="string">"https://api.applicationinsights.io/beta/apps/&#123;0&#125;/&#123;1&#125;/&#123;2&#125;?&#123;3&#125;"</span>, APPID, queryType, queryPath, parameterString);</div><div class="line">HttpResponseMessage response = client.GetAsync(req).Result;</div><div class="line"><span class="keyword">if</span> (response.IsSuccessStatusCode)</div><div class="line">&#123;</div><div class="line"></div><div class="line">    ApplicationInsightsMessage applicationInsightsMessage  =</div><div class="line">        JsonConvert.DeserializeObject&lt;ApplicationInsightsMessage&gt;(</div><div class="line">            response.Content.ReadAsStringAsync().Result);</div><div class="line">    <span class="keyword">return</span> applicationInsightsMessage;</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>這樣就可以呼叫API取資料了，這寫一個小小的Unit Test驗證是否正確，因為，目前實測結果，當資料送出後，Application Insights收到大約要經過三分鐘，所以，這邊必須先<code>Sleep</code>，不然會發生測試錯誤<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">_telemetryClient.TrackPageView(<span class="string">"TrackPageViewTest2"</span>);</div><div class="line">System.Threading.Thread.Sleep(<span class="number">210000</span>);</div><div class="line">ApplicationInsightsMessage AIM = ApplicationInsightsAPI.ReadEvent();</div><div class="line">Assert.AreEqual(<span class="string">"TrackPageViewTest2"</span>, AIM.<span class="keyword">value</span>[<span class="number">0</span>].pageView.name);</div></pre></td></tr></table></figure></p>
+<p>目前上面資料點保存時間只有七天，如果資料是屬於統計分析或是針對資料做相依性分析，建議把資料傳回自己的DB保存起來</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><hr>
+<ol>
+<li>OData : <a href="http://www.odata.org" target="_blank" rel="external">http://www.odata.org</a></li>
+<li>Application Insights API : <a href="https://dev.applicationinsights.io/documentation/overview" target="_blank" rel="external">https://dev.applicationinsights.io/documentation/overview</a></li>
+</ol>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share">Share</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_pinterest"></a>
+    <a class="a2a_button_tumblr"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>
+            follow:</p>
+        <ul class="social-links">
+            
+                
+                    <li>
+                        <a class="social-tooltip" title="twitter" href="https://twitter.com/Chia_Chi_Kuo" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="facebook" href="https://www.facebook.com/jaigi.kuo" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="github" href="https://github.com/edwardkuo/" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="rss" href="http://edwardkuo.github.io/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                    </li>
+                    
+                        
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/paper/2016/10/16/Azure/2016-10-16/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            使用Azure Application Insights效益
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/paper/2016/10/04/LifeStyle/2016-10-04/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">踏入職場前該具備什麼樣能力之我見</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+            
+                <div class="widgets-container">
+                    
+                        
+                            
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://docs.microsoft.com/zh-tw/media/hubs/microsoftteamshome/teams-skype-to-teams.svg)" alt="查詢Microsoft Teams群組中儲存檔案的容量" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a></p>
+                            <p class="item-title"><a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="title">查詢Microsoft Teams群組中儲存檔案的容量</a></p>
+                            <p class="item-date"><time datetime="2017-12-12T16:00:00.000Z" itemprop="datePublished">2017-12-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/04/Devops/VSTSFority/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://bright-side-of-life.com/wp-content/uploads/2017/05/post-fortify-fb.jpg)" alt="VSTS整合資安工具Fortify達成自動化" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/12/04/Devops/VSTSFority/" class="title">VSTS整合資安工具Fortify達成自動化</a></p>
+                            <p class="item-date"><time datetime="2017-12-03T16:00:00.000Z" itemprop="datePublished">2017-12-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/21/Other/StudyLove/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://distudio.blob.core.windows.net/study4tw/1510761314.63796.png)" alt="Study4.TW Study4Love - 與大師對談 活動" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/21/Other/StudyLove/" class="title">Study4.TW Study4Love - 與大師對談 活動</a></p>
+                            <p class="item-date"><time datetime="2017-11-21T14:59:31.000Z" itemprop="datePublished">2017-11-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/10/Devops/VSTSCore/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://core.ac.uk/resources/corelogo_hires.png)" alt="有參照外部元件如何在VSTS建立.Net Core Package" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/10/Devops/VSTSCore/" class="title">有參照外部元件如何在VSTS建立.Net Core Package</a></p>
+                            <p class="item-date"><time datetime="2017-11-09T16:00:00.000Z" itemprop="datePublished">2017-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/10/16/Azure/AIappTeams/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://datadog-prod.imgix.net/img/blog/monitor-azure-logic-app-workflows-datadog/azure-logic-apps-hero.png?ch=Width&fit=max&fm=png&auto=format&lossless=1)" alt="Application Insights + Logic App + Microsoft Teams 整合" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a></p>
+                            <p class="item-title"><a href="/paper/2017/10/16/Azure/AIappTeams/" class="title">Application Insights + Logic App + Microsoft Teams 整合</a></p>
+                            <p class="item-date"><time datetime="2017-10-15T16:00:00.000Z" itemprop="datePublished">2017-10-16</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/資料庫程式版控/">資料庫程式版控</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雲端到地端的持續整合與交付/">雲端到地端的持續整合與交付</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">7</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP-NET/">ASP.NET</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple/">Apple</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Azure/">Azure</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cordova/">Cordova</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevOps/">DevOps</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-End/">Front-End</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LifeStyle/">LifeStyle</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Office-365/">Office 365</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Other/">Other</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerShell/">PowerShell</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T-SQL/">T-SQL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSTS/">VSTS</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Studio/">Visual Studio</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ASP-NET/" style="font-size: 11.82px;">ASP.NET</a> <a href="/tags/Apple/" style="font-size: 13.64px;">Apple</a> <a href="/tags/Azure/" style="font-size: 20px;">Azure</a> <a href="/tags/C/" style="font-size: 18.18px;">C#</a> <a href="/tags/Cordova/" style="font-size: 11.82px;">Cordova</a> <a href="/tags/DevOps/" style="font-size: 19.09px;">DevOps</a> <a href="/tags/Docker/" style="font-size: 14.55px;">Docker</a> <a href="/tags/Front-End/" style="font-size: 10.91px;">Front-End</a> <a href="/tags/LifeStyle/" style="font-size: 16.36px;">LifeStyle</a> <a href="/tags/Office-365/" style="font-size: 10px;">Office 365</a> <a href="/tags/Other/" style="font-size: 11.82px;">Other</a> <a href="/tags/PowerShell/" style="font-size: 12.73px;">PowerShell</a> <a href="/tags/T-SQL/" style="font-size: 15.45px;">T-SQL</a> <a href="/tags/VSTS/" style="font-size: 17.27px;">VSTS</a> <a href="/tags/Visual-Studio/" style="font-size: 11.82px;">Visual Studio</a>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://study4.tw">Study4.TW</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/Study4.Enterprise/">Study4.Enterprise</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/286316594814216/">Azure &amp; .NET Developer FB 社團</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/MISDevOps/">製造業 DevOps日常</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://mva.microsoft.com/?mtag=4040062">MVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://channel9.msdn.com">Channel9</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://dog0416.blogspot.tw/">Matsurigoto</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://skychang.github.io/">天空的垃圾場</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://kyleap.blogspot.tw/">程式宅急便</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://08alan.github.io/">維持熱情不滅</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://dotblogs.com.tw/jamesfu">五餅二魚工作室</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://yi-shiuan.github.io/">饅頭小舖</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://michael80321.blogspot.tw/">Michael&#39;s World</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+                                
+                                    
+                                        <div class="widget-wrap widget-list">
+                                            <h3 class="widget-title">Visitor</h3>
+                                            <div class="widget">
+                                                <a href="http://s11.flagcounter.com/more/4zV"><img src="http://s11.flagcounter.com/count/4zV/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_8/viewers_0/labels_0/pageviews_1/flags_0/percent_1/" alt="Flag Counter" border="0"></a>
+                                            </div>
+
+                                        </div>
+
+
+                </div>
+                </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Edward kuo</p>
+                
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'ek20';
+    
+    
+    var disqus_url = 'http://edwardkuo.imas.tw/paper/2016/10/12/Azure/2016-10-12/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

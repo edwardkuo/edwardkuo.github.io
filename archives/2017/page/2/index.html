@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="_lzVun8mT2ObiZ3rk5827pMMbko8SQthqo8OtoRxhsc" />
+    
+        <title>
+            
+                Archive: 2017 |
+                    
+                        E.K TechThinking
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+        
+                        <meta name="description" content="Azure,Teams,雲端架構,製造業,DevOps,程式開發,MVP,架構設計,C#,SQL,javascript,html,css,微軟,MVC,Server,寫">
+<meta property="og:type" content="website">
+<meta property="og:title" content="E.K TechThinking">
+<meta property="og:url" content="http://edwardkuo.imas.tw/archives/2017/page/2/index.html">
+<meta property="og:site_name" content="E.K TechThinking">
+<meta property="og:description" content="Azure,Teams,雲端架構,製造業,DevOps,程式開發,MVP,架構設計,C#,SQL,javascript,html,css,微軟,MVC,Server,寫">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="E.K TechThinking">
+<meta name="twitter:description" content="Azure,Teams,雲端架構,製造業,DevOps,程式開發,MVP,架構設計,C#,SQL,javascript,html,css,微軟,MVC,Server,寫">
+                            
+
+                                
+                                    <link rel="alternate" href="http://edwardkuo.github.io/atom.xml" title="E.K TechThinking" type="application/atom+xml" />
+                                    
+
+                                        
+
+                                                <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+                                                    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+                                                        <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+                                                            <link rel="stylesheet" href="/css/style.css">
+
+                                                                <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+                                                                    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-33121513-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+                                                                        <script type="text/javascript">
+                                                                            var appInsights = window.appInsights || function(config) {
+                                                                                function i(config) {
+                                                                                    t[config] = function() {
+                                                                                        var i = arguments;
+                                                                                        t.queue.push(function() {
+                                                                                            t[config].apply(t, i)
+                                                                                        })
+                                                                                    }
+                                                                                }
+                                                                                var t = {
+                                                                                        config: config
+                                                                                    },
+                                                                                    u = document,
+                                                                                    e = window,
+                                                                                    o = "script",
+                                                                                    s = "AuthenticatedUserContext",
+                                                                                    h = "start",
+                                                                                    c = "stop",
+                                                                                    l = "Track",
+                                                                                    a = l + "Event",
+                                                                                    v = l + "Page",
+                                                                                    y = u.createElement(o),
+                                                                                    r, f;
+                                                                                y.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js";
+                                                                                u.getElementsByTagName(o)[0].parentNode.appendChild(y);
+                                                                                try {
+                                                                                    t.cookie = u.cookie
+                                                                                } catch (p) {}
+                                                                                for (t.queue = [], t.version = "1.0", r = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; r.length;) i("track" + r.pop());
+                                                                                return i("set" + s), i("clear" + s), i(h + a), i(c + a), i(h + v), i(c + v), i("flush"), config.disableExceptionTracking || (r = "onerror", i("_" + r), f = e[r], e[r] = function(config, i, u, e, o) {
+                                                                                    var s = f && f(config, i, u, e, o);
+                                                                                    return s !== !0 && t["_" + r](config, i, u, e, o), s
+                                                                                }), t
+                                                                            }({
+                                                                                instrumentationKey: "7891dfec-e884-4bdc-bf34-f581dce47f3a"
+                                                                            });
+
+                                                                            window.appInsights = appInsights;
+
+                                                                            // Add telemetry initializer
+                                                                            appInsights.queue.push(function() {
+                                                                                appInsights.context.addTelemetryInitializer(function(envelope) {
+                                                                                    var telemetryItem = envelope.data.baseData;
+
+
+                                                                                    // To set custom properties:
+                                                                                    telemetryItem.properties = telemetryItem.properties || {};
+                                                                                    telemetryItem.properties["ApplicationName"] = "EK20";
+
+
+                                                                                });
+                                                                            });
+                                                                            // end of insertion
+
+
+
+                                                                            appInsights.trackPageView();
+                                                                        </script>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Tech &amp; Thinking &amp; DevOps &amp; Azure &amp; VSTS</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/about.html">About</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/slideshare/slideshare.html">Slideshare</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/Link/Link.html">Hot Link</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <i class="icon fa fa-archive"></i>Archive: 2017
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            
+
+    
+    
+        
+        
+        <section class="archives-wrap">
+            <div class="archive-year-wrap">
+                <a href="/archives/2017" class="archive-year"><i class="icon fa fa-calendar-o"></i>2017</a>
+            </div>
+            <div class="archives">
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/05/25/Other/EXCELJson/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://cdn1.pcadvisor.co.uk/cmsdata/features/3656625/how-to-create-pivottables-main_thumb800.png)" alt="用Excel產生Json格式的資料" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/05/25/Other/EXCELJson/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-05-24T16:00:00.000Z" itemprop="datePublished">2017-05-25</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/05/25/Other/EXCELJson/">用Excel產生Json格式的資料</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+Json做為資料傳遞格式傳遞是越來越普遍，就連把SQL也支援JSON資料傳入做Insert資料用。不過，雖然JSON資料普遍使用，但是，有一個比較大缺點，就是要產生JSON格式的資料並不容易，尤其要多筆資料時候，往往不是缺了[就是少了甚麼，造成格式錯誤。
+尤其最近是把Json資料當作參數傳入SQL中，每每要組合這些資料，就快被搞死，因此，找到一個套件叫做Office with Excel to 
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/05/24/Devops/MobileCenter/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://www.visualstudio.com/wp-content/uploads/2016/11/roadmap@2x.png)" alt="VSTS 整合Visual Studio Mobile Center" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/05/24/Devops/MobileCenter/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-05-23T16:00:00.000Z" itemprop="datePublished">2017-05-24</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/05/24/Devops/MobileCenter/">VSTS 整合Visual Studio Mobile Center</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+要在VSTS建置一個Xamarin開發出來的App，只要在Build Process將相關要建置的Task設定好基本上就可以產生出一個APP，若是要建置出iOS用的APP，就必須要在建置的Agent下一番功夫，例如使用Local agent或是第三方的Agent像是MacinCloud幫忙建置Xamarin專案，用Local agent則還是必須準備一台MAC在上面安裝Build Agent，似
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/05/15/LifeStyle/SaveRansomWin32WannaCrypt/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://pcsolution99.files.wordpress.com/2017/03/wp-1489212561284.jpg)" alt="修復RansomWin32WannaCrypt勒索病毒方式" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/05/15/LifeStyle/SaveRansomWin32WannaCrypt/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-05-14T16:00:00.000Z" itemprop="datePublished">2017-05-15</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/05/15/LifeStyle/SaveRansomWin32WannaCrypt/">修復RansomWin32WannaCrypt勒索病毒方式</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+這一波病毒我想最累因該是企業內部MIS人員，有些朋友公司又有遇到遭情，整個節日就泡湯，這次大部分都是微軟作業系統(聽說MAC也會有)遭殃，但不可避免就是，已經不只是從原本被動模式中毒，就算放著連上網也會中毒，雖然，微軟早在之前就有發布更新，我相信很多人也是沒更新的 XD
+
+根據微軟的安全報告指出，這個勒索軟體是屬於WannaCryptor病毒的其中一隻變種。為了協助Windows用戶共同面對這個
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/05/15/Devops/VSTSAI/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.merv.io/images/whatis2.gif)" alt="在Application Insights標註VSTS Release的版本戳記" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/05/15/Devops/VSTSAI/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a>
+            </p>
+            <p class="date"><time datetime="2017-05-14T16:00:00.000Z" itemprop="datePublished">2017-05-15</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/05/15/Devops/VSTSAI/">在Application Insights標註VSTS Release的版本戳記</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+常用Application Insighs的人，可以了解Application Insighs能監控的資訊有多強大，不過，在這些資訊中往往會Miss掉一個訊息，就是現在運行的系統版本所得到資訊，跟之前的資訊是否是同一個版本呢?雖然，我們可以在Application Insights內用客製化屬性標記系統版本，但是，不過在統計圖表中卻無法得知這份資訊。在資料的判讀上就會出現問題
+因此，為了解決這問
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/05/13/Azure/AzurelinuxSQL/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://edumuch.com/wp-content/uploads/2016/01/fe0cb49c-fc42-487f-8e68-e247b4278174_orig.png)" alt="(Docker Swarm)Azure Container Service中建立MS SQL Server for linux" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/05/13/Azure/AzurelinuxSQL/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-05-12T16:00:00.000Z" itemprop="datePublished">2017-05-13</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/05/13/Azure/AzurelinuxSQL/">(Docker Swarm)Azure Container Service中建立MS SQL Server for linux</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+繼上一篇的Azure Container Service初體驗之後，就在想要如何去應用ACS(Azure Container Service的簡稱)的功能，有什麼場景是在對於系統開發或是企業應用方面有幫助的方案，突然，想到其中一個方式，就是建立開發測試的資料庫，在開發時期拿來使用，所以，用ACS建立一個臨時要用的資料庫來做測試用，或許也是一個不錯的選擇，其實，也是可以做為微服務中的資料庫區塊
+不
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/05/07/Azure/AzureDocker/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://s3.amazonaws.com/media-p.slid.es/uploads/413373/images/2525284/docker.png)" alt="Azure Container Service初體驗" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/05/07/Azure/AzureDocker/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-05-06T16:00:00.000Z" itemprop="datePublished">2017-05-07</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/05/07/Azure/AzureDocker/">Azure Container Service初體驗</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+研究Docker時候，總是在想為了來使用Docker技術，我必須架設具有Container機制的Server，或是在自己PC上使用Docker for Windows建立Container，然後才可以使用Docker Image，雖然不複雜，但有時候也覺得不方便，尤其在寫程式時候，會需要做到測試部分，會用到Docker建置相關環境，如果這環境會被地域限制住，感覺又那樣不方便，在Azure上看到一
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/05/06/Azure/AzureSSH/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://cdn.fedoramagazine.org/wp-content/uploads/2016/06/ssh-clients-945x400.png)" alt="建立Azure管理所需要的SSH金鑰" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/05/06/Azure/AzureSSH/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-05-05T16:00:00.000Z" itemprop="datePublished">2017-05-06</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/05/06/Azure/AzureSSH/">建立Azure管理所需要的SSH金鑰</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+進入Azure之後，我們可以透過很多工具或是方式去管理我們在Azure上面的資源或是VM，不過，可以發現很多管理上，已經不只是使用帳號密碼做登入驗證，部分身分驗證資訊已經改用SSH的金鑰來進行驗證，因此，就必須製作屬於SSH的公鑰與私鑰，當我們在建構服務時候，就需要我們自己產生SSH公鑰資訊填入，做為日後登入資訊的驗證，雖然，這樣方式是相對複雜，但對於安全性又是多一分保障。
+準備事項
+製作SSH
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/04/25/Azure/ApplicationInsightsOMS/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://i.ytimg.com/vi/RMYfSJ9GMeM/maxresdefault.jpg)" alt="Application Insights 結合OMS擴充監控分析" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/04/25/Azure/ApplicationInsightsOMS/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a>
+            </p>
+            <p class="date"><time datetime="2017-04-24T16:00:00.000Z" itemprop="datePublished">2017-04-25</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/04/25/Azure/ApplicationInsightsOMS/">Application Insights 結合OMS擴充監控分析</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+Application Insights好處在前面幾篇文章就有提到，尤其對於企業內部眾多的Application來說，Application Insights確實有助於我們從資料面去查詢一些蛛絲馬跡，不過，就整體管理而言，Azure Applcation Insights還是相對薄弱，畢竟，在上面要看一些指標或是報表並不是那樣友善，如果，把Application Insights結合OMS效果就
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/04/25/Net/Customelement/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://media.rehansaeed.com/rehansaeed/2014/02/NET.png)" alt="讀取客製化Web.config / app.config的element" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/04/25/Net/Customelement/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-04-24T16:00:00.000Z" itemprop="datePublished">2017-04-25</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/04/25/Net/Customelement/">讀取客製化Web.config / app.config的element</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+通常在app.config都是用原本預設的element，不過，今天為了自己的元件的設定，必須透過客製化的element作為元件的config，好久沒有研究這部分，所以，研究一下，終於被我弄出來，因此，在這紀錄一下，讓有後續想用的人可以參考
+自訂.config標籤
+這裡自訂標籤如下，主要標籤分為三層，第一層Token為最外面標籤，等同於元件要開始讀取此設定的root位置，第二層TokenTarg
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/04/08/Docker/DockerSQL/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://i.ytimg.com/vi/Q5POuMHxW-0/maxresdefault.jpg)" alt="開始建立SQL Server for Windows Containers" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/04/08/Docker/DockerSQL/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-04-08T14:59:31.000Z" itemprop="datePublished">2017-04-08</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/04/08/Docker/DockerSQL/">開始建立SQL Server for Windows Containers</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+有了Docker這項技術後，想要把SQL Server也放入到Docker中，自從SSMS 2016開始，管理工具與DB可以分開安裝後，就沒有在自己電腦安裝DB，但是，有時候在開發專案，並不可能隨時與DB連線，如果手邊沒有SQL Server也很不方便，所以，可以用Docker建立SQL Server，如果中間被搞壞了，也不用太害怕。此外，或許可以透過這樣方式解決一些實務上遇到SQL測試的另一種
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/04/02/Azure/VSTSWebAPP/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://ncmedia.azureedge.net/ncmedia/2016/12/ai-58b8577beae92.gif)" alt="用Azure Web App內的Continuous Delivery快速建置VSTS的CI / CD流程" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/04/02/Azure/VSTSWebAPP/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-04-01T16:00:00.000Z" itemprop="datePublished">2017-04-02</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/04/02/Azure/VSTSWebAPP/">用Azure Web App內的Continuous Delivery快速建置VSTS的CI / CD流程</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+如果版控是用VSTS，我們可以在VSTS裡面設定Continuous Build&amp;Continuous Release，讓我們的Web專案可以自動化建置到自動化佈署，且佈署到Azure Web App又有Task可用，基本上只需要把相關屬性設定完成，就可以運作，整體來說並會太困難
+但是，對於VSTS不熟的人，可能要花一點時間去了解如何設定這些Task，才能讓Continuous Buil
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/03/23/SQL/Memorytableindex/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://mspoweruser.com/wp-content/uploads/2016/05/Microsoft-SQL-Server-2016.jpg)" alt="透過參考數值設定In Memory Table的Index" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/03/23/SQL/Memorytableindex/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-03-22T16:00:00.000Z" itemprop="datePublished">2017-03-23</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/03/23/SQL/Memorytableindex/">透過參考數值設定In Memory Table的Index</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+自從SQL 2014開始，有了In Memory Table感覺在效能上又多了一道曙光，而到了SQL 2016這部分又更強化了，可用的SQL語句又增加，雖然In Memory Table是可以增加效能，但是，如果沒有設定好index反而會造成效益不彰的狀況，這幾天針對這部分進行一些調教，原本以為跟傳統資料表設定index一樣，最後發其實沒有這樣簡單，反而相對複雜，主要是因為在In Memory 
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/03/15/Devops/VSTSHockyApp/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://static01.nyt.com/images/2016/09/09/well/mind/well_MIRL_stoplight/well_MIRL_stoplight-superJumbo-v2.gif)" alt="VSTS佈署Xamarin.iOS到Hockeyapp，自動更新版號和切換BundleIdentifier" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/03/15/Devops/VSTSHockyApp/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-03-14T16:00:00.000Z" itemprop="datePublished">2017-03-15</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/03/15/Devops/VSTSHockyApp/">VSTS佈署Xamarin.iOS到Hockeyapp，自動更新版號和切換BundleIdentifier</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+在VSTS上面，可以建置Xamarin並將App發佈到HockeyApp上面進行，就可以讓用戶透過HockeyApp下載App，且HockeyApp本身可以讓APP有更新上架後，讓用戶開啟App之後，自動跳出更新App的訊息，這樣好處就可以減少開發人員再去做版本更新的通知功能。HockeyApp其背後的通知更新的機制在於Build版號要更新，才會通知有下載用戶說有新版本上架，換句話說如果只是單純
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/03/10/Docker/Deletewindowsfilter/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://www.docker.com/sites/default/files/Docker_Survey_%232_v04.0-01.png)" alt="無法刪除Docker資料夾中的windowsfilter目錄" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/03/10/Docker/Deletewindowsfilter/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-03-09T16:00:00.000Z" itemprop="datePublished">2017-03-10</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/03/10/Docker/Deletewindowsfilter/">無法刪除Docker資料夾中的windowsfilter目錄</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+因為安裝了Docker for Windows，並透過Docker指令去抓取Docker Store中的image後發現，在Docker預設是把image放在C:\ProgramData\Dock路徑下，這樣我C槽如果要放很多種image，有可能就不夠大了，於是想要把Image放到其他地方。這時候可以透過Docker for Windows中的Setting去修改預設路徑
+
+這邊只要加入&quo
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/03/01/PowerShell/PowershellFile/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://static.wixstatic.com/media/94e66f_cc6315f5bf1e43aca75ca1810f880907~mv2.gif/v1/fill/w_1600,h_900,al_c,q_90/file.jpg)" alt="Powershell刪除檔案和更改檔名" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/03/01/PowerShell/PowershellFile/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-02-28T16:00:00.000Z" itemprop="datePublished">2017-03-01</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/03/01/PowerShell/PowershellFile/">Powershell刪除檔案和更改檔名</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+之前在研討會曾提過，要把自動化程序搞好，善用PowerShell是不可少的，尤其在企業內部的管理面上，不使用PowerShell感覺還是卡卡的。在這邊分享如何用PowerShell去更改檔案名稱以及把過期檔案給刪除
+更改檔案名稱
+抓取某個資料夾中指定的副檔名，並修改成自己想要的副檔名。透過Get-ChildItem把該資料夾內的檔案列表抓出來。其中，為了讓整個.ps更靈活，所以，這邊採用$arg
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/02/14/Devops/VSTSLibrary/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.slate.com/content/dam/slate/articles/technology/seven_wonders/2014/11/141209_7Wonders_WaterHero.gif.CROP.original-original.gif)" alt="善用VSTS的Library功能管理參數" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/02/14/Devops/VSTSLibrary/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-02-13T16:00:00.000Z" itemprop="datePublished">2017-02-14</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/02/14/Devops/VSTSLibrary/">善用VSTS的Library功能管理參數</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+大部專案都透過VSTS來進行佈署，雖然專案多，但是其實很多時候要設定的參數往往都相同，或是要佈署的路徑可能有80%是一樣，就必須每次都設定一次，或是說要用到一些Command的指令，在不同專案可能要寫一樣，若是，當中有需要變換指令寫法，就必須記住那些專案有用到，然後去改他，這樣非常不方便。再者，有些設定參數可能是具有安全性，不適合寫在Task中。
+基於上面一些理由，就可以透過VSTS的Libra
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/02/09/Devops/DeletePackageVSTS/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://mohamedradwan.com/wp-content/uploads/2016/07/0-Release-Management-Overview-for-TFS-and-VSTS.jpg)" alt="快速刪除VSTS Package某一個元件所有的版本" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/02/09/Devops/DeletePackageVSTS/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-02-08T16:00:00.000Z" itemprop="datePublished">2017-02-09</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/02/09/Devops/DeletePackageVSTS/">快速刪除VSTS Package某一個元件所有的版本</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+VSTS Packages可以讓我們自訂團隊的Nuget Service，我們可以把自訂元件放到VSTS內，並分享給團隊人使用，一般來說這樣應用問題不太大，不過，用一段時間發現一個問題，就是當要把這個元件從Package Feed移掉時候，並沒有想像中簡單。雖然，介面上有提供Unlist &amp; Delete Package，前者是讓這個版本不顯示在Feed上面，後者則是把這版本元件給刪除，
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/02/07/PowerShell/RemotePowershell/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://img.wonderhowto.com/img/97/81/63528493233379/0/hack-like-pro-scripting-for-aspiring-hacker-part-3-windows-powershell.1280x600.jpg)" alt="用Powershell執行遠端VM內的Powershell Script" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/02/07/PowerShell/RemotePowershell/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            
+            </p>
+            <p class="date"><time datetime="2017-02-06T16:00:00.000Z" itemprop="datePublished">2017-02-07</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/02/07/PowerShell/RemotePowershell/">用Powershell執行遠端VM內的Powershell Script</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+遇到VSTS佈署到遠端VM後，必須執行一些遠端VM中的Powershell的情境，執行佈署的Server和遠端VM並不在同一個網域內，所以，無法透過網域的方式去執行遠端VM中的PowerShell指令。因此，為了要達到這個目的，就必須在遠端VM中安裝WinRM( Windows remote management)，這樣才有辦法在Clinet端呼叫遠端VM中的Powersehll
+設定WINRM
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/02/01/Devops/MicrosoftTeamsAI/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog.tradeshift.com/wp-content/uploads/2015/10/collaboration-illustration.jpg)" alt="Microsoft Teams 結合Azure Application Insights Alert" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/02/01/Devops/MicrosoftTeamsAI/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a>
+            </p>
+            <p class="date"><time datetime="2017-01-31T16:00:00.000Z" itemprop="datePublished">2017-02-01</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/02/01/Devops/MicrosoftTeamsAI/">Microsoft Teams 結合Azure Application Insights Alert</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+之前還很高興的把Application Insights與Slack串接起來，可參考Azure Application Insights發Alert訊息到Slack 
+，但沒多久Microsoft又出了一個Microsoft Teams的協同工具，再加上部分工作已經轉移到Teams，為了整合各項資訊到同一平台上，所以，打算把原本發送到Slack的轉移到到Teams上面，再加上Slack免費版只有
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/paper/2017/01/22/Devops/MSTeamsandVSTS/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://www.imagination-station.org/wp-content/uploads/2015/07/pyro-power-328870.jpg)" alt="Microsoft Teams結合VSTS" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="disqus-comment-count" data-disqus-identifier="" data-disqus-url="http://edwardkuo.imas.tw/paper/2017/01/22/Devops/MSTeamsandVSTS/">0</span>
+    
+</span>
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a>
+            </p>
+            <p class="date"><time datetime="2017-01-21T16:00:00.000Z" itemprop="datePublished">2017-01-22</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/paper/2017/01/22/Devops/MSTeamsandVSTS/">Microsoft Teams結合VSTS</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+Teams除了一般協同工具之用外，針對開發人員來說又多一個好玩的東西，就是可以整合VSTS了，在整合部分目前可以整合就是VSTS發送通知，讓團隊在不管是在Build或是Release時候，都可以即時獲得訊息，尤其是當Release需要被Approve時候，也可以透過通知方式，通知要Approve人來處理
+整合VSTS訊息
+在還沒有Teams以前，我是用Slack去整合VSTS資訊，在Slack應
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+
+    </div></section>
+
+
+    <nav id="page-nav">
+        <span class="pages">Page 2 of 3</span>
+        <a class="extend prev" rel="prev" href="/archives/2017/">&laquo;</a><a class="page-number" href="/archives/2017/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2017/page/3/">3</a><a class="extend next" rel="next" href="/archives/2017/page/3/">&raquo;</a>
+    </nav>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>
+            follow:</p>
+        <ul class="social-links">
+            
+                
+                    <li>
+                        <a class="social-tooltip" title="twitter" href="https://twitter.com/Chia_Chi_Kuo" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="facebook" href="https://www.facebook.com/jaigi.kuo" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="github" href="https://github.com/edwardkuo/" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="rss" href="http://edwardkuo.github.io/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                    </li>
+                    
+                        
+        </ul>
+    </div>
+    
+                <div class="widgets-container">
+                    
+                        
+                            
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://docs.microsoft.com/zh-tw/media/hubs/microsoftteamshome/teams-skype-to-teams.svg)" alt="查詢Microsoft Teams群組中儲存檔案的容量" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a></p>
+                            <p class="item-title"><a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="title">查詢Microsoft Teams群組中儲存檔案的容量</a></p>
+                            <p class="item-date"><time datetime="2017-12-12T16:00:00.000Z" itemprop="datePublished">2017-12-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/04/Devops/VSTSFority/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://bright-side-of-life.com/wp-content/uploads/2017/05/post-fortify-fb.jpg)" alt="VSTS整合資安工具Fortify達成自動化" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/12/04/Devops/VSTSFority/" class="title">VSTS整合資安工具Fortify達成自動化</a></p>
+                            <p class="item-date"><time datetime="2017-12-03T16:00:00.000Z" itemprop="datePublished">2017-12-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/21/Other/StudyLove/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://distudio.blob.core.windows.net/study4tw/1510761314.63796.png)" alt="Study4.TW Study4Love - 與大師對談 活動" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/21/Other/StudyLove/" class="title">Study4.TW Study4Love - 與大師對談 活動</a></p>
+                            <p class="item-date"><time datetime="2017-11-21T14:59:31.000Z" itemprop="datePublished">2017-11-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/10/Devops/VSTSCore/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://core.ac.uk/resources/corelogo_hires.png)" alt="有參照外部元件如何在VSTS建立.Net Core Package" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/10/Devops/VSTSCore/" class="title">有參照外部元件如何在VSTS建立.Net Core Package</a></p>
+                            <p class="item-date"><time datetime="2017-11-09T16:00:00.000Z" itemprop="datePublished">2017-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/10/16/Azure/AIappTeams/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://datadog-prod.imgix.net/img/blog/monitor-azure-logic-app-workflows-datadog/azure-logic-apps-hero.png?ch=Width&fit=max&fm=png&auto=format&lossless=1)" alt="Application Insights + Logic App + Microsoft Teams 整合" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a></p>
+                            <p class="item-title"><a href="/paper/2017/10/16/Azure/AIappTeams/" class="title">Application Insights + Logic App + Microsoft Teams 整合</a></p>
+                            <p class="item-date"><time datetime="2017-10-15T16:00:00.000Z" itemprop="datePublished">2017-10-16</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/資料庫程式版控/">資料庫程式版控</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雲端到地端的持續整合與交付/">雲端到地端的持續整合與交付</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">7</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP-NET/">ASP.NET</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple/">Apple</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Azure/">Azure</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cordova/">Cordova</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevOps/">DevOps</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-End/">Front-End</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LifeStyle/">LifeStyle</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Office-365/">Office 365</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Other/">Other</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerShell/">PowerShell</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T-SQL/">T-SQL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSTS/">VSTS</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Studio/">Visual Studio</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ASP-NET/" style="font-size: 11.82px;">ASP.NET</a> <a href="/tags/Apple/" style="font-size: 13.64px;">Apple</a> <a href="/tags/Azure/" style="font-size: 20px;">Azure</a> <a href="/tags/C/" style="font-size: 18.18px;">C#</a> <a href="/tags/Cordova/" style="font-size: 11.82px;">Cordova</a> <a href="/tags/DevOps/" style="font-size: 19.09px;">DevOps</a> <a href="/tags/Docker/" style="font-size: 14.55px;">Docker</a> <a href="/tags/Front-End/" style="font-size: 10.91px;">Front-End</a> <a href="/tags/LifeStyle/" style="font-size: 16.36px;">LifeStyle</a> <a href="/tags/Office-365/" style="font-size: 10px;">Office 365</a> <a href="/tags/Other/" style="font-size: 11.82px;">Other</a> <a href="/tags/PowerShell/" style="font-size: 12.73px;">PowerShell</a> <a href="/tags/T-SQL/" style="font-size: 15.45px;">T-SQL</a> <a href="/tags/VSTS/" style="font-size: 17.27px;">VSTS</a> <a href="/tags/Visual-Studio/" style="font-size: 11.82px;">Visual Studio</a>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://study4.tw">Study4.TW</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/Study4.Enterprise/">Study4.Enterprise</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/286316594814216/">Azure &amp; .NET Developer FB 社團</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/MISDevOps/">製造業 DevOps日常</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://mva.microsoft.com/?mtag=4040062">MVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://channel9.msdn.com">Channel9</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://dog0416.blogspot.tw/">Matsurigoto</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://skychang.github.io/">天空的垃圾場</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://kyleap.blogspot.tw/">程式宅急便</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://08alan.github.io/">維持熱情不滅</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://dotblogs.com.tw/jamesfu">五餅二魚工作室</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://yi-shiuan.github.io/">饅頭小舖</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://michael80321.blogspot.tw/">Michael&#39;s World</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+                                
+                                    
+                                        <div class="widget-wrap widget-list">
+                                            <h3 class="widget-title">Visitor</h3>
+                                            <div class="widget">
+                                                <a href="http://s11.flagcounter.com/more/4zV"><img src="http://s11.flagcounter.com/count/4zV/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_8/viewers_0/labels_0/pageviews_1/flags_0/percent_1/" alt="Flag Counter" border="0"></a>
+                                            </div>
+
+                                        </div>
+
+
+                </div>
+                </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Edward kuo</p>
+                
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'ek20';
+    
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="_lzVun8mT2ObiZ3rk5827pMMbko8SQthqo8OtoRxhsc" />
+    
+        <title>
+            
+                使用Azure DocumentDB儲存資料 |
+                    
+                        E.K TechThinking
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+        
+                
+                    <meta name="keywords" content="Azure">
+                    
+                        <meta name="description" content="做Azure Notification Hub時候，雖然，查詢Notification Hub本身中PNS和註冊ID的對應表，但是，有時候會因為不明原因導致這份Mapping表消失，為了避免這現象，需要額外把這些資訊給額外儲存起來。在Azure除了能使用RMS DB存放資料外，也來試試看使用NoSQL來除儲存資料，選用DocumentDB作為這次的方案。
+DocumentDB是屬於JSON資料庫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Azure DocumentDB儲存資料">
+<meta property="og:url" content="http://edwardkuo.imas.tw/paper/2016/07/26/Azure/2016-07-26/index.html">
+<meta property="og:site_name" content="E.K TechThinking">
+<meta property="og:description" content="做Azure Notification Hub時候，雖然，查詢Notification Hub本身中PNS和註冊ID的對應表，但是，有時候會因為不明原因導致這份Mapping表消失，為了避免這現象，需要額外把這些資訊給額外儲存起來。在Azure除了能使用RMS DB存放資料外，也來試試看使用NoSQL來除儲存資料，選用DocumentDB作為這次的方案。
+DocumentDB是屬於JSON資料庫">
+<meta property="og:image" content="http://edumuch.com/wp-content/uploads/2016/01/fe0cb49c-fc42-487f-8e68-e247b4278174_orig.png">
+<meta property="og:updated_time" content="2016-11-22T15:55:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Azure DocumentDB儲存資料">
+<meta name="twitter:description" content="做Azure Notification Hub時候，雖然，查詢Notification Hub本身中PNS和註冊ID的對應表，但是，有時候會因為不明原因導致這份Mapping表消失，為了避免這現象，需要額外把這些資訊給額外儲存起來。在Azure除了能使用RMS DB存放資料外，也來試試看使用NoSQL來除儲存資料，選用DocumentDB作為這次的方案。
+DocumentDB是屬於JSON資料庫">
+<meta name="twitter:image" content="http://edumuch.com/wp-content/uploads/2016/01/fe0cb49c-fc42-487f-8e68-e247b4278174_orig.png">
+                            
+
+                                
+                                    <link rel="alternate" href="http://edwardkuo.github.io/atom.xml" title="E.K TechThinking" type="application/atom+xml" />
+                                    
+
+                                        
+
+                                                <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+                                                    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+                                                        <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+                                                            <link rel="stylesheet" href="/css/style.css">
+
+                                                                <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+                                                                    
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-33121513-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+                                                                        <script type="text/javascript">
+                                                                            var appInsights = window.appInsights || function(config) {
+                                                                                function i(config) {
+                                                                                    t[config] = function() {
+                                                                                        var i = arguments;
+                                                                                        t.queue.push(function() {
+                                                                                            t[config].apply(t, i)
+                                                                                        })
+                                                                                    }
+                                                                                }
+                                                                                var t = {
+                                                                                        config: config
+                                                                                    },
+                                                                                    u = document,
+                                                                                    e = window,
+                                                                                    o = "script",
+                                                                                    s = "AuthenticatedUserContext",
+                                                                                    h = "start",
+                                                                                    c = "stop",
+                                                                                    l = "Track",
+                                                                                    a = l + "Event",
+                                                                                    v = l + "Page",
+                                                                                    y = u.createElement(o),
+                                                                                    r, f;
+                                                                                y.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js";
+                                                                                u.getElementsByTagName(o)[0].parentNode.appendChild(y);
+                                                                                try {
+                                                                                    t.cookie = u.cookie
+                                                                                } catch (p) {}
+                                                                                for (t.queue = [], t.version = "1.0", r = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; r.length;) i("track" + r.pop());
+                                                                                return i("set" + s), i("clear" + s), i(h + a), i(c + a), i(h + v), i(c + v), i("flush"), config.disableExceptionTracking || (r = "onerror", i("_" + r), f = e[r], e[r] = function(config, i, u, e, o) {
+                                                                                    var s = f && f(config, i, u, e, o);
+                                                                                    return s !== !0 && t["_" + r](config, i, u, e, o), s
+                                                                                }), t
+                                                                            }({
+                                                                                instrumentationKey: "7891dfec-e884-4bdc-bf34-f581dce47f3a"
+                                                                            });
+
+                                                                            window.appInsights = appInsights;
+
+                                                                            // Add telemetry initializer
+                                                                            appInsights.queue.push(function() {
+                                                                                appInsights.context.addTelemetryInitializer(function(envelope) {
+                                                                                    var telemetryItem = envelope.data.baseData;
+
+
+                                                                                    // To set custom properties:
+                                                                                    telemetryItem.properties = telemetryItem.properties || {};
+                                                                                    telemetryItem.properties["ApplicationName"] = "EK20";
+
+
+                                                                                });
+                                                                            });
+                                                                            // end of insertion
+
+
+
+                                                                            appInsights.trackPageView();
+                                                                        </script>
+</head>
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">Tech &amp; Thinking &amp; DevOps &amp; Azure &amp; VSTS</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/about.html">About</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/slideshare/slideshare.html">Slideshare</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/Link/Link.html">Hot Link</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    uncategorized
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-Azure/2016-07-26" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        使用Azure DocumentDB儲存資料
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/paper/2016/07/26/Azure/2016-07-26/" class="article-date">
+    <time datetime="2016-07-25T16:00:00.000Z" itemprop="datePublished">2016-07-26</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Azure/">Azure</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <img src="http://edumuch.com/wp-content/uploads/2016/01/fe0cb49c-fc42-487f-8e68-e247b4278174_orig.png">
+<p>做Azure Notification Hub時候，雖然，查詢Notification Hub本身中PNS和註冊ID的對應表，但是，有時候會因為不明原因導致這份Mapping表消失，為了避免這現象，需要額外把這些資訊給額外儲存起來。在Azure除了能使用RMS DB存放資料外，也來試試看使用NoSQL來除儲存資料，選用DocumentDB作為這次的方案。</p>
+<p>DocumentDB是屬於<code>JSON</code>資料庫且提供結構描述彈性，以及能依需求擴大和縮小資料庫，使用DocumentDB最重要是下面這樣的結構圖:<br><img src="/blogimage/DOC1.png" width="600"></p>
+<p>此外，DocumentDB本身也提供相對應各類型程式語言的API，所以，操作上就相對就方便許多</p>
+<h3 id="建立DocumentDB"><a href="#建立DocumentDB" class="headerlink" title="建立DocumentDB"></a>建立DocumentDB</h3><hr>
+<p>要在Azure建立DocumentDB相當簡單，只需要到Azure Portal選用DocumentDB<br><img src="/blogimage/DOC2-1.png" width="400"></p>
+<p>並且填入相關設定值，就可以建立一個DocumentDB Account了<br><img src="/blogimage/DOC3.png" width="250"></p>
+<p>記住這時候只是建立<strong>DocumentDB Account</strong>，還沒有建立可以儲存的DB，換成RMS DB來說就只是建立好SQL Server還沒有建立SQL Server內的DB是一樣的，因此，還必須到DocumentDB Account中加入一個Database<br><img src="/blogimage/Doc4.png" width="500"></p>
+<p>這時候就會出現Database可以用了<br><img src="/blogimage/doc5.png" width="500"></p>
+<h3 id="DocumentDB的CRUD"><a href="#DocumentDB的CRUD" class="headerlink" title="DocumentDB的CRUD"></a>DocumentDB的CRUD</h3><hr>
+<p>一旦建立好Database後，後面就可以開始針對DocumentDB進行操作了，DocumentDB雖然是儲存資料，但是，其實把每一個<code>Json</code>資訊作為文件給儲存起來。例如你的Json格式如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;	<span class="attr">"platform"</span>:<span class="string">"apns"</span>,	<span class="attr">"Handle"</span>:<span class="string">"cd"</span>,	<span class="attr">"Tags"</span>:['<span class="number">222</span>','aaaa']&#125;</div></pre></td></tr></table></figure></p>
+<p>被放在DocumentDB中就是一筆資料，也可以說是一份文件，所以，你有多少份Json檔，就會有多少筆資料，而在DocumentDB為了存放這些『文件』，必須透過建立一個容器做儲存，因此，從<code>DocumentDB Account</code>到<code>DocumentDB</code>到<code>Collection</code>到<code>Document</code>，可以看出來其DocumentDB階層，如下圖<br><img src="/blogimage/ED.png" width="600"></p>
+<p>前面已經建立好了DocumentDB Database，還必須在DocumentDB Database中建立一個<code>Collection</code>儲存文件資料<br><img src="/blogimage/EK%202016-07-26%20%E4%B8%8A%E5%8D%888.46.16.png" width="500"></p>
+<p>其中，在DocumentDB的定價部分，則取決於<code>Collection</code>建置的規模大小了<br><img src="/blogimage/EK%202016-07-26%20%E4%B8%8A%E5%8D%888.48.34.png" width="300"></p>
+<p>在DocumentDB中除了你自行定義的資料欄位外，有一個預設會自動幫你加上的就是<code>ID</code>這個標籤，這個<code>ID</code>標籤可以讓系統幫你自動設定一組GUID碼，或是你自行設定自己想要的資訊，若是自行設定，前提必須確保ID是所有Document中的唯一值，若是你的<code>Json</code>檔中沒有<code>ID</code>欄位，系統也會自動幫你產生<code>ID</code>欄位<br><img src="/blogimage/ED2.png" width="400"></p>
+<p>當Azure上面都設定好之後，現在就是可以下載.NET的DocumentDB SDK，到Nuget搜尋<code>Microsoft.Azure.DocumentDB</code>並安裝，就可以開始進行開發了，在開始前必須先到DocumentDB找到連線字串和金鑰<br><img src="/blogimage/EDF.png" width="250"></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">string</span> DocumentDBConnection = <span class="string">"Connection string"</span>;<span class="keyword">private</span> <span class="keyword">string</span> DocumentDBKey = <span class="string">"Key"</span>;</div></pre></td></tr></table></figure>
+<h4 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h4><p>建立一份文件，首先必須先定義好此文件中的Json格式，換句話說也是欄位資訊<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">DeviceRegisterationInfo</span>&#123;    [JsonProperty(PropertyName = <span class="string">"id"</span>)]    <span class="keyword">public</span> <span class="keyword">string</span> Id &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;    <span class="keyword">public</span> <span class="keyword">string</span> PNS &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;    <span class="keyword">public</span> <span class="keyword">string</span> Platform &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;    <span class="keyword">public</span> <span class="keyword">string</span> Tags &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;&#125;</div></pre></td></tr></table></figure></p>
+<p>如上述所有說，如果沒有id欄位，系統會自動幫你設定，不過，如果對業務流程清晰的話，我還是建議自己設定會比較好，至少在搜尋時候可以依照ID進行搜尋會比較快。開始建立與DocumentDB的連線<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> DocumentClient client;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">DBconnection</span>(<span class="params"></span>)</span>&#123;    <span class="keyword">this</span>.client = <span class="keyword">new</span> DocumentClient(<span class="keyword">new</span> Uri(DocumentDBConnection), DocumentDBKey);&#125;</div></pre></td></tr></table></figure></p>
+<p>當<code>Collection</code>內有該份<code>ID</code>文件時，你並不能再建立一個相同<code>ID</code>文件去覆蓋掉它，如果你要強行建立就會發生<code>DocumentClientException</code></p>
+<blockquote>
+<p>Message: {“Errors”:[“Resource with specified id or name already exists”]}<br>ActivityId: 1b1a3770-e220-4bd5-b8dc-5bf48a8042bb, Request URI: /apps/cd04a067-b8de-46a2-8825-a25652296b7f/services/7af737f3-15ed-4ae9-98bb-08865fe0fbb5/partitions/dec123e2-d08a-4f2e-88d8-311e6a8e2e0e/replicas/131139654072259410p</p>
+</blockquote>
+<p>不過，當你要去查這筆文件時候，如果也查不到文件時候，也會發生<code>DocumentClientException</code>錯誤，這時候就可以去建立一筆新的文件資料<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">async</span> Task <span class="title">Insertdata</span>(<span class="params"><span class="keyword">string</span> databaseName, <span class="keyword">string</span> collectionName, DeviceRegisterationInfo inDocument</span>)</span>&#123;    <span class="keyword">try</span>    &#123;        <span class="keyword">await</span> <span class="keyword">this</span>.client.ReadDocumentAsync(UriFactory.CreateDocumentUri(databaseName, collectionName, inDocument.Id));    &#125;    <span class="keyword">catch</span> (DocumentClientException ex)    &#123;        <span class="keyword">if</span> (ex.StatusCode == HttpStatusCode.NotFound)        &#123;            <span class="keyword">await</span>                <span class="keyword">this</span>.client.CreateDocumentAsync(                    UriFactory.CreateDocumentCollectionUri(databaseName, collectionName), inDocument);        &#125;    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p> 就可以執行寫入資料的程式了<br> <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Program p = <span class="keyword">new</span> Program();p.DBconnection();DeviceRegisterationInfo dr = <span class="keyword">new</span> DeviceRegisterationInfo();dr.PNS = <span class="string">"test1"</span>;dr.Platform = <span class="string">"APNS"</span>;dr.Tags = <span class="string">"Azure"</span>;dr.Id = <span class="string">"edwardkuo3@gmail.com"</span>;p.Insertdata(<span class="string">"test"</span>, <span class="string">"demo1"</span>,dr);</div></pre></td></tr></table></figure></p>
+<p>結果如下，資料中的<code>ID</code>，會等同Azure管理介面上的『識別碼』<br><img src="/blogimage/EK%202016-07-26%20%E4%B8%8A%E5%8D%889.15.54.png" width="500"></p>
+<h4 id="Read"><a href="#Read" class="headerlink" title="Read"></a>Read</h4><p>要讀取資料很簡單，就是透過Linq語法和DocumentDB溝通就可以<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">IQueryable&lt;DeviceRegisterationInfo&gt; result =    <span class="keyword">this</span>.client.CreateDocumentQuery&lt;DeviceRegisterationInfo&gt;(        UriFactory.CreateDocumentCollectionUri(databaseName, collectionName))    ;<span class="keyword">foreach</span> (DeviceRegisterationInfo family <span class="keyword">in</span> result)&#123;    Console.WriteLine(<span class="string">"ID &#123;0&#125;"</span>, family.Id);    Console.WriteLine(<span class="string">"Tag &#123;0&#125;"</span>, family.Tags);&#125;</div></pre></td></tr></table></figure></p>
+<p>就可以取出來了<br><img src="/blogimage/EK%202016-07-26%20%E4%B8%8A%E5%8D%8810.24.25.png" width="350"></p>
+<h4 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h4><p>要更新資料，基本上你必須知道你要更新文件的<code>ID</code>，才有辦法直接更新資料，所以，一開始是使用系統幫你設定的ID編碼，就必須先查出文件ID才有辦法進行更新資料<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Updatedata</span>(<span class="params"><span class="keyword">string</span> databaseName, <span class="keyword">string</span> collectionName, DeviceRegisterationInfo inDocument</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri(databaseName, collectionName, inDocument.Id), inDocument);&#125;</div></pre></td></tr></table></figure></p>
+<p>目前資料如下，要把<em>edwardkuo3@gmail.com</em>中的<strong>PNS</strong>值改為<em>WPS</em>和<strong>Tag</strong>值改成<em>Azure</em><br><img src="/blogimage/EK%202016-07-26%20%E4%B8%8A%E5%8D%8810.28.21.png" width="400"></p>
+<p>修改<code>DeviceRegisterationInfo</code>內容<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DeviceRegisterationInfo dr = <span class="keyword">new</span> DeviceRegisterationInfo();dr.PNS = <span class="string">"test1"</span>;dr.Platform = <span class="string">"WPS"</span>;dr.Tags = <span class="string">"Azure"</span>;dr.Id = <span class="string">"edwardkuo3@gmail.com"</span>;</div></pre></td></tr></table></figure></p>
+<p>結果如下<br><img src="/blogimage/EK%202016-07-26%20%E4%B8%8A%E5%8D%8810.47.43.png" width="400"></p>
+<h4 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h4><p>刪掉資料，就只需要把<code>ID</code>放入就可以輕鬆刪除資料<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.client.DeleteDocumentAsync(UriFactory.CreateDocumentUri(databaseName, collectionName, inDocumentD.Id))</div></pre></td></tr></table></figure></p>
+<hr>
+<p>在操作DocumentDB中的Database Name和Collection名稱記得要注意大小寫，在Function中的大小寫與Azure上的設定不同，會不Work的</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share">Share</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_pinterest"></a>
+    <a class="a2a_button_tumblr"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>
+            follow:</p>
+        <ul class="social-links">
+            
+                
+                    <li>
+                        <a class="social-tooltip" title="twitter" href="https://twitter.com/Chia_Chi_Kuo" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="facebook" href="https://www.facebook.com/jaigi.kuo" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="github" href="https://github.com/edwardkuo/" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                    </li>
+                    
+                        
+                
+                    <li>
+                        <a class="social-tooltip" title="rss" href="http://edwardkuo.github.io/atom.xml" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                    </li>
+                    
+                        
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/paper/2016/07/31/Azure/2016-07-31/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            製作iOS in House + Azure Notification Hub 憑證
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/paper/2016/07/25/Apple/2016-07-26/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">修改MAC畫面截圖的檔案存放路徑和檔名</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+            
+                <div class="widgets-container">
+                    
+                        
+                            
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://docs.microsoft.com/zh-tw/media/hubs/microsoftteamshome/teams-skype-to-teams.svg)" alt="查詢Microsoft Teams群組中儲存檔案的容量" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a></p>
+                            <p class="item-title"><a href="/paper/2017/12/13/Devops/TeamsFileSize/" class="title">查詢Microsoft Teams群組中儲存檔案的容量</a></p>
+                            <p class="item-date"><time datetime="2017-12-12T16:00:00.000Z" itemprop="datePublished">2017-12-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/12/04/Devops/VSTSFority/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://bright-side-of-life.com/wp-content/uploads/2017/05/post-fortify-fb.jpg)" alt="VSTS整合資安工具Fortify達成自動化" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/12/04/Devops/VSTSFority/" class="title">VSTS整合資安工具Fortify達成自動化</a></p>
+                            <p class="item-date"><time datetime="2017-12-03T16:00:00.000Z" itemprop="datePublished">2017-12-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/21/Other/StudyLove/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://distudio.blob.core.windows.net/study4tw/1510761314.63796.png)" alt="Study4.TW Study4Love - 與大師對談 活動" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/21/Other/StudyLove/" class="title">Study4.TW Study4Love - 與大師對談 活動</a></p>
+                            <p class="item-date"><time datetime="2017-11-21T14:59:31.000Z" itemprop="datePublished">2017-11-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/11/10/Devops/VSTSCore/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://core.ac.uk/resources/corelogo_hires.png)" alt="有參照外部元件如何在VSTS建立.Net Core Package" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/paper/2017/11/10/Devops/VSTSCore/" class="title">有參照外部元件如何在VSTS建立.Net Core Package</a></p>
+                            <p class="item-date"><time datetime="2017-11-09T16:00:00.000Z" itemprop="datePublished">2017-11-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/paper/2017/10/16/Azure/AIappTeams/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://datadog-prod.imgix.net/img/blog/monitor-azure-logic-app-workflows-datadog/azure-logic-apps-hero.png?ch=Width&fit=max&fm=png&auto=format&lossless=1)" alt="Application Insights + Logic App + Microsoft Teams 整合" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a></p>
+                            <p class="item-title"><a href="/paper/2017/10/16/Azure/AIappTeams/" class="title">Application Insights + Logic App + Microsoft Teams 整合</a></p>
+                            <p class="item-date"><time datetime="2017-10-15T16:00:00.000Z" itemprop="datePublished">2017-10-16</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Azure-Application-Insights/">Azure Application Insights</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Microsoft-Teams/">Microsoft Teams</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/資料庫程式版控/">資料庫程式版控</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/雲端到地端的持續整合與交付/">雲端到地端的持續整合與交付</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">7</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASP-NET/">ASP.NET</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apple/">Apple</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Azure/">Azure</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C#</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cordova/">Cordova</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DevOps/">DevOps</a><span class="tag-list-count">32</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-End/">Front-End</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LifeStyle/">LifeStyle</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Office-365/">Office 365</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Other/">Other</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerShell/">PowerShell</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T-SQL/">T-SQL</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSTS/">VSTS</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Visual-Studio/">Visual Studio</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/ASP-NET/" style="font-size: 11.82px;">ASP.NET</a> <a href="/tags/Apple/" style="font-size: 13.64px;">Apple</a> <a href="/tags/Azure/" style="font-size: 20px;">Azure</a> <a href="/tags/C/" style="font-size: 18.18px;">C#</a> <a href="/tags/Cordova/" style="font-size: 11.82px;">Cordova</a> <a href="/tags/DevOps/" style="font-size: 19.09px;">DevOps</a> <a href="/tags/Docker/" style="font-size: 14.55px;">Docker</a> <a href="/tags/Front-End/" style="font-size: 10.91px;">Front-End</a> <a href="/tags/LifeStyle/" style="font-size: 16.36px;">LifeStyle</a> <a href="/tags/Office-365/" style="font-size: 10px;">Office 365</a> <a href="/tags/Other/" style="font-size: 11.82px;">Other</a> <a href="/tags/PowerShell/" style="font-size: 12.73px;">PowerShell</a> <a href="/tags/T-SQL/" style="font-size: 15.45px;">T-SQL</a> <a href="/tags/VSTS/" style="font-size: 17.27px;">VSTS</a> <a href="/tags/Visual-Studio/" style="font-size: 11.82px;">Visual Studio</a>
+        </div>
+    </div>
+
+
+                                
+                            
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://study4.tw">Study4.TW</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/Study4.Enterprise/">Study4.Enterprise</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/286316594814216/">Azure &amp; .NET Developer FB 社團</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://www.facebook.com/groups/MISDevOps/">製造業 DevOps日常</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://mva.microsoft.com/?mtag=4040062">MVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://channel9.msdn.com">Channel9</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://dog0416.blogspot.tw/">Matsurigoto</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://skychang.github.io/">天空的垃圾場</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://kyleap.blogspot.tw/">程式宅急便</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://08alan.github.io/">維持熱情不滅</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://dotblogs.com.tw/jamesfu">五餅二魚工作室</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://yi-shiuan.github.io/">饅頭小舖</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://michael80321.blogspot.tw/">Michael&#39;s World</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+                                
+                                    
+                                        <div class="widget-wrap widget-list">
+                                            <h3 class="widget-title">Visitor</h3>
+                                            <div class="widget">
+                                                <a href="http://s11.flagcounter.com/more/4zV"><img src="http://s11.flagcounter.com/count/4zV/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_8/viewers_0/labels_0/pageviews_1/flags_0/percent_1/" alt="Flag Counter" border="0"></a>
+                                            </div>
+
+                                        </div>
+
+
+                </div>
+                </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2017 Edward kuo</p>
+                
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'ek20';
+    
+    
+    var disqus_url = 'http://edwardkuo.imas.tw/paper/2016/07/26/Azure/2016-07-26/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
